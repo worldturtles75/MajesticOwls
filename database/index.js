@@ -1,4 +1,3 @@
-
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/greenfield');
 
@@ -20,7 +19,7 @@ var userSchema = mongoose.Schema({
   })
 
 
-var user = mongoose.moddel('user', userSchema);
+var user = mongoose.model('user', userSchema);
 
 
-export.modules = user;
+module.export = user;
