@@ -13,7 +13,8 @@
     "server-dev": "nodemon server/index.js",
     "start": "node server/index.js",
     "test": "mocha",
-    "db": "sudo mongod"
+    "db": "sudo mongod",
+    "heroku-postbuild": "webpack -p"
   },
   "dependencies": {
     "babel-loader": "^7.0.0",
