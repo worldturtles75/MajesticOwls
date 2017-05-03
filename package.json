@@ -11,6 +11,7 @@
     "dev": "webpack -d --watch",
     "build": "webpack -p",
     "server-dev": "nodemon server/index.js",
+    "start": "node server/index.js",
     "db": "sudo mongod"
   },
   "dependencies": {
