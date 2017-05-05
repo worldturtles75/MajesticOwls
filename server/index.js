@@ -42,10 +42,11 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '/../react-client/dist/index.html'));
 });
 
+
 app.get('/auth/google',
   passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }));
 
-app.get('/auth/google/callback'
+app.get('/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/login' }),
   (req, res) => {
     res.redirect('/');
