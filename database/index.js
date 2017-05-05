@@ -1,5 +1,8 @@
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/greenfield');
+// mongoose.connect('mongodb://localhost/greenfield');
+
+mongoose.connect('mongodb://group:Hackreactor21@ds127101.mlab.com:27101/greenfield');
+mongoose.Promise = require('bluebird');
 
 var db = mongoose.connection;
 
@@ -13,13 +16,12 @@ db.once('open', function() {
 
 
 var userSchema = mongoose.Schema({
-
-    user: {type: String, unique: true}
-
+    user: String,
+    history: String
   })
 
 
-var user = mongoose.model('user', userSchema);
+var  historyStorage = mongoose.model('historyStorage', userSchema);
 
 
-module.export = user;
+module.exports = historyStorage;
