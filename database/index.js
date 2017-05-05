@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+const findOrCreate = require('mongoose-find-or-create');
 mongoose.connect('mongodb://localhost/greenfield');
 
 var db = mongoose.connection;
@@ -14,9 +15,10 @@ db.once('open', function() {
 
 var userSchema = mongoose.Schema({
 
-    user: {type: String, unique: true}
+  user: {type: String, unique: true}
 
 });
+userSchema.plugin(findOrCreate)
 
 
 var user = mongoose.model('user', userSchema);
