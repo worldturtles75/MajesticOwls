@@ -4,6 +4,12 @@ const findOrCreate = require('mongoose-find-or-create');
 mongoose.connect('mongodb://group:Hackreactor21@ds127101.mlab.com:27101/greenfield');
 mongoose.Promise = require('bluebird');
 
+var mongoose = require('mongoose');
+// mongoose.connect('mongodb://localhost/greenfield');
+
+mongoose.connect('mongodb://group:Hackreactor21@ds127101.mlab.com:27101/greenfield');
+mongoose.Promise = require('bluebird');
+
 
 var db = mongoose.connection;
 
