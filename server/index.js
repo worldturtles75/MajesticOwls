@@ -2,9 +2,8 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const session = require('express-session')
+const session = require('express-session');
 const User = require('../database/index');
-var historyStorage = require('../database/index');
 const app = express();
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
@@ -52,6 +51,37 @@ app.get('/auth/google/callback',
   (req, res) => {
     res.redirect('/');
   });
+
+
+//FOR ADDING DATA INTO THE DATEBASE
+app.post('/datebase/save', (req,res) => {
+
+    const addNew = new User({
+      user: req.body.user,
+      history: req.body.history
+    })
+
+    addNew.save((err,result) => {
+      if (err) {
+        console.log('did not save');
+      } else {
+        console.log('history saved', result);
+      }
+    })
+    res.end();
+});
+
+//RETURNS LIST OF THE USERS HISTORY
+app.get('/database/return', (req,res) => {
+  User.find({user: req.body}).sort('history').exec((err,result) => {
+    if(err) {
+      console.log('Get did not return data');
+    } else {
+      res.json(result);
+    }
+  })
+
+})
 
 
 const port = process.env.PORT || 1337;
