@@ -27,6 +27,9 @@ const styles = {
   toolbarStyle: {
     backgroundColor: '#FFF',
   },
+  googleSignInStyle: {
+    textDecoration: 'none',
+  },
 }
 
 const SignIn = () => (
@@ -42,7 +45,8 @@ const SignIn = () => (
     </MuiThemeProvider>
     <div
       style = {styles.signInStyle} >
-      <a href="/auth/google">
+      <a href="/auth/google"
+        style = {styles.googleSignInStyle}>
         <GoogleButton />
       </a>
     </div>
