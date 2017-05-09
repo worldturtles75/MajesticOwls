@@ -9,11 +9,6 @@ var historyStorage = require('../database/index');
 var mongoose = require('mongoose');
 
 
-
-
-
-
-
 /***********************************************************
 This test is to test the testing suite
 ************************************************************/
