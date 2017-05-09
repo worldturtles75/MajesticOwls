@@ -36,6 +36,7 @@
     "passport-google-oauth": "^1.0.0",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
+    "react-google-button": "^0.2.0",
     "react-router-dom": "^4.1.1",
     "request": "^2.81.0",
     "webpack": "^2.5.1"
