@@ -16,7 +16,7 @@ const styles = {
     right: 'auto',
     left: 50,
     bottom: 'auto',
-    position: 'relative',
+    position: 'fixed',
   },
   signInStyle: {
     position: 'absolute',
@@ -24,12 +24,17 @@ const styles = {
     left: '50%',
     transform: 'translate(-50%, -50%)',
   },
+  toolbarStyle: {
+    backgroundColor: '#FFF',
+  },
 }
 
 const SignIn = () => (
   <div> 
     <MuiThemeProvider>
-      <Toolbar>
+      <Toolbar
+        style = {styles.toolbarStyle}
+      >
         <ToolbarGroup firstChild={true} style={styles.titleStyle}>
           <ToolbarTitle text="Majestic Owls" />
         </ToolbarGroup>
