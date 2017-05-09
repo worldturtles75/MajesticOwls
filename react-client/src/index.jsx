@@ -9,7 +9,7 @@ import {
   BrowserRouter as Router,
   Route,
   Link,
-} from 'react-router-dom'
+} from 'react-router-dom';
 
 const styles = {
   titleStyle: {
@@ -25,14 +25,18 @@ const styles = {
     left:'auto',
     bottom: 'auto',
     position:'fixed',
-  }
+  },
+  toolbarStyle: {
+    backgroundColor: '#FFF',
+  },
 }
 
 const Home = () => (
   <div>
     <div> 
       <MuiThemeProvider>
-        <Toolbar>
+        <Toolbar
+          style = {styles.toolbarStyle}>
           <ToolbarGroup firstChild={true} style={styles.titleStyle}>
             <ToolbarTitle text="Majestic Owls" />
           </ToolbarGroup>
