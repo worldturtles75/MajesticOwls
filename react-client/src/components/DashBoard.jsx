@@ -18,21 +18,12 @@ const styles = {
     bottom: 'auto',
     position: 'fixed',
   },
-  signInStyle: {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-  },
   toolbarStyle: {
     backgroundColor: '#FFF',
   },
-  googleSignInStyle: {
-    textDecoration: 'none',
-  },
 }
 
-const SignIn = () => (
+const DashBoard = () => (
   <div> 
     <MuiThemeProvider>
       <Toolbar
@@ -43,14 +34,7 @@ const SignIn = () => (
         </ToolbarGroup>
       </Toolbar>
     </MuiThemeProvider>
-    <div
-      style = {styles.signInStyle} >
-      <a href="/auth/google"
-        style = {styles.googleSignInStyle}>
-        <GoogleButton />
-      </a>
-    </div>
   </div>
 )
 
-export default SignIn;
+export default DashBoard;
