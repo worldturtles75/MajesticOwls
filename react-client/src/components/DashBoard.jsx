@@ -15,6 +15,9 @@ import {
   Route,
   Link,
 } from 'react-router-dom';
+import {
+  indigo500,
+} from 'material-ui/styles/colors';
 
 class DashBoard extends React.Component {
   constructor (props) {
@@ -31,20 +34,26 @@ class DashBoard extends React.Component {
         bottom: 'auto',
         position: 'fixed',
       },
-      toolbarStyle: {
-        backgroundColor: '#FFF',
-      },
       gridList: {
         width: 'auto',
         height: 'auto',
         overflowY: 'auto',
+        marginLeft: 20,
+        marginRight: 20,
+        marginTop: 20,
       },
       signOutStyle: {
-        top:15,
+        top:10,
         right: 30,
         left:'auto',
         bottom: 'auto',
         position:'fixed',
+      },
+      whiteTextStyle: {
+        color: '#FFF',
+      },
+      toolbarStyle: {
+        backgroundColor: indigo500,
       },
     }
     return(
@@ -53,11 +62,15 @@ class DashBoard extends React.Component {
           <Toolbar
             style = {styles.toolbarStyle}>
             <ToolbarGroup firstChild={true} style={styles.titleStyle}>
-              <ToolbarTitle text="Majestic Owls" />
+              <ToolbarTitle 
+                text="Majestic Owls" 
+                style={styles.whiteTextStyle}
+              />
             </ToolbarGroup>
             <ToolbarGroup style={styles.signOutStyle}>
               <Link to='/'>
                 <FlatButton
+                  style={styles.whiteTextStyle}
                   label="Sign Out"
                 />
               </Link>
@@ -67,7 +80,7 @@ class DashBoard extends React.Component {
         <MuiThemeProvider>
           <GridList
             cellHeight={400}
-            cols = {6}
+            cols = {3}
             style={styles.gridList}
           >
             <MuiThemeProvider><WeatherCard/></MuiThemeProvider>
