@@ -23,13 +23,11 @@ import {
   render() {
     const styles = {
       gridList: {
-        width: 500,
-
+        width: '100%',
         height: 400,
         overflowY: 'auto',
       },
       card: {
-
         width: '100%',
         height: 400,
       },
@@ -67,6 +65,7 @@ import {
     return (
       <div>
         <MuiThemeProvider>
+
 
           <Card style={styles.card}>
             <CardHeader
@@ -107,6 +106,7 @@ import {
             </GridList>
             <CardHeader
               title="On-Time" />
+
 
           </Card>
         </MuiThemeProvider>
