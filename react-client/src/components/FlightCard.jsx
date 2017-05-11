@@ -17,13 +17,11 @@ import StarBorder from 'material-ui/svg-icons/toggle/star-border';
   render() {
     const styles = {
       gridList: {
-        width: 500,
-
+        width: '100%',
         height: 400,
         overflowY: 'auto',
       },
       card: {
-
         width: '100%',
         height: 400,
       }
@@ -33,6 +31,7 @@ import StarBorder from 'material-ui/svg-icons/toggle/star-border';
         <div>
         <MuiThemeProvider>
 
+
           <Card style={styles.card}>
                <Subheader>Flight Info</Subheader>
 
@@ -40,6 +39,7 @@ import StarBorder from 'material-ui/svg-icons/toggle/star-border';
                <ul>{this.props.flight.departurePort} | {this.props.flight.departureCity}  TO {this.props.flight.arrivalPort} | {this.props.flight.arrivalCity}</ul>
                <ul>{this.props.flight.leaveTime}</ul>
                <ul>{this.props.flight.airline}</ul>
+
 
           </Card>
         </MuiThemeProvider>
