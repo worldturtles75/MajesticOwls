@@ -17,7 +17,23 @@ import {
  class FlightCard extends React.Component {
   constructor (props) {
     super(props);
+}
+
+  componentWillMount() {
+    this.flightSearch();
   }
+  flightSearch(airline,flight,month,day,year) {
+    return $.getJSON('https://crossorigin.me/https://api.flightstats.com/flex/flightstatus/rest/v2/json/flight/status/AA/102/arr/2017/5/11?appId=a187a7bc&appKey=e276d93bc5207238c1eacdd21bec0653&utc=false')
+        .then((data) => {
+          console.log('data',data);
+          this.setState({
+              departure: data.appendix.airports[0].city
+
+
+          });
+        });
+
+      }
 
   render() {
     const styles = {
@@ -105,6 +121,7 @@ import {
             </GridList>
             <CardHeader
               title="On-Time" />
+
           </Card>
         </MuiThemeProvider>
       </div>
