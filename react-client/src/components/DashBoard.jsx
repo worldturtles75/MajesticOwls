@@ -26,8 +26,30 @@ class DashBoard extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
+      food: []
     }
   }
+
+  searchYelp(location) {
+    $.ajax({
+      url: 'https://api.yelp.com/v3/businesses/search',
+      type: 'GET',
+      data: {
+        term: 'food',
+        location: this.props.location || 'San Francisco',
+        sort_by: 'rating'
+      },
+      headers: {
+        Authorization: `Bearer ${process.env.YELP_TOKEN || window.YELP_TOKEN}`
+      }
+    })
+    .done((data) => {
+      this.setState({
+        food: data
+      })
+    });
+  }
+
   render() {
     const styles = {
       titleStyle: {
