@@ -22,7 +22,7 @@ import {
   render() {
     const styles = {
       gridList: {
-        width: 500,
+        width: '100%',
         height: 400,
         overflowY: 'auto',
       },
@@ -64,6 +64,7 @@ import {
     return (
       <div>
         <MuiThemeProvider>
+
 
           <Card style={styles.card}>
             <CardHeader
