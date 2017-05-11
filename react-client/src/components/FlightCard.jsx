@@ -18,13 +18,13 @@ import {
  class FlightCard extends React.Component {
   constructor (props) {
     super(props);
-
   }
+
   render() {
     const styles = {
       gridList: {
-        width: '100%',
-        height: '40%',
+        width: 500,
+        height: 400,
         overflowY: 'auto',
       },
       card: {
@@ -68,14 +68,14 @@ import {
           <Card style={styles.card}>
             <CardHeader
               title="Flight Information"
-              avatar={<Avatar icon={<ActionFlightTakeoff />} 
-                style={styles.avatar} 
+              avatar={<Avatar icon={<ActionFlightTakeoff />}
+                style={styles.avatar}
                 color={white}/>}
               style={styles.cardHeader}
             />
             <Divider/>
-            <CardTitle 
-              title={this.props.flight.airline} 
+            <CardTitle
+              title={this.props.flight.airline}
               subtitle={'Leaving at: ' + this.props.flight.leaveTime}
             />
             <GridList
@@ -110,6 +110,7 @@ import {
     )
   }
 }
+
 
 
 export default FlightCard;
