@@ -5,8 +5,8 @@ const styles = {
   // Put any inline css styles here.
 }
 
-const FoodCard = () => {
-
-}
+const FoodCard = () => (
+  <div></div>
+)
 
 export default FoodCard;

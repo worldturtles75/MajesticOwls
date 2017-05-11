@@ -5,8 +5,8 @@ const styles = {
   // Put any inline css styles here.
 }
 
-const WeatherCard = () => {
-
-}
+const WeatherCard = () => (
+  <div></div>
+)
 
 export default WeatherCard;
