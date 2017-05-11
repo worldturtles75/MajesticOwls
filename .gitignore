@@ -6,6 +6,9 @@
 # Config vars
 server/config.js
 
+# Webpack bundle
+react-client/dist/bundle.js
+
 # Logs
 logs
 *.log
