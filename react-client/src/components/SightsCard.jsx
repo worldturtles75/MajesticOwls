@@ -71,7 +71,7 @@ const testData = [
   },
 ];
 
-const SightsCard = () => (
+const SightsCard = (props) => (
   <div>
     <Card
       style={styles.card}
@@ -86,14 +86,14 @@ const SightsCard = () => (
         cellHeight={180}
         style={styles.gridList}
       >
-        {testData.map((tile) => (
+        {props.sights.map((sight) => (
           <GridTile
-            key={tile.img}
-            title={tile.title}
-            subtitle={<b>{tile.author}</b>}
+            key={sight.img}
+            title={sight.name}
+            subtitle={<b>{sight.formatted_address}</b>}
             actionIcon={<IconButton><StarBorder color="white" /></IconButton>}
           >
-            <img src={tile.img} />
+            <img src={sight.img} />
           </GridTile>
         ))}
       </GridList>

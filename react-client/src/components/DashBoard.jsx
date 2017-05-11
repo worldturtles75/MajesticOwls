@@ -21,6 +21,8 @@ import {
   indigo500,
   amber500,
 } from 'material-ui/styles/colors';
+import $ from 'jquery';
+import config from '../config/config.js'
 
 class DashBoard extends React.Component {
   constructor (props) {
@@ -29,11 +31,23 @@ class DashBoard extends React.Component {
       food: [],
       sights: [],
     }
+    this.searchGoogle = this.searchGoogle.bind(this);
   }
 
   searchGoogle(location) {
+    $.getJSON('https://crossorigin.me/https://maps.googleapis.com/maps/api/place/textsearch/json?query=new+york+city+point+of+interest&language=en&key=' + config.GOOGLE_KEY)
+      .then((data) => {
+        console.log('data', data);
+        this.setState({
+          sights: data.results
+        })
+      });
   }
-  
+
+  componentDidMount() {
+    this.searchGoogle();
+  }
+
   searchYelp(location) {
     $.ajax({
       url: 'https://api.yelp.com/v3/businesses/search',
@@ -131,7 +145,7 @@ class DashBoard extends React.Component {
             <MuiThemeProvider><WeatherCard/></MuiThemeProvider>
             <MuiThemeProvider><FlightCard/></MuiThemeProvider>
             <MuiThemeProvider><FoodCard/></MuiThemeProvider>
-            <MuiThemeProvider><SightsCard/></MuiThemeProvider>
+            <MuiThemeProvider><SightsCard sights={this.state.sights}/></MuiThemeProvider>
           </GridList>
         </MuiThemeProvider>
         <MuiThemeProvider>
