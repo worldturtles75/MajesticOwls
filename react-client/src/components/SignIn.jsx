@@ -9,6 +9,9 @@ import {
   Route,
   Link,
 } from 'react-router-dom';
+import {
+  indigo500,
+} from 'material-ui/styles/colors';
 
 const styles = {
   titleStyle: {
@@ -24,11 +27,14 @@ const styles = {
     left: '50%',
     transform: 'translate(-50%, -50%)',
   },
-  toolbarStyle: {
-    backgroundColor: '#FFF',
-  },
   googleSignInStyle: {
     textDecoration: 'none',
+  },
+  whiteTextStyle: {
+    color: '#FFF',
+  },
+  toolbarStyle: {
+    backgroundColor: indigo500,
   },
 }
 
@@ -39,7 +45,10 @@ const SignIn = () => (
         style = {styles.toolbarStyle}
       >
         <ToolbarGroup firstChild={true} style={styles.titleStyle}>
-          <ToolbarTitle text="Majestic Owls" />
+          <ToolbarTitle 
+            text="Majestic Owls"
+            style={styles.whiteTextStyle}
+          />
         </ToolbarGroup>
       </Toolbar>
     </MuiThemeProvider>

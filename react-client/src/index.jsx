@@ -10,6 +10,10 @@ import {
   Route,
   Link,
 } from 'react-router-dom';
+import {
+  indigo500,
+} from 'material-ui/styles/colors';
+
 
 class App extends React.Component {
   constructor(props) {
@@ -31,15 +35,21 @@ class App extends React.Component {
         position: 'fixed',
       },
       signInStyle: {
-        top:15,
+        top: 10,
         right: 30,
         left:'auto',
         bottom: 'auto',
         position:'fixed',
       },
-      toolbarStyle: {
-        backgroundColor: '#FFF',
+      signIn: {
+        color: '#FFF',
       },
+      toolbarStyle: {
+        backgroundColor: indigo500,
+      },
+      toolbarTitleStyle: {
+        color: '#FFF',
+      }
     }
 
     const Home = () => (
@@ -48,11 +58,15 @@ class App extends React.Component {
             <Toolbar
               style = {styles.toolbarStyle}>
               <ToolbarGroup firstChild={true} style={styles.titleStyle}>
-                <ToolbarTitle text="Majestic Owls" />
+                <ToolbarTitle 
+                  text="Majestic Owls"
+                  style={styles.toolbarTitleStyle}
+                />
               </ToolbarGroup>
               <ToolbarGroup style={styles.signInStyle}>
                 <Link to='/sign-in'>
                   <FlatButton
+                    style={styles.signIn}
                     label="Sign In"
                   />
                 </Link>
