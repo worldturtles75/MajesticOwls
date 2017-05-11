@@ -5,8 +5,8 @@ const styles = {
   // Put any inline css styles here.
 }
 
-const SightsCard = () => {
-
-}
+const SightsCard = () => (
+  <div></div>
+)
 
 export default SightsCard;
