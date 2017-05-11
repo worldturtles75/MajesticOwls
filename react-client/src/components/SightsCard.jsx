@@ -5,6 +5,11 @@ import {GridList, GridTile} from 'material-ui/GridList';
 import IconButton from 'material-ui/IconButton';
 import Subheader from 'material-ui/Subheader';
 import StarBorder from 'material-ui/svg-icons/toggle/star-border';
+import MapsPlace from 'material-ui/svg-icons/maps/place';
+import Avatar from 'material-ui/Avatar';
+import {
+  grey500,
+} from 'material-ui/styles/colors';
 
 const styles = {
   cardHeader: {
@@ -18,6 +23,9 @@ const styles = {
   card: {
     width: '100%',
     height: 400,
+  },
+  avatar: {
+    backgroundColor: grey500,
   }
 }
 const testData = [
@@ -63,28 +71,29 @@ const testData = [
   },
 ];
 
-const SightsCard = () => (
+const SightsCard = (props) => (
   <div>
     <Card
       style={styles.card}
     >
       <CardHeader
         title="Places of Interest"
-        avatar="images/jsa-128.jpg"
+        subtitle="Subtitle here"
+        avatar={<Avatar icon={<MapsPlace />} style={styles.avatar} />}
         style={styles.cardHeader}
       />
       <GridList
         cellHeight={180}
         style={styles.gridList}
       >
-        {testData.map((tile) => (
+        {props.sights.map((sight) => (
           <GridTile
-            key={tile.img}
-            title={tile.title}
-            subtitle={<b>{tile.author}</b>}
+            key={sight.img}
+            title={sight.name}
+            subtitle={<b>{sight.formatted_address}</b>}
             actionIcon={<IconButton><StarBorder color="white" /></IconButton>}
           >
-            <img src={tile.img} />
+            <img src={sight.img} />
           </GridTile>
         ))}
       </GridList>
