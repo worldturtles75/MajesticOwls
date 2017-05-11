@@ -9,7 +9,9 @@ import SightsCard from './SightsCard.jsx';
 import WeatherCard from './WeatherCard.jsx';
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
 import GridList from 'material-ui/GridList';
-import GoogleButton from 'react-google-button'
+import GoogleButton from 'react-google-button';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentSearch from 'material-ui/svg-icons/action/search';
 import {
   BrowserRouter as Router,
   Route,
@@ -17,6 +19,7 @@ import {
 } from 'react-router-dom';
 import {
   indigo500,
+  amber500,
 } from 'material-ui/styles/colors';
 
 class DashBoard extends React.Component {
@@ -55,6 +58,15 @@ class DashBoard extends React.Component {
       toolbarStyle: {
         backgroundColor: indigo500,
       },
+      fab: {
+        margin: 0,
+        top: 'auto',
+        right: 20,
+        bottom: 20,
+        left: 'auto',
+        zIndex: 100,
+        position: 'fixed',
+      },
     }
     return(
       <div>
@@ -88,6 +100,13 @@ class DashBoard extends React.Component {
             <MuiThemeProvider><FoodCard/></MuiThemeProvider>
             <MuiThemeProvider><SightsCard/></MuiThemeProvider>
           </GridList>
+        </MuiThemeProvider>
+        <MuiThemeProvider>
+          <FloatingActionButton 
+            style={styles.fab} 
+            backgroundColor = {amber500}
+            label="Search"><ContentSearch />
+          </FloatingActionButton>
         </MuiThemeProvider>
       </div>
     )
