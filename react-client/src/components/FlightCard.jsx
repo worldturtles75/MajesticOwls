@@ -13,6 +13,7 @@ import StarBorder from 'material-ui/svg-icons/toggle/star-border';
     super(props);
 }
 
+
   componentWillMount() {
     this.flightSearch();
   }
