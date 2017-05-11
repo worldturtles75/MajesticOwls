@@ -9,11 +9,10 @@ import ActionFlightTakeoff from 'material-ui/svg-icons/action/flight-takeoff';
 import Avatar from 'material-ui/Avatar';
 import Arrow from 'material-ui/svg-icons/navigation/arrow-forward';
 import Divider from 'material-ui/Divider';
-
-
 import {
   grey500, white, teal500,
 } from 'material-ui/styles/colors';
+
 
  class FlightCard extends React.Component {
   constructor (props) {
@@ -65,6 +64,7 @@ import {
     return (
       <div>
         <MuiThemeProvider>
+
           <Card style={styles.card}>
             <CardHeader
               title="Flight Information"
