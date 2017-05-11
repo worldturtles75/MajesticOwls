@@ -105,7 +105,9 @@ class DashBoard extends React.Component {
     }
     return(
       <div>
+
         <SignOutToolBar/>
+
         <MuiThemeProvider>
           <GridList
             cellHeight={400}
