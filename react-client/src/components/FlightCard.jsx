@@ -35,12 +35,9 @@ import StarBorder from 'material-ui/svg-icons/toggle/star-border';
 
           <Card style={styles.card}>
                <Subheader>Flight Info</Subheader>
-
-
                <ul>{this.props.flight.departurePort} | {this.props.flight.departureCity}  TO {this.props.flight.arrivalPort} | {this.props.flight.arrivalCity}</ul>
                <ul>{this.props.flight.leaveTime}</ul>
                <ul>{this.props.flight.airline}</ul>
-
 
           </Card>
         </MuiThemeProvider>
