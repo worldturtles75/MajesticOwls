@@ -26,10 +26,14 @@ class DashBoard extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      food: []
+      food: [],
+      sights: [],
     }
   }
 
+  searchGoogle(location) {
+  }
+  
   searchYelp(location) {
     $.ajax({
       url: 'https://api.yelp.com/v3/businesses/search',
