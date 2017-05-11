@@ -66,8 +66,6 @@ import {
     return (
       <div>
         <MuiThemeProvider>
-
-
           <Card style={styles.card}>
             <CardHeader
               title="Flight Information"
@@ -107,7 +105,6 @@ import {
             </GridList>
             <CardHeader
               title="On-Time" />
-
 
           </Card>
         </MuiThemeProvider>
