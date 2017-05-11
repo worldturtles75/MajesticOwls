@@ -16,7 +16,7 @@ import StarBorder from 'material-ui/svg-icons/toggle/star-border';
   render() {
     const styles = {
       gridList: {
-        width: 500,
+        width: '100%',
         height: 400,
         overflowY: 'auto',
       },
@@ -29,6 +29,7 @@ import StarBorder from 'material-ui/svg-icons/toggle/star-border';
     return (
         <div>
         <MuiThemeProvider>
+
 
           <Card style={styles.card}>
                <Subheader>Flight Info</Subheader>
