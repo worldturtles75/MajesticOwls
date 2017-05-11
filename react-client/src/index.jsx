@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Search from './components/Search.jsx';
 import SignIn from './components/SignIn.jsx';
 import DashBoard from './components/DashBoard.jsx';
 
