@@ -8,12 +8,12 @@ import StarBorder from 'material-ui/svg-icons/toggle/star-border';
 
 const styles = {
   gridList: {
-    width: 500,
+    width: '100%',
     height: 400,
     overflowY: 'auto',
   },
   card: {
-    width:500,
+    width: '100%',
     height: 400,
   }
 }
