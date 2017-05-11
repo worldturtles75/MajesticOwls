@@ -12,11 +12,10 @@ import StarBorder from 'material-ui/svg-icons/toggle/star-border';
     super(props);
   }
 
-
   render() {
     const styles = {
       gridList: {
-        width: '100%',
+        width: 500,
         height: 400,
         overflowY: 'auto',
       },
@@ -42,6 +41,7 @@ import StarBorder from 'material-ui/svg-icons/toggle/star-border';
     )
   }
 }
+
 
 
 export default FlightCard;
