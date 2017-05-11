@@ -48,7 +48,7 @@ class DashBoard extends React.Component {
       },
     }
     return(
-      <div> 
+      <div>
         <MuiThemeProvider>
           <Toolbar
             style = {styles.toolbarStyle}>
@@ -57,7 +57,7 @@ class DashBoard extends React.Component {
             </ToolbarGroup>
             <ToolbarGroup style={styles.signOutStyle}>
               <Link to='/'>
-                <FlatButton 
+                <FlatButton
                   label="Sign Out"
                 />
               </Link>
@@ -66,7 +66,7 @@ class DashBoard extends React.Component {
         </MuiThemeProvider>
         <MuiThemeProvider>
           <GridList
-            cellHeight={400} 
+            cellHeight={400}
             cols = {6}
             style={styles.gridList}
           >
