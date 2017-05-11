@@ -17,46 +17,46 @@ const styles = {
     height: 400,
   }
 }
-const tilesData = [
+const testData = [
   {
     img: 'images/grid-list/00-52-29-429_640.jpg',
     title: 'Golden Gate Bridge',
-    author: 'jill111',
+    author: 'Price: $ · Rating: 4.9',
   },
   {
     img: 'images/grid-list/burger-827309_640.jpg',
-    title: 'Tasty burger',
-    author: 'pashminu',
+    title: 'Fisherman\'s Wharf',
+    author: 'Price: $$ · Rating: 4.5',
   },
   {
     img: 'images/grid-list/camera-813814_640.jpg',
-    title: 'Camera',
-    author: 'Danson67',
+    title: 'Pier 39',
+    author: 'Price: $$ · Rating: 4.3',
   },
   {
     img: 'images/grid-list/morning-819362_640.jpg',
-    title: 'Morning',
-    author: 'fancycrave1',
+    title: 'California Academy of Sciences',
+    author: 'Price: $$$ · Rating: 4.7',
   },
   {
     img: 'images/grid-list/hats-829509_640.jpg',
-    title: 'Hats',
-    author: 'Hans',
+    title: 'De Young Museum',
+    author: 'Price: $$$ · Rating: 4.4',
   },
   {
     img: 'images/grid-list/honey-823614_640.jpg',
-    title: 'Honey',
-    author: 'fancycravel',
+    title: 'Legion of Honor',
+    author: 'Price: $$$ · Rating: 4.6',
   },
   {
     img: 'images/grid-list/vegetables-790022_640.jpg',
-    title: 'Vegetables',
-    author: 'jill111',
+    title: 'Ferry Building',
+    author: 'Price: $ · Rating: 4.6',
   },
   {
     img: 'images/grid-list/water-plant-821293_640.jpg',
-    title: 'Water plant',
-    author: 'BkrmadtyaKarki',
+    title: 'AT&T Park',
+    author: 'Price: $$ · Rating: 4.2',
   },
 ];
 
@@ -66,16 +66,16 @@ const SightsCard = () => (
       <Card
         style={styles.card}
       >
+        <Subheader>Sights</Subheader>
         <GridList
           cellHeight={180}
           style={styles.gridList}
         >
-          <Subheader>Sights</Subheader>
-          {tilesData.map((tile) => (
+          {testData.map((tile) => (
             <GridTile
               key={tile.img}
               title={tile.title}
-              subtitle={<span>by <b>{tile.author}</b></span>}
+              subtitle={<b>{tile.author}</b>}
               actionIcon={<IconButton><StarBorder color="white" /></IconButton>}
             >
               <img src={tile.img} />
