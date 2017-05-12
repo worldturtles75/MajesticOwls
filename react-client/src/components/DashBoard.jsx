@@ -36,7 +36,7 @@ class DashBoard extends React.Component {
   }
 
   searchGoogle(location) {
-    $.getJSON('https://crossorigin.me/https://maps.googleapis.com/maps/api/place/textsearch/json?query=new+york+city+point+of+interest&language=en&key=' + require('../config/config').GOOGLE_KEY)
+    $.getJSON('https://crossorigin.me/https://maps.googleapis.com/maps/api/place/textsearch/json?query=new+york+city+point+of+interest&language=en&key=' + (process.env.GOOGLE_KEY || require('../config/config').GOOGLE_KEY))
       .then((data) => {
         console.log('data', data);
         this.setState({
@@ -46,7 +46,7 @@ class DashBoard extends React.Component {
   }
 
   flightSearch(airline,flight,month,day,year) {
-    return $.getJSON('https://crossorigin.me/https://api.flightstats.com/flex/flightstatus/rest/v2/json/flight/status/AA/102/arr/2017/5/11?appId=' + require('../config/config').FLIGHTSTATUS.API_KEY + '&appKey=' + require('../config/config').FLIGHTSTATUS.APP_KEY + '&utc=false')
+    return $.getJSON('https://crossorigin.me/https://api.flightstats.com/flex/flightstatus/rest/v2/json/flight/status/AA/102/arr/2017/5/11?appId=' + (process.env.FLIGHT_API_KEY || require('../config/config').FLIGHTSTATUS.API_KEY) + '&appKey=' + (process.env.FLIGHT_APP_KEY || require('../config/config').FLIGHTSTATUS.APP_KEY) + '&utc=false')
         .then((data) => {
           console.log('data',data);
             var obj = {
@@ -65,30 +65,24 @@ class DashBoard extends React.Component {
 
       }
 
-  componentDidMount() {
-    this.searchGoogle();
-    this.flightSearch();
-  }
-
-  searchYelp(location) {
-    $.ajax({
-      url: 'https://api.yelp.com/v3/businesses/search',
-      type: 'GET',
-      data: {
-        term: 'food',
-        location: this.props.location || 'San Francisco',
-        sort_by: 'rating'
-      },
-      headers: {
-        Authorization: `Bearer ${process.env.YELP_TOKEN || require('../config/config').YELP_TOKEN}`
-      }
+  searchFood(location) {
+    $.get('https://crossorigin.me/https://maps.googleapis.com/maps/api/place/textsearch/json', {
+      key: process.env.GOOGLE_KEY || require('../config/config').GOOGLE_KEY,
+      query: location || 'San Francisco',
+      type: 'restaurant'
     })
     .done((data) => {
       this.setState({
-        food: data
+        food: data.results
       })
-      console.log(data);
+      console.log('food', data.results);
     });
+  }
+
+  componentDidMount() {
+    this.searchGoogle();
+    this.flightSearch();
+    this.searchFood();
   }
 
   render() {
