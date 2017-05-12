@@ -49,7 +49,7 @@ class NewTrip extends React.Component {
       this.setState({stepIndex: stepIndex - 1});
     }
   };
-  handleChange (event, index, value) { 
+  handleChange (event, index, value) {
     this.setState({airline: value});
   };
   handleDate (event, date) {
@@ -149,6 +149,7 @@ class NewTrip extends React.Component {
           </MuiThemeProvider>
           <div style={styles.contentStyle}>
             {finished ? (
+              // do shit here
               <Redirect push to="/dashboard" />
             ) : (
               <div>
