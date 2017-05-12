@@ -46,7 +46,7 @@ class DashBoard extends React.Component {
   }
 
   flightSearch(airline,flight,month,day,year) {
-    return $.getJSON('https://crossorigin.me/https://api.flightstats.com/flex/flightstatus/rest/v2/json/flight/status/AA/102/arr/2017/5/11?appId=' + config.FLIGHTSTATUS.API_KEY + '&appKey=' + config.FLIGHTSTATUS.APP_KEY + '&utc=false')
+    return $.getJSON('https://crossorigin.me/https://api.flightstats.com/flex/flightstatus/rest/v2/json/flight/status/AA/102/arr/2017/5/11?appId=' + require('../config/config').FLIGHTSTATUS.API_KEY + '&appKey=' + require('../config/config').FLIGHTSTATUS.APP_KEY + '&utc=false')
         .then((data) => {
           console.log('data',data);
             var obj = {
@@ -164,6 +164,7 @@ class DashBoard extends React.Component {
             cellHeight={400}
             cols = {3}
             style={styles.gridList}
+            padding = {25}
           >
             <MuiThemeProvider><WeatherCard/></MuiThemeProvider>
             <MuiThemeProvider><FlightCard flight={this.state.flight}/></MuiThemeProvider>
