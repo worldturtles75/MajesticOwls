@@ -12,17 +12,28 @@ import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui
 import {
   indigo500,
 } from 'material-ui/styles/colors';
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+import TextField from 'material-ui/TextField';
+import DatePicker from 'material-ui/DatePicker';
+
 
 class NewTrip extends React.Component {
   constructor(props) {
     super(props);
+    injectTapEventPlugin();
     this.state = {
       finished: false,
       stepIndex: 0,
+      airline: 'AL',
+      flightNumber: '',
+      finalDestination: '',
     }
     this.handleNext = this.handleNext.bind(this);
     this.handlePrev = this.handlePrev.bind(this);
     this.getStepContent = this.getStepContent.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
   handleNext () {
     const {stepIndex} = this.state;
@@ -38,12 +49,46 @@ class NewTrip extends React.Component {
       this.setState({stepIndex: stepIndex - 1});
     }
   };
+  handleChange (event, index, value) { 
+    this.setState({airline: value});
+  }
   getStepContent(stepIndex) {
+    let DateTimeFormat = global.Intl.DateTimeFormat;
     switch (stepIndex) {
       case 0:
-        return 'Select campaign settings...';
+        return (<MuiThemeProvider><SelectField
+          floatingLabelText='Airline'
+          value={this.state.airline}
+          onChange={this.handleChange}
+        >
+          <MenuItem value='AL' label='Alaska Airlines (AL)' primaryText='Alaska Airlines' />
+          <MenuItem value='AA' label='American Airlines (AA)' primaryText="American Airlines" />
+          <MenuItem value='DL' label='Delta Airlines (DL)' primaryText="Delta Airlines" />
+          <MenuItem value='F9' label='Frontier Airlines (F9)' primaryText='Frontier Airlines' />
+          <MenuItem value='WN' label='Southwest Airlines (WN)' primaryText='Southwest Airlines'/>
+          <MenuItem value='NK' label='Spirit Airlines (NK)' primaryText='Spirit Airlines' />
+          <MenuItem value='UA' label='United Airlines (UA)' primaryText='United Airlines' />
+          <MenuItem value='VX' label='Virgin America (VX)' primaryText='Virgin America' />
+        </SelectField></MuiThemeProvider>);
       case 1:
-        return 'What is an ad group anyways?';
+        return (<div>
+                  <MuiThemeProvider><TextField
+                    floatingLabelText="Flight Number"
+                    hintText="007"
+                  />
+                  </MuiThemeProvider>
+                  <MuiThemeProvider>
+                  <DatePicker
+                    hintText="Flight Date"
+                    firstDayOfWeek={0}
+                    formatDate={new DateTimeFormat('en-US', {
+                      day: 'numeric',
+                      month: 'long',
+                      year: 'numeric',
+                    }).format}/>
+                  </MuiThemeProvider>
+                </div>
+                );
       case 2:
         return 'This is the bit I really care about!';
       default:
@@ -127,7 +172,7 @@ class NewTrip extends React.Component {
                 <StepLabel>Choose Flight # & Date</StepLabel>
               </Step>
               <Step>
-                <StepLabel>Add Final Destination</StepLabel>
+                <StepLabel>Add Final Destination Address</StepLabel>
               </Step>
             </Stepper>
           </MuiThemeProvider>
@@ -146,7 +191,7 @@ class NewTrip extends React.Component {
               </p>
             ) : (
               <div>
-                <p>{this.getStepContent(stepIndex)}</p>
+                {this.getStepContent(stepIndex)}
                 <div style={{marginTop: 12}}>
                   <MuiThemeProvider>
                     <FlatButton
