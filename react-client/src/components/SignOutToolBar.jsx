@@ -1,17 +1,11 @@
 import React from 'react';
-import {render} from 'react-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import RaisedButton from 'material-ui/RaisedButton';
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
-import GoogleButton from 'react-google-button'
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-} from 'react-router-dom';
 import {
   indigo500,
 } from 'material-ui/styles/colors';
+import {Link} from 'react-router-dom';
+import FlatButton from 'material-ui/FlatButton';
 
 const styles = {
   titleStyle: {
@@ -21,52 +15,50 @@ const styles = {
     bottom: 'auto',
     position: 'fixed',
   },
-  signInStyle: {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-  },
-  googleSignInStyle: {
-    textDecoration: 'none',
+  signOutStyle: {
+    top:10,
+    right: 30,
+    left:'auto',
+    bottom: 'auto',
+    position:'fixed',
   },
   whiteTextStyle: {
     color: '#FFF',
   },
   toolbarStyle: {
     backgroundColor: indigo500,
+    zIndex: 1000,
   },
   homeStyle: {
     textDecoration: 'none',
   },
 }
 
-const SignIn = () => (
-  <div> 
+const SignOutToolBar = () => (
+  <div>
     <MuiThemeProvider>
       <Toolbar
-        style = {styles.toolbarStyle}
-      >
+        style = {styles.toolbarStyle}>
         <ToolbarGroup firstChild={true} style={styles.titleStyle}>
           <Link to='/'
             style={styles.homeStyle}
           >
-            <ToolbarTitle 
+            <ToolbarTitle
             text="Viator"
             style={styles.whiteTextStyle}
             />
-          </Link> 
+          </Link>
+        </ToolbarGroup>
+        <ToolbarGroup style={styles.signOutStyle}>
+          <Link to='/'>
+            <FlatButton
+              style={styles.whiteTextStyle}
+              label="Sign Out"
+            />
+          </Link>
         </ToolbarGroup>
       </Toolbar>
     </MuiThemeProvider>
-    <div
-      style = {styles.signInStyle} >
-      <a href="/auth/google"
-        style = {styles.googleSignInStyle}>
-        <GoogleButton />
-      </a>
-    </div>
   </div>
 )
-
-export default SignIn;
+export default SignOutToolBar;
