@@ -8,8 +8,9 @@ import StarBorder from 'material-ui/svg-icons/toggle/star-border';
 import MapsPlace from 'material-ui/svg-icons/maps/place';
 import Avatar from 'material-ui/Avatar';
 import {
-  grey500,
+  grey500, blueGrey500
 } from 'material-ui/styles/colors';
+import Divider from 'material-ui/Divider';
 
 const styles = {
   cardHeader: {
@@ -25,7 +26,7 @@ const styles = {
     height: 400,
   },
   avatar: {
-    backgroundColor: grey500,
+    backgroundColor: blueGrey500,
   }
 }
 
@@ -40,6 +41,7 @@ const SightsCard = (props) => (
         avatar={<Avatar icon={<MapsPlace />} style={styles.avatar} />}
         style={styles.cardHeader}
       />
+      <Divider/>
       <GridList
         cellHeight={180}
         style={styles.gridList}

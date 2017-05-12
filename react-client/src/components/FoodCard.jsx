@@ -4,7 +4,8 @@ import {List, ListItem} from 'material-ui/List';
 import Subheader from 'material-ui/Subheader';
 import Avatar from 'material-ui/Avatar';
 import MapsLocalDining from 'material-ui/svg-icons/maps/local-dining';
-import {grey500} from 'material-ui/styles/colors';
+import {grey500, red500} from 'material-ui/styles/colors';
+import Divider from 'material-ui/Divider';
 
 const styles = {
   cardHeader: {
@@ -20,7 +21,7 @@ const styles = {
     height: 400,
   },
   avatar: {
-    backgroundColor: grey500,
+    backgroundColor: red500,
   }
 }
 
@@ -35,6 +36,7 @@ const FoodCard = (props) => (
       />}
       style={styles.cardHeader}
     />
+    <Divider/>
     <List
       style={styles.list}
     >
