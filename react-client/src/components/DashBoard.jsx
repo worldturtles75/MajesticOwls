@@ -164,6 +164,7 @@ class DashBoard extends React.Component {
             cellHeight={400}
             cols = {3}
             style={styles.gridList}
+            padding = {25}
           >
             <MuiThemeProvider><WeatherCard/></MuiThemeProvider>
             <MuiThemeProvider><FlightCard flight={this.state.flight}/></MuiThemeProvider>
