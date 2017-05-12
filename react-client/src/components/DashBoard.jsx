@@ -65,30 +65,24 @@ class DashBoard extends React.Component {
 
       }
 
-  componentDidMount() {
-    this.searchGoogle();
-    this.flightSearch();
-  }
-
-  searchYelp(location) {
-    $.ajax({
-      url: 'https://api.yelp.com/v3/businesses/search',
-      type: 'GET',
-      data: {
-        term: 'food',
-        location: this.props.location || 'San Francisco',
-        sort_by: 'rating'
-      },
-      headers: {
-        Authorization: `Bearer ${process.env.YELP_TOKEN || require('../config/config').YELP_TOKEN}`
-      }
+  searchFood(location) {
+    $.get('https://crossorigin.me/https://maps.googleapis.com/maps/api/place/textsearch/json', {
+      key: process.env.GOOGLE_KEY || require('../config/config').GOOGLE_KEY,
+      query: location || 'San Francisco',
+      type: 'restaurant'
     })
     .done((data) => {
       this.setState({
-        food: data
+        food: data.results
       })
-      console.log(data);
+      console.log('food', data.results);
     });
+  }
+
+  componentDidMount() {
+    this.searchGoogle();
+    this.flightSearch();
+    this.searchFood();
   }
 
   render() {
