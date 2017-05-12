@@ -13,12 +13,13 @@ import {
   grey500, white, teal500,
 } from 'material-ui/styles/colors';
 
+
  class FlightCard extends React.Component {
   constructor (props) {
     super(props);
-    this.state = {
-    }
+
   }
+
 
   render() {
     const styles = {
