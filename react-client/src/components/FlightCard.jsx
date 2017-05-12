@@ -7,7 +7,6 @@ import Subheader from 'material-ui/Subheader';
 import StarBorder from 'material-ui/svg-icons/toggle/star-border';
 
 
-
  class FlightCard extends React.Component {
   constructor (props) {
     super(props);
@@ -35,6 +34,7 @@ import StarBorder from 'material-ui/svg-icons/toggle/star-border';
 
           <Card style={styles.card}>
                <Subheader>Flight Info</Subheader>
+
                <ul>{this.props.flight.departurePort} | {this.props.flight.departureCity}  TO {this.props.flight.arrivalPort} | {this.props.flight.arrivalCity}</ul>
                <ul>{this.props.flight.leaveTime}</ul>
                <ul>{this.props.flight.airline}</ul>
