@@ -37,7 +37,7 @@ class DashBoard extends React.Component {
   }
 
   searchGoogle(location) {
-    $.getJSON('https://crossorigin.me/https://maps.googleapis.com/maps/api/place/textsearch/json?query=new+york+city+point+of+interest&language=en&key=' + config.GOOGLE_KEY)
+    $.getJSON('https://crossorigin.me/https://maps.googleapis.com/maps/api/place/textsearch/json?query=san+francisco+point+of+interest&language=en&key=' + config.GOOGLE_KEY)
       .then((data) => {
         console.log('data', data);
         this.setState({
