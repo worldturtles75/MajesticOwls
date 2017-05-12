@@ -5,11 +5,22 @@ import {GridList, GridTile} from 'material-ui/GridList';
 import IconButton from 'material-ui/IconButton';
 import Subheader from 'material-ui/Subheader';
 import StarBorder from 'material-ui/svg-icons/toggle/star-border';
+import ActionFlightTakeoff from 'material-ui/svg-icons/action/flight-takeoff';
+import Avatar from 'material-ui/Avatar';
+import Arrow from 'material-ui/svg-icons/navigation/arrow-forward';
+
+
+import {
+  grey500,red500
+} from 'material-ui/styles/colors';
+
+
 
 
  class FlightCard extends React.Component {
   constructor (props) {
     super(props);
+
   }
 
 
@@ -23,19 +34,57 @@ import StarBorder from 'material-ui/svg-icons/toggle/star-border';
       card: {
         width: '100%',
         height: 400,
+      },
+      mainTitle: {
+
+      },
+      avatar: {
+        backgroundColor: grey500,
+      },
+      iconrotate: {
+        transform: [{ rotate: '45deg'}]
+      },
+      main:{
+        textAlign: 'center',
+        fontSize: 60,
+      },
+      main1:{
+        textAlign: 'center',
+        fontSize: 10,
+      },
+      avatar1:{
+        align: 60,
       }
+
+
     }
+
+
+
 
     return (
         <div>
         <MuiThemeProvider>
-          <Card style={styles.card}>
-               <Subheader>Flight Info</Subheader>
 
-               <ul>{this.props.flight.departurePort} | {this.props.flight.departureCity}  TO {this.props.flight.arrivalPort} | {this.props.flight.arrivalCity}</ul>
+
+          <Card style={styles.card}>
+          <CardHeader
+            title="Flight Information"
+            avatar={<Avatar icon={<ActionFlightTakeoff />} style={styles.avatar} color={red500}/>}
+            style={styles.cardHeader}
+          />
+                <CardText style={styles.main}>{this.props.flight.departurePort}<br /><ul style={styles.main1}>{this.props.flight.departureCity}</ul></CardText>
+                <Arrow />
+                <CardText style={styles.main}>{this.props.flight.arrivalPort}<br /><ul style={styles.main1}>{this.props.flight.arrivalCity}</ul></CardText>
+
+          <CardText>
+
                <ul>{this.props.flight.leaveTime}</ul>
                <ul>{this.props.flight.airline}</ul>
+               <ul>{this.props.flight.flightDuration}</ul>
+               <ul>{this.props.flight.leaveDate}</ul>
 
+          </CardText>
           </Card>
         </MuiThemeProvider>
         </div>
