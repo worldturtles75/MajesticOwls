@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import SignIn from './components/SignIn.jsx';
 import DashBoard from './components/DashBoard.jsx';
+import NewTrip from './components/NewTrip.jsx';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import FlatButton from 'material-ui/FlatButton';
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
@@ -13,6 +14,7 @@ import {
 import {
   indigo500,
 } from 'material-ui/styles/colors';
+import injectTapEventPlugin from 'react-tap-event-plugin';
 
 
 class App extends React.Component {
@@ -62,7 +64,7 @@ class App extends React.Component {
                   style={styles.homeStyle}
                 >
                   <ToolbarTitle 
-                  text="Flighty McFlightFace"
+                  text="Advena"
                   style={styles.whiteTextStyle}
                   />
                 </Link>
@@ -86,10 +88,11 @@ class App extends React.Component {
           <Route exact path="/" component={Home}/>
           <Route path="/sign-in" component={SignIn}/>
           <Route path="/dashboard" component={DashBoard}/>
+          <Route path="/trip" component={NewTrip}/>
         </div>
       </Router>
     )
   }
 }
-
+injectTapEventPlugin();
 ReactDOM.render(<App/>, document.getElementById('app'));

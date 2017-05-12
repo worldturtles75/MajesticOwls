@@ -52,10 +52,10 @@ const SignIn = () => (
             style={styles.homeStyle}
           >
             <ToolbarTitle 
-            text="Majestic Owls"
+            text="Advena"
             style={styles.whiteTextStyle}
             />
-          </Link>
+          </Link> 
         </ToolbarGroup>
       </Toolbar>
     </MuiThemeProvider>
