@@ -64,7 +64,7 @@ class App extends React.Component {
                   style={styles.homeStyle}
                 >
                   <ToolbarTitle 
-                  text="Advena"
+                  text="Viator"
                   style={styles.whiteTextStyle}
                   />
                 </Link>

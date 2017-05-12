@@ -7,7 +7,6 @@ import FlightCard from './FlightCard.jsx';
 import FoodCard from './FoodCard.jsx';
 import SightsCard from './SightsCard.jsx';
 import WeatherCard from './WeatherCard.jsx';
-import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
 import GridList from 'material-ui/GridList';
 import GoogleButton from 'react-google-button';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
@@ -18,10 +17,10 @@ import {
   Link,
 } from 'react-router-dom';
 import {
-  indigo500,
   amber500,
 } from 'material-ui/styles/colors';
 import $ from 'jquery';
+import SignOutToolBar from './SignOutToolBar.jsx'
 
 class DashBoard extends React.Component {
   constructor (props) {
@@ -87,13 +86,6 @@ class DashBoard extends React.Component {
 
   render() {
     const styles = {
-      titleStyle: {
-        top: 'auto',
-        right: 'auto',
-        left: 50,
-        bottom: 'auto',
-        position: 'fixed',
-      },
       gridList: {
         width: 'auto',
         height: 'auto',
@@ -101,20 +93,6 @@ class DashBoard extends React.Component {
         marginLeft: 20,
         marginRight: 20,
         marginTop: 20,
-      },
-      signOutStyle: {
-        top:10,
-        right: 30,
-        left:'auto',
-        bottom: 'auto',
-        position:'fixed',
-      },
-      whiteTextStyle: {
-        color: '#FFF',
-      },
-      toolbarStyle: {
-        backgroundColor: indigo500,
-        zIndex: 1000,
       },
       fab: {
         margin: 0,
@@ -125,35 +103,10 @@ class DashBoard extends React.Component {
         zIndex: 100,
         position: 'fixed',
       },
-      homeStyle: {
-        textDecoration: 'none',
-      },
     }
     return(
       <div>
-        <MuiThemeProvider>
-          <Toolbar
-            style = {styles.toolbarStyle}>
-            <ToolbarGroup firstChild={true} style={styles.titleStyle}>
-              <Link to='/'
-                style={styles.homeStyle}
-              >
-                <ToolbarTitle
-                text="Advena"
-                style={styles.whiteTextStyle}
-                />
-              </Link>
-            </ToolbarGroup>
-            <ToolbarGroup style={styles.signOutStyle}>
-              <Link to='/'>
-                <FlatButton
-                  style={styles.whiteTextStyle}
-                  label="Sign Out"
-                />
-              </Link>
-            </ToolbarGroup>
-          </Toolbar>
-        </MuiThemeProvider>
+        <SignOutToolBar/>
         <MuiThemeProvider>
           <GridList
             cellHeight={400}

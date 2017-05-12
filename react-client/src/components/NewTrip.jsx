@@ -9,15 +9,12 @@ import FlatButton from 'material-ui/FlatButton';
 import {Link} from 'react-router-dom';
 import {Redirect} from 'react-router';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
-import {
-  indigo500,
-} from 'material-ui/styles/colors';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import TextField from 'material-ui/TextField';
 import DatePicker from 'material-ui/DatePicker';
 import Divider from 'material-ui/Divider';
+import SignOutToolBar from './SignOutToolBar.jsx'
 
 
 class NewTrip extends React.Component {
@@ -129,70 +126,13 @@ class NewTrip extends React.Component {
   render () {
     const {finished, stepIndex} = this.state;
     const styles = {
-      titleStyle: {
-        top: 'auto',
-        right: 'auto',
-        left: 50,
-        bottom: 'auto',
-        position: 'fixed',
-      },
       contentStyle: {
         margin: '0 16px',
-      },
-      signOutStyle: {
-        top:10,
-        right: 30,
-        left:'auto',
-        bottom: 'auto',
-        position:'fixed',
-      },
-      whiteTextStyle: {
-        color: '#FFF',
-      },
-      toolbarStyle: {
-        backgroundColor: indigo500,
-        zIndex: 1000,
-      },
-      fab: {
-        margin: 0,
-        top: 'auto',
-        right: 20,
-        bottom: 20,
-        left: 'auto',
-        zIndex: 100,
-        position: 'fixed',
-      },
-      homeStyle: {
-        textDecoration: 'none',
       },
     }
     return (
       <div>
-        <div>
-          <MuiThemeProvider>
-            <Toolbar
-              style = {styles.toolbarStyle}>
-              <ToolbarGroup firstChild={true} style={styles.titleStyle}>
-                <Link to='/'
-                  style={styles.homeStyle}
-                >
-                  <ToolbarTitle
-                  text="Advena"
-                  style={styles.whiteTextStyle}
-                  />
-                </Link>
-              </ToolbarGroup>
-              <ToolbarGroup style={styles.signOutStyle}>
-                <Link to='/'>
-                  <FlatButton
-                    style={styles.whiteTextStyle}
-                    label="Sign Out"
-                  />
-                </Link>
-              </ToolbarGroup>
-            </Toolbar>
-          </MuiThemeProvider>
-        </div>
+        <SignOutToolBar/>
         <div style={{width: '100%', maxWidth: 800, margin: 'auto'}}>
           <MuiThemeProvider>
             <Stepper activeStep={stepIndex}>
