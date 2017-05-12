@@ -14,7 +14,7 @@ import {
 import {
   indigo500,
 } from 'material-ui/styles/colors';
-var injectTapEventPlugin = require("react-tap-event-plugin");
+import injectTapEventPlugin from 'react-tap-event-plugin';
 
 
 class App extends React.Component {
@@ -94,5 +94,5 @@ class App extends React.Component {
     )
   }
 }
-
+injectTapEventPlugin();
 ReactDOM.render(<App/>, document.getElementById('app'));

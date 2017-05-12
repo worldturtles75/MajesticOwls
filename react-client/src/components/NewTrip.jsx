@@ -7,6 +7,7 @@ import {
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 import {Link} from 'react-router-dom';
+import {Redirect} from 'react-router';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
 import {
@@ -14,15 +15,14 @@ import {
 } from 'material-ui/styles/colors';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
-import injectTapEventPlugin from 'react-tap-event-plugin';
 import TextField from 'material-ui/TextField';
 import DatePicker from 'material-ui/DatePicker';
+import Divider from 'material-ui/Divider';
 
 
 class NewTrip extends React.Component {
   constructor(props) {
     super(props);
-    injectTapEventPlugin();
     this.state = {
       finished: false,
       stepIndex: 0,
@@ -34,6 +34,9 @@ class NewTrip extends React.Component {
     this.handlePrev = this.handlePrev.bind(this);
     this.getStepContent = this.getStepContent.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleDate = this.handleDate.bind(this);
+    this.handleFlightNumber = this.handleFlightNumber.bind(this);
+    this.handleFinalDestination = this.handleFinalDestination.bind(this);
   }
   handleNext () {
     const {stepIndex} = this.state;
@@ -51,48 +54,76 @@ class NewTrip extends React.Component {
   };
   handleChange (event, index, value) { 
     this.setState({airline: value});
-  }
+  };
+  handleDate (event, date) {
+    this.setState({date: date});
+    console.log('date', date);
+  };
+  handleFlightNumber (event, flightNumber) {
+    this.setState({flightNumber: flightNumber});
+  };
+  handleFinalDestination (event, address) {
+    this.setState({finalDestination: address});
+  };
   getStepContent(stepIndex) {
     let DateTimeFormat = global.Intl.DateTimeFormat;
     switch (stepIndex) {
       case 0:
-        return (<MuiThemeProvider><SelectField
-          floatingLabelText='Airline'
-          value={this.state.airline}
-          onChange={this.handleChange}
-        >
-          <MenuItem value='AL' label='Alaska Airlines (AL)' primaryText='Alaska Airlines' />
-          <MenuItem value='AA' label='American Airlines (AA)' primaryText="American Airlines" />
-          <MenuItem value='DL' label='Delta Airlines (DL)' primaryText="Delta Airlines" />
-          <MenuItem value='F9' label='Frontier Airlines (F9)' primaryText='Frontier Airlines' />
-          <MenuItem value='WN' label='Southwest Airlines (WN)' primaryText='Southwest Airlines'/>
-          <MenuItem value='NK' label='Spirit Airlines (NK)' primaryText='Spirit Airlines' />
-          <MenuItem value='UA' label='United Airlines (UA)' primaryText='United Airlines' />
-          <MenuItem value='VX' label='Virgin America (VX)' primaryText='Virgin America' />
-        </SelectField></MuiThemeProvider>);
+        return (<MuiThemeProvider>
+                  <SelectField
+                    floatingLabelText='Airline'
+                    value={this.state.airline}
+                    onChange={this.handleChange}
+                  >
+                    <MenuItem value='AL' label='Alaska Airlines (AL)' primaryText='Alaska Airlines' />
+                    <MenuItem value='AA' label='American Airlines (AA)' primaryText="American Airlines" />
+                    <MenuItem value='DL' label='Delta Airlines (DL)' primaryText="Delta Airlines" />
+                    <MenuItem value='F9' label='Frontier Airlines (F9)' primaryText='Frontier Airlines' />
+                    <MenuItem value='WN' label='Southwest Airlines (WN)' primaryText='Southwest Airlines'/>
+                    <MenuItem value='NK' label='Spirit Airlines (NK)' primaryText='Spirit Airlines' />
+                    <MenuItem value='UA' label='United Airlines (UA)' primaryText='United Airlines' />
+                    <MenuItem value='VX' label='Virgin America (VX)' primaryText='Virgin America' />
+                  </SelectField>
+                </MuiThemeProvider>
+                );
       case 1:
         return (<div>
-                  <MuiThemeProvider><TextField
-                    floatingLabelText="Flight Number"
-                    hintText="007"
-                  />
+                  <MuiThemeProvider>
+                    <TextField
+                      floatingLabelText="Flight Number"
+                      onChange={this.handleFlightNumber}
+                      hintText="007"
+                      floatingLabelFixed={true}
+                    />
                   </MuiThemeProvider>
                   <MuiThemeProvider>
-                  <DatePicker
-                    hintText="Flight Date"
-                    firstDayOfWeek={0}
-                    formatDate={new DateTimeFormat('en-US', {
-                      day: 'numeric',
-                      month: 'long',
-                      year: 'numeric',
-                    }).format}/>
+                    <Divider />
+                  </MuiThemeProvider>
+                  <MuiThemeProvider>
+                    <DatePicker
+                      onChange={this.handleDate}
+                      hintText="Flight Date"
+                      firstDayOfWeek={0}
+                      formatDate={new DateTimeFormat('en-US', {
+                        day: 'numeric',
+                        month: 'long',
+                        year: 'numeric',
+                      }).format}/>
                   </MuiThemeProvider>
                 </div>
                 );
       case 2:
-        return 'This is the bit I really care about!';
+        return (<MuiThemeProvider>
+                  <TextField
+                    floatingLabelText="Destination Address"
+                    onChange={this.handleFlightNumber}
+                    hintText="944 Market Street San Francisco"
+                    floatingLabelFixed={true}
+                  />
+                </MuiThemeProvider>
+                );
       default:
-        return 'You\'re a long way from home sonny jim!';
+        return 'You\'ve somehow found a bug in our code, well done!';
     }
   };
   render () {
@@ -162,7 +193,7 @@ class NewTrip extends React.Component {
             </Toolbar>
           </MuiThemeProvider>
         </div>
-        <div style={{width: '100%', maxWidth: 700, margin: 'auto'}}>
+        <div style={{width: '100%', maxWidth: 800, margin: 'auto'}}>
           <MuiThemeProvider>
             <Stepper activeStep={stepIndex}>
               <Step>
@@ -178,17 +209,7 @@ class NewTrip extends React.Component {
           </MuiThemeProvider>
           <div style={styles.contentStyle}>
             {finished ? (
-              <p>
-                <a
-                  href="#"
-                  onClick={(event) => {
-                    event.preventDefault();
-                    this.setState({stepIndex: 0, finished: false});
-                  }}
-                >
-                  Click here
-                </a> to reset the example.
-              </p>
+              <Redirect push to="/dashboard" />
             ) : (
               <div>
                 {this.getStepContent(stepIndex)}
