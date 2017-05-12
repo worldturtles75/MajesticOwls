@@ -47,18 +47,72 @@ class DashBoard extends React.Component {
   }
 
   flightSearch(airline,flight,month,day,year) {
+<<<<<<< HEAD
     return $.getJSON('https://crossorigin.me/https://api.flightstats.com/flex/flightstatus/rest/v2/json/flight/status/AA/102/arr/2017/5/11?appId=' + (process.env.FLIGHT_API_KEY || require('../config/config').FLIGHTSTATUS.API_KEY) + '&appKey=' + (process.env.FLIGHT_APP_KEY || require('../config/config').FLIGHTSTATUS.APP_KEY) + '&utc=false')
+=======
+
+    return $.getJSON('https://crossorigin.me/https://api.flightstats.com/flex/flightstatus/rest/v2/json/flight/status/AA/340/arr/2017/5/11?appId=' + require('../config/config').FLIGHTSTATUS.API_KEY + '&appKey=' + require('../config/config').FLIGHTSTATUS.APP_KEY + '&utc=false')
+>>>>>>> ADJUSTMENTS TO FLIGHT CARD
 
         .then((data) => {
           console.log('data',data);
-            var obj = {
+          var dateTime = data.flightStatuses[0].departureDate.dateLocal;
+          var newTime;
+          var dateOnly;
+          var hours;
+          var minutes;
+          var count = 0;
+        for (var i = 0; i < dateTime.length; i++) {
+          if (dateTime[i] === 'T') {
+            dateOnly = dateTime.slice(0,i);
+            newTime =dateTime.slice(i+1,dateTime.length);
+          }
+        }
+
+            hours = newTime.slice(0,2);
+            minutes = newTime.slice(3,5);
+
+          hours = Number(hours);
+
+          if (hours > 12) {
+
+              newTime = (Math.floor(hours - 12)).toString()+ ':' + minutes + ' PM'
+          } else {
+
+              newTime = hours.toString() + ':'+ minutes + ' AM'
+          }
+
+          var flightDuration = data.flightStatuses[1].flightDurations.scheduledAirMinutes
+
+          if (flightDuration > 60) {
+            hours = Math.floor(flightDuration / 60);
+            minutes = flightDuration - (hours * 60);
+
+            flightDuration = hours.toString() + ' Hour(s) ' + minutes.toString() + ' Minutes(s)'
+          }
+
+          console.log(flightDuration);
+          console.log(newTime);
+
+
+          dateOnly = dateOnly.slice(8,10) + '-' + dateOnly.slice(5,7) + '-' + dateOnly.slice(0,4);
+
+            console.log(dateOnly);
+
+          var obj = {
               departurePort: data.appendix.airports[0].fs,
               arrivalPort: data.appendix.airports[1].fs,
-              departureCity: data.appendix.airports[0].city,
-              arrivalCity: data.appendix.airports[1].city,
-              leaveTime: data.flightStatuses[0].departureDate.dateLocal,
-              airline: data.appendix.airlines[0].name
+              departureCity: data.appendix.airports[0].city + ', '+data.appendix.airports[0].stateCode,
+              arrivalCity: data.appendix.airports[1].city + ',' + data.appendix.airports[1].stateCode,
+              leaveTime: newTime,
+              flightDuration: flightDuration,
+              airline: data.appendix.airlines[0].name,
+              leaveDate: dateOnly
+
             };
+
+
+
             console.log('obj', obj)
           this.setState({
               flight: obj
