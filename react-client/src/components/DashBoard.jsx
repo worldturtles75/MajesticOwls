@@ -114,6 +114,7 @@ class DashBoard extends React.Component {
       },
       toolbarStyle: {
         backgroundColor: indigo500,
+        zIndex: 1000,
       },
       fab: {
         margin: 0,
@@ -138,7 +139,7 @@ class DashBoard extends React.Component {
                 style={styles.homeStyle}
               >
                 <ToolbarTitle
-                text="Flighty McFlightFace"
+                text="Advena"
                 style={styles.whiteTextStyle}
                 />
               </Link>
@@ -167,11 +168,13 @@ class DashBoard extends React.Component {
           </GridList>
         </MuiThemeProvider>
         <MuiThemeProvider>
-          <FloatingActionButton
-            style={styles.fab}
-            backgroundColor = {amber500}
-            label="Search"><ContentAdd />
-          </FloatingActionButton>
+          <Link to='/trip'>
+            <FloatingActionButton
+              style={styles.fab}
+              backgroundColor = {amber500}
+              label="Search"><ContentAdd />
+            </FloatingActionButton>
+          </Link>
         </MuiThemeProvider>
       </div>
     )
