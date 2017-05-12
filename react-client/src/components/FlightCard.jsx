@@ -7,12 +7,13 @@ import Subheader from 'material-ui/Subheader';
 import StarBorder from 'material-ui/svg-icons/toggle/star-border';
 
 
+
  class FlightCard extends React.Component {
   constructor (props) {
     super(props);
-    this.state = {
-    }
+
   }
+
 
   render() {
     const styles = {
