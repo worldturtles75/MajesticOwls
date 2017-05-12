@@ -13,6 +13,7 @@ import {
   grey500, white, teal500,
 } from 'material-ui/styles/colors';
 
+
  class FlightCard extends React.Component {
   constructor (props) {
     super(props);
@@ -60,12 +61,17 @@ import {
         left: '50%',
         transform: 'translate(-50%, -50%)',
       },
+
     }
+
+
+
 
     return (
       <div>
         <MuiThemeProvider>
           <Card style={styles.card}>
+
 
             <CardHeader
               title="Flight Information"
@@ -105,7 +111,6 @@ import {
             </GridList>
             <CardHeader
               title="On-Time" />
-
           </Card>
         </MuiThemeProvider>
       </div>
