@@ -145,9 +145,9 @@ class DashBoard extends React.Component {
   }
 
   componentDidMount() {
-    // this.searchGoogle();
+    this.searchGoogle();
     this.databaseFlightSearch();
-    // this.searchFood();
+    this.searchFood();
   }
 
   render() {
