@@ -52,7 +52,7 @@ const SignIn = () => (
             style={styles.homeStyle}
           >
             <ToolbarTitle 
-            text="Viator"
+            text="Via·tor"
             style={styles.whiteTextStyle}
             />
           </Link> 
