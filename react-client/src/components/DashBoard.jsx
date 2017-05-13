@@ -34,6 +34,7 @@ class DashBoard extends React.Component {
     }
     this.searchGoogle = this.searchGoogle.bind(this);
     this.flightSearch = this.flightSearch.bind(this);
+    this.searchFood = this.searchFood.bind(this);
   }
 
   searchGoogle(location) {
@@ -117,16 +118,14 @@ class DashBoard extends React.Component {
       }
 
   searchFood(location) {
-    $.get('https://crossorigin.me/https://maps.googleapis.com/maps/api/place/textsearch/json', {
-      key: process.env.GOOGLE_KEY || require('../config/config').GOOGLE_KEY,
-      query: location || 'San Francisco',
-      type: 'restaurant'
+    $.get('/food', {
+      location: location
     })
     .done((data) => {
       this.setState({
-        food: data.results
+        food: data
       })
-    });
+    })
   }
 
   componentDidMount() {

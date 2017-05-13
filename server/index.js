@@ -7,6 +7,10 @@ const User = require('../database/index');
 const app = express();
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+const GooglePlaces = require('googleplaces');
+const GOOGLE_KEY = process.env.GOOGLE_KEY || require('./config').GOOGLE_KEY;
+
+const place = new GooglePlaces(GOOGLE_KEY, 'json');
 
 app.use(express.static(__dirname + '/../react-client/dist'));
 
@@ -62,6 +66,34 @@ app.get('/sign-in', (req, res) => {
 
 app.get('/trip', (req, res) => {
   res.sendFile(path.join(__dirname, '/../react-client/dist/index.html'));
+})
+
+app.get('/food', (req, res) => {
+  let params = {
+    query: req.query.location || 'San Francisco',
+    type: 'restaurant'
+  }
+  const getRestaurants = new Promise((resolve, reject) => {
+    place.textSearch(params, (err, res) => {
+      if (err) console.error(err);
+      resolve(res.results);
+    });
+  });
+  getRestaurants.then(restaurants => {
+    promiseArr = restaurants.map((restaurant) => {
+      return new Promise((resolve, reject) => {
+        place.placeDetailsRequest({ placeid: restaurant.place_id }, (err, res) => {
+          if (err) console.error(err);
+          restaurant.url = res.result.url;
+          restaurant.photo = 'https://maps.googleapis.com/maps/api/place/photo?maxheight=100&photoreference=' + restaurant.photos[0].photo_reference + '&key=' + GOOGLE_KEY;
+          resolve(restaurant);
+        });
+      });
+    });
+    Promise.all(promiseArr).then(restaurants => {
+      res.send(restaurants);
+    });
+  })
 })
 
 
