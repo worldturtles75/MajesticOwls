@@ -8,7 +8,6 @@ import FoodCard from './FoodCard.jsx';
 import SightsCard from './SightsCard.jsx';
 import WeatherCard from './WeatherCard.jsx';
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
-
 import GridList from 'material-ui/GridList';
 import GoogleButton from 'react-google-button';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
@@ -22,7 +21,11 @@ import {
   amber500,
 } from 'material-ui/styles/colors';
 import $ from 'jquery';
-import SignOutToolBar from './SignOutToolBar.jsx'
+import SignOutToolBar from './SignOutToolBar.jsx';
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
+
+
 
 class DashBoard extends React.Component {
   constructor (props) {
@@ -30,10 +33,14 @@ class DashBoard extends React.Component {
     this.state = {
       food: [],
       sights: [],
-      flight: {}
+      flight: {},
+      flightsArray:[]
     }
     this.searchGoogle = this.searchGoogle.bind(this);
     this.flightSearch = this.flightSearch.bind(this);
+
+    this.databaseFlightSearch = this.databaseFlightSearch.bind(this);
+    this.historyChange = this.historyChange.bind(this);
     this.searchFood = this.searchFood.bind(this);
   }
 
@@ -47,9 +54,27 @@ class DashBoard extends React.Component {
       });
   }
 
+  databaseFlightSearch() {
+    var context = this;
+    $.ajax({
+      type: 'GET',
+      url: '/database/return',
+      datatype: 'json'
+    })
+    .done(function(data) {
+      context.setState({
+        flightsArray:data
+      })
+      context.flightSearch(data[0].Airline,data[0].flight,data[0].month,data[0].day,data[0].year);
+      console.log('success GET', data);
+      })
+    .fail(function(err) {
+      console.log('failed to GET', err);
+    })
+  }
   flightSearch(airline,flight,month,day,year) {
 
-    return $.getJSON('https://crossorigin.me/https://api.flightstats.com/flex/flightstatus/rest/v2/json/flight/status/AA/340/arr/2017/5/11?appId=' + require('../config/config').FLIGHTSTATUS.API_KEY + '&appKey=' + require('../config/config').FLIGHTSTATUS.APP_KEY + '&utc=false')
+    return $.getJSON('https://crossorigin.me/https://api.flightstats.com/flex/flightstatus/rest/v2/json/flight/status/'+airline+'/'+flight+'/arr/'+year+'/'+day+'/'+month+'?appId=' + require('../config/config').FLIGHTSTATUS.API_KEY + '&appKey=' + require('../config/config').FLIGHTSTATUS.APP_KEY + '&utc=false')
         .then((data) => {
           console.log('data',data);
           var dateTime = data.flightStatuses[0].departureDate.dateLocal;
@@ -64,21 +89,16 @@ class DashBoard extends React.Component {
             newTime =dateTime.slice(i+1,dateTime.length);
           }
         }
-
-            hours = newTime.slice(0,2);
-            minutes = newTime.slice(3,5);
-
+          hours = newTime.slice(0,2);
+          minutes = newTime.slice(3,5);
           hours = Number(hours);
 
           if (hours > 12) {
-
               newTime = (Math.floor(hours - 12)).toString()+ ':' + minutes + ' PM'
           } else {
-
               newTime = hours.toString() + ':'+ minutes + ' AM'
           }
-
-          var flightDuration = data.flightStatuses[1].flightDurations.scheduledAirMinutes
+          var flightDuration = data.flightStatuses[0].flightDurations.scheduledAirMinutes;
 
           if (flightDuration > 60) {
             hours = Math.floor(flightDuration / 60);
@@ -87,13 +107,7 @@ class DashBoard extends React.Component {
             flightDuration = hours.toString() + ' Hour(s) ' + minutes.toString() + ' Minutes(s)'
           }
 
-          console.log(flightDuration);
-          console.log(newTime);
-
-
           dateOnly = dateOnly.slice(8,10) + '-' + dateOnly.slice(5,7) + '-' + dateOnly.slice(0,4);
-
-            console.log(dateOnly);
 
           var obj = {
               departurePort: data.appendix.airports[0].fs,
@@ -107,15 +121,17 @@ class DashBoard extends React.Component {
 
             };
 
-
-
-            console.log('obj', obj)
           this.setState({
               flight: obj
           });
         });
 
       }
+
+  historyChange(event, index, value) {
+    value = JSON.parse(value);
+    this.flightSearch(value.Airline,value.flight,value.month,value.day,value.year);
+  }
 
   searchFood(location) {
     $.get('/food', {
@@ -130,7 +146,7 @@ class DashBoard extends React.Component {
 
   componentDidMount() {
     this.searchGoogle();
-    this.flightSearch();
+    this.databaseFlightSearch();
     this.searchFood();
   }
 
@@ -153,6 +169,14 @@ class DashBoard extends React.Component {
         zIndex: 100,
         position: 'fixed',
       },
+      hist:{
+        margin: 5,
+        top: 20,
+        bottom: 'auto',
+        left: 'auto',
+        zIndex: 100,
+        position: 'fixed',
+      }
     }
     return(
       <div>
@@ -166,12 +190,30 @@ class DashBoard extends React.Component {
             style={styles.gridList}
             padding = {25}
           >
+
             <MuiThemeProvider><WeatherCard/></MuiThemeProvider>
             <MuiThemeProvider><FlightCard flight={this.state.flight}/></MuiThemeProvider>
             <MuiThemeProvider><FoodCard food={this.state.food}/></MuiThemeProvider>
             <MuiThemeProvider><SightsCard sights={this.state.sights}/></MuiThemeProvider>
           </GridList>
         </MuiThemeProvider>
+
+        <MuiThemeProvider>
+          <GridList
+
+          >
+          <SelectField
+            floatingLabelText='History'
+            onChange={this.historyChange}
+            style={styles.hist}
+          >
+          {this.state.flightsArray.map((index) => {
+            return <MenuItem value={JSON.stringify(index)} label={index.Airline + ' ' +index.flight} primaryText={index.Airline + ' ' +index.flight} />
+          })}
+            </SelectField>
+            </GridList>
+        </MuiThemeProvider>
+
         <MuiThemeProvider>
           <Link to='/trip'>
             <FloatingActionButton
