@@ -175,8 +175,15 @@ saveData() {
             </Stepper>
           </MuiThemeProvider>
           <div style={styles.contentStyle}>
+<<<<<<< HEAD
             {finished ? ( this.saveData() ||
               <Redirect push to="/dashboard" />) : (
+=======
+            {finished ? (
+              // do shit here
+              <Redirect push to="/dashboard" />
+            ) : (
+>>>>>>> 1bc20011748826bc7433c738d336c47aed9fed8d
               <div>
                 {this.getStepContent(stepIndex)}
                 <div style={{marginTop: 12}}>
