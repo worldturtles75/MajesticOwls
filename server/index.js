@@ -67,19 +67,23 @@ app.get('/trip', (req, res) => {
 
 //FOR ADDING DATA INTO THE DATEBASE
 app.post('/database/save', (req,res) => {
-
-    const addNew = new User({
-      user: req.body.user,
-      history: req.body.history
-    })
-
-    addNew.save((err,result) => {
-      if (err) {
-        console.log('did not save');
-      } else {
-        console.log('history saved', result);
-      }
-    })
+    console.log(res.body);
+    // const addNew = new User({
+    //   user: ,
+    //   month: String,
+    //   day: String,
+    //   year: String,
+    //   Airline: String,
+    //   flight: String
+    // })
+    //
+    // addNew.save((err,result) => {
+    //   if (err) {
+    //     console.log('did not save');
+    //   } else {
+    //     console.log('history saved', result);
+    //   }
+    // })
     res.end();
 });
 
