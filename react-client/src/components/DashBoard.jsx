@@ -58,7 +58,7 @@ class DashBoard extends React.Component {
       context.setState({
         flightsArray:data
       })
-      context.flightSearch(data[data.length-1].Airline,data[data.length-1].flight,data[data.length-1].month,data[data.length-1].day,data[data.length-1].year);
+      context.flightSearch(data[0].Airline,data[0].flight,data[0].month,data[0].day,data[0].year);
       console.log('success GET', data);
       })
     .fail(function(err) {

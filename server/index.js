@@ -101,7 +101,7 @@ app.post('/database/save', (req,res) => {
 
 //RETURNS LIST OF THE USERS HISTORY
 app.get('/database/return', (req,res) => {
-  User.find({user: userId}).exec((err,result) => {
+  User.find({user: userId}).sort([['updatedAt', 'descending']]).limit(5).exec((err,result) => {
     if(err) {
       console.log('Get did not return data');
     } else {
