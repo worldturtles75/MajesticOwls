@@ -21,7 +21,11 @@ import {
   amber500,
 } from 'material-ui/styles/colors';
 import $ from 'jquery';
-import SignOutToolBar from './SignOutToolBar.jsx'
+import SignOutToolBar from './SignOutToolBar.jsx';
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
+
+
 
 class DashBoard extends React.Component {
   constructor (props) {
@@ -35,6 +39,7 @@ class DashBoard extends React.Component {
     this.searchGoogle = this.searchGoogle.bind(this);
     this.flightSearch = this.flightSearch.bind(this);
     this.databaseFlightSearch = this.databaseFlightSearch.bind(this);
+    this.historyChange = this.historyChange.bind(this);
   }
 
   searchGoogle(location) {
@@ -67,12 +72,6 @@ class DashBoard extends React.Component {
   }
   flightSearch(airline,flight,month,day,year) {
 
-    console.log(airline);
-    console.log(flight);
-    console.log(month);
-    console.log(day);
-    console.log(year);
-    console.log('https://crossorigin.me/https://api.flightstats.com/flex/flightstatus/rest/v2/json/flight/status/'+airline+'/'+flight+'/arr/'+year+'/'+day+'/'+month+'?appId=' + require('../config/config').FLIGHTSTATUS.API_KEY + '&appKey=' + require('../config/config').FLIGHTSTATUS.APP_KEY + '&utc=false');
     return $.getJSON('https://crossorigin.me/https://api.flightstats.com/flex/flightstatus/rest/v2/json/flight/status/'+airline+'/'+flight+'/arr/'+year+'/'+day+'/'+month+'?appId=' + require('../config/config').FLIGHTSTATUS.API_KEY + '&appKey=' + require('../config/config').FLIGHTSTATUS.APP_KEY + '&utc=false')
         .then((data) => {
           console.log('data',data);
@@ -88,19 +87,15 @@ class DashBoard extends React.Component {
             newTime =dateTime.slice(i+1,dateTime.length);
           }
         }
-            hours = newTime.slice(0,2);
-            minutes = newTime.slice(3,5);
-
+          hours = newTime.slice(0,2);
+          minutes = newTime.slice(3,5);
           hours = Number(hours);
 
           if (hours > 12) {
-
               newTime = (Math.floor(hours - 12)).toString()+ ':' + minutes + ' PM'
           } else {
-
               newTime = hours.toString() + ':'+ minutes + ' AM'
           }
-
           var flightDuration = data.flightStatuses[0].flightDurations.scheduledAirMinutes;
 
           if (flightDuration > 60) {
@@ -130,6 +125,11 @@ class DashBoard extends React.Component {
         });
 
       }
+
+  historyChange(event, index, value) {
+    value = JSON.parse(value);
+    this.flightSearch(value.Airline,value.flight,value.month,value.day,value.year);
+  }
 
   searchFood(location) {
     $.get('https://crossorigin.me/https://maps.googleapis.com/maps/api/place/textsearch/json', {
@@ -169,6 +169,14 @@ class DashBoard extends React.Component {
         zIndex: 100,
         position: 'fixed',
       },
+      hist:{
+        margin: 5,
+        top: 20,
+        bottom: 'auto',
+        left: 'auto',
+        zIndex: 100,
+        position: 'fixed',
+      }
     }
     return(
       <div>
@@ -182,12 +190,30 @@ class DashBoard extends React.Component {
             style={styles.gridList}
             padding = {25}
           >
+
             <MuiThemeProvider><WeatherCard/></MuiThemeProvider>
             <MuiThemeProvider><FlightCard flight={this.state.flight}/></MuiThemeProvider>
             <MuiThemeProvider><FoodCard food={this.state.food}/></MuiThemeProvider>
             <MuiThemeProvider><SightsCard sights={this.state.sights}/></MuiThemeProvider>
           </GridList>
         </MuiThemeProvider>
+
+        <MuiThemeProvider>
+          <GridList
+
+          >
+          <SelectField
+            floatingLabelText='History'
+            onChange={this.historyChange}
+            style={styles.hist}
+          >
+          {this.state.flightsArray.map((index) => {
+            return <MenuItem value={JSON.stringify(index)} label={index.Airline + ' ' +index.flight} primaryText={index.Airline + ' ' +index.flight} />
+          })}
+            </SelectField>
+            </GridList>
+        </MuiThemeProvider>
+
         <MuiThemeProvider>
           <Link to='/trip'>
             <FloatingActionButton
