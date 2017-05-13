@@ -21,7 +21,8 @@ const userSchema = mongoose.Schema({
     day: String,
     year: String,
     Airline: String,
-    flight: String
+    flight: String,
+    destination: String
 
   });
 

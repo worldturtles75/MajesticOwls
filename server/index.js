@@ -11,13 +11,14 @@ const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 app.use(express.static(__dirname + '/../react-client/dist'));
 
 // Passport/Auth
-
+var userId;
 passport.use(new GoogleStrategy({
     clientID: process.env.G_ID || require('./config').G_ID,
     clientSecret: process.env.G_SECRET || require('./config').G_SECRET,
     callbackURL: process.env.G_URL || 'http://localhost:1337/auth/google/callback'
   },
   (accessToken, refreshToken, profile, done) => {
+      userId = profile.id;
     User.findOrCreate({ googleId: profile.id }, (err, user) => {
       return done(err, user);
     });
@@ -67,32 +68,44 @@ app.get('/trip', (req, res) => {
 
 //FOR ADDING DATA INTO THE DATEBASE
 app.post('/database/save', (req,res) => {
-    console.log(res.body);
-    // const addNew = new User({
-    //   user: ,
-    //   month: String,
-    //   day: String,
-    //   year: String,
-    //   Airline: String,
-    //   flight: String
-    // })
-    //
-    // addNew.save((err,result) => {
-    //   if (err) {
-    //     console.log('did not save');
-    //   } else {
-    //     console.log('history saved', result);
-    //   }
-    // })
+
+    var dateTotal = req.body.date;
+    var monthOnly;
+    var dayOnly;
+    var yearOnly;
+
+    yearOnly = dateTotal.slice(0,4);
+    dayOnly = Number(dateTotal.slice(5,7)).toString();
+    monthOnly = Number(dateTotal.slice(8,10)).toString();
+    userId = userId.toString();
+
+    const addNew = new User({
+      user: userId,
+      month: monthOnly,
+      day: dayOnly,
+      year: yearOnly,
+      Airline: req.body.airline,
+      flight: req.body.flightNumber,
+      destination: req.body.finalDestination
+    })
+
+    addNew.save((err,result) => {
+      if (err) {
+        console.log('did not save');
+      } else {
+        console.log('history saved', result);
+      }
+    })
     res.end();
 });
 
 //RETURNS LIST OF THE USERS HISTORY
 app.get('/database/return', (req,res) => {
-  User.find({user: req.body}).sort('history').exec((err,result) => {
+  User.find({user: userId}).exec((err,result) => {
     if(err) {
       console.log('Get did not return data');
     } else {
+      console.log(result);
       res.json(result);
     }
   })

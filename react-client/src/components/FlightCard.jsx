@@ -17,7 +17,6 @@ import {
  class FlightCard extends React.Component {
   constructor (props) {
     super(props);
-
   }
 
 
@@ -84,6 +83,7 @@ import {
             <CardTitle
               title={this.props.flight.airline}
               subtitle={'Leaving at: ' + this.props.flight.leaveTime}
+
             />
             <GridList
               style = {styles.gridList}
@@ -109,8 +109,7 @@ import {
                 </CardHeader>
               </GridTile>
             </GridList>
-            <CardHeader
-              title="On-Time" />
+
           </Card>
         </MuiThemeProvider>
       </div>

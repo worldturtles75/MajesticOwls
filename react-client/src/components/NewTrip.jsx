@@ -115,7 +115,7 @@ class NewTrip extends React.Component {
         return (<MuiThemeProvider>
                   <TextField
                     floatingLabelText="Destination Address"
-                    onChange={this.handleFlightNumber}
+                    onChange={this.handleFinalDestination}
                     hintText="944 Market Street San Francisco"
                     floatingLabelFixed={true}
                   />
@@ -143,10 +143,10 @@ saveData() {
           })
           .done(function(data) {
 
-          console.log('POST Successful', data);
+          console.log('POST Successful');
           })
           .fail(function(err) {
-          console.error('POST failed', );
+          console.error('POST failed');
         })
   };
 
@@ -175,12 +175,8 @@ saveData() {
             </Stepper>
           </MuiThemeProvider>
           <div style={styles.contentStyle}>
-            {finished ? (
-
-                this.saveData()
-
-
-            ) : (
+            {finished ? ( this.saveData() ||
+              <Redirect push to="/dashboard" />) : (
               <div>
                 {this.getStepContent(stepIndex)}
                 <div style={{marginTop: 12}}>
