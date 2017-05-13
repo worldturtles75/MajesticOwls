@@ -8,10 +8,6 @@ import FoodCard from './FoodCard.jsx';
 import SightsCard from './SightsCard.jsx';
 import WeatherCard from './WeatherCard.jsx';
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
-<<<<<<< HEAD
-=======
-
->>>>>>> 1bc20011748826bc7433c738d336c47aed9fed8d
 import GridList from 'material-ui/GridList';
 import GoogleButton from 'react-google-button';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
@@ -92,10 +88,6 @@ class DashBoard extends React.Component {
             newTime =dateTime.slice(i+1,dateTime.length);
           }
         }
-<<<<<<< HEAD
-=======
-
->>>>>>> 1bc20011748826bc7433c738d336c47aed9fed8d
             hours = newTime.slice(0,2);
             minutes = newTime.slice(3,5);
 
@@ -109,11 +101,7 @@ class DashBoard extends React.Component {
               newTime = hours.toString() + ':'+ minutes + ' AM'
           }
 
-<<<<<<< HEAD
-          var flightDuration = data.flightStatuses[0].flightDurations.scheduledAirMinutes
-=======
-          var flightDuration = data.flightStatuses[1].flightDurations.scheduledAirMinutes
->>>>>>> 1bc20011748826bc7433c738d336c47aed9fed8d
+          var flightDuration = data.flightStatuses[0].flightDurations.scheduledAirMinutes;
 
           if (flightDuration > 60) {
             hours = Math.floor(flightDuration / 60);
@@ -121,20 +109,9 @@ class DashBoard extends React.Component {
 
             flightDuration = hours.toString() + ' Hour(s) ' + minutes.toString() + ' Minutes(s)'
           }
-<<<<<<< HEAD
-          dateOnly = dateOnly.slice(8,10) + '-' + dateOnly.slice(5,7) + '-' + dateOnly.slice(0,4);
-
-=======
-
-          console.log(flightDuration);
-          console.log(newTime);
-
 
           dateOnly = dateOnly.slice(8,10) + '-' + dateOnly.slice(5,7) + '-' + dateOnly.slice(0,4);
 
-            console.log(dateOnly);
-
->>>>>>> 1bc20011748826bc7433c738d336c47aed9fed8d
           var obj = {
               departurePort: data.appendix.airports[0].fs,
               arrivalPort: data.appendix.airports[1].fs,
@@ -146,13 +123,7 @@ class DashBoard extends React.Component {
               leaveDate: dateOnly
 
             };
-<<<<<<< HEAD
-=======
 
-
-
-            console.log('obj', obj)
->>>>>>> 1bc20011748826bc7433c738d336c47aed9fed8d
           this.setState({
               flight: obj
           });
