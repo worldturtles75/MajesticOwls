@@ -16,6 +16,22 @@ app.use(express.static(__dirname + '/../react-client/dist'));
 
 // Passport/Auth
 var userId;
+// check if user has saved data
+var userIdCheck = false;
+var checkUser = () => {
+  User.find({user: userId}).exec((err,result) => {
+    if(err) {
+      console.log('Get did not return data');
+    } else {
+      if (typeof result[0] === 'object') {
+        userIdCheck = true;
+      } else {
+        userIdCheck = false; 
+      }
+    }
+  });
+}
+
 passport.use(new GoogleStrategy({
     clientID: process.env.G_ID || require('./config').G_ID,
     clientSecret: process.env.G_SECRET || require('./config').G_SECRET,
@@ -23,6 +39,7 @@ passport.use(new GoogleStrategy({
   },
   (accessToken, refreshToken, profile, done) => {
       userId = profile.id;
+      checkUser();
     User.findOrCreate({ googleId: profile.id }, (err, user) => {
       return done(err, user);
     });
@@ -54,7 +71,11 @@ app.get('/auth/google',
 app.get('/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/sign-in' }),
   (req, res) => {
-    res.redirect('/dashboard');
+    if (userIdCheck === true) {
+      res.redirect('/dashboard');
+    } else {
+      res.redirect('/trip');
+    }
   });
 
 app.get('/dashboard', (req, res) => {
@@ -160,11 +181,11 @@ app.post('/database/save', (req,res) => {
 
 //RETURNS LIST OF THE USERS HISTORY
 app.get('/database/return', (req,res) => {
-  User.find({user: userId}).sort([['updatedAt', 'descending']]).limit(5).exec((err,result) => {
+  User.find({user: userId}).limit(10).exec((err,result) => {
     if(err) {
       console.log('Get did not return data');
     } else {
-      console.log(result);
+      result = result.reverse();
       res.json(result);
     }
   })
