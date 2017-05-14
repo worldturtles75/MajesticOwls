@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import SignIn from './components/SignIn.jsx';
 import DashBoard from './components/DashBoard.jsx';
 import NewTrip from './components/NewTrip.jsx';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'; // All Material-UI components must be wrapped in MuiThemeProvider
 import FlatButton from 'material-ui/FlatButton';
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
@@ -14,21 +14,16 @@ import {
 } from 'react-router-dom';
 import {
   indigo500, grey300,
-} from 'material-ui/styles/colors';
-import injectTapEventPlugin from 'react-tap-event-plugin';
+} from 'material-ui/styles/colors'; // Hex Codes for Material Colors
+import injectTapEventPlugin from 'react-tap-event-plugin'; // Must import in order to use selectField
 
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-
   }
-  componentWillMount() {
-
-  }
-
-
   render() {
+    // In Line CSS for components
     const styles = {
       titleStyle: {
         top: 'auto',
@@ -133,5 +128,6 @@ class App extends React.Component {
     )
   }
 }
+// Call injectTapEvent to render selectField component
 injectTapEventPlugin();
 ReactDOM.render(<App/>, document.getElementById('app'));
