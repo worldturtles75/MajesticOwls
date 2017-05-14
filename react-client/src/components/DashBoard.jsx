@@ -66,7 +66,7 @@ class DashBoard extends React.Component {
       context.setState({
         flightsArray:data
       })
-      context.flightSearch(data[0].Airline,data[0].flight,data[0].month,data[0].day,data[0].year, data[0].flight);
+      context.flightSearch(data[0].Airline,data[0].flight,data[0].month,data[0].day,data[0].year);
       console.log('success GET', data);
       })
     .fail(function(err) {
@@ -74,7 +74,7 @@ class DashBoard extends React.Component {
     })
   }
 
-  flightSearch(airline,flight,month,day,year,flightNumber) {
+  flightSearch(airline,flight,month,day,year) {
     console.log('airline', airline);
     return $.getJSON('https://crossorigin.me/https://api.flightstats.com/flex/flightstatus/rest/v2/json/flight/status/'+airline+'/'+flight+'/arr/'+year+'/'+day+'/'+month+'?appId=' + require('../config/config').FLIGHTSTATUS.API_KEY + '&appKey=' + require('../config/config').FLIGHTSTATUS.APP_KEY + '&utc=false')
     .then((data) => {
@@ -115,7 +115,7 @@ class DashBoard extends React.Component {
         flightDuration: flightDuration,
         airline: data.appendix.airlines[0].name,
         leaveDate: dateOnly,
-        flightNumber: flightNumber,
+        flightNumber: flight,
       };
       this.setState({
         flight: obj
@@ -123,12 +123,13 @@ class DashBoard extends React.Component {
     });
   }
 
-  historyChange(event, index, value) {
-    value = JSON.parse(value);
-    this.flightSearch(value.Airline,value.flight,value.month,value.day,value.year, value.flight)
-    /*this.setState({
+  historyChange(event, index) {
+    this.setState({
       index: index,
-    });*/
+    }, function() {
+      var flight = this.state.flightsArray[index];
+      this.flightSearch(flight.Airline,flight.flight,flight.month,flight.day,flight.year);
+    });
   }
 
   searchFood(location) {
@@ -184,7 +185,7 @@ class DashBoard extends React.Component {
             value={this.state.index}
             style={styles.hist}>
             {this.state.flightsArray.map((index, ind) => {
-              return <MenuItem value={JSON.stringify(index)} label={index.Airline + ' ' +index.flight} primaryText={index.Airline + ' ' +index.flight} />
+              return <MenuItem value={ind} label={index.Airline + ' ' +index.flight} primaryText={index.Airline + ' ' +index.flight} />
             })}
           </SelectField>
         </MuiThemeProvider>
