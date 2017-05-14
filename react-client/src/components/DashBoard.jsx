@@ -109,7 +109,9 @@ class DashBoard extends React.Component {
       if (flightDuration > 60) {
         hours = Math.floor(flightDuration / 60);
         minutes = flightDuration - (hours * 60);
-        flightDuration = hours.toString() + ' Hour(s) ' + minutes.toString() + ' Minutes(s)'
+        flightDuration = hours.toString() + ' Hour(s) ' + minutes.toString() + ' Minute(s)';
+      } else if (flightDuration <= 60) {
+        flightDuration = flightDuration + ' Minute(s)';
       }
       dateOnly = dateOnly[5] === '0' ? (dateOnly.slice(6,7) + '/' + dateOnly.slice(8,10) + '/' + dateOnly.slice(0,4)) : (dateOnly.slice(5,7) + '/' + dateOnly.slice(8,10) + '/' + dateOnly.slice(0,4));
       var obj = {

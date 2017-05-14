@@ -29,10 +29,8 @@ var checkUser = () => {
         userIdCheck = true;
       } else {
         userIdCheck = false;
-
       }
     }
-
   });
 }
 
