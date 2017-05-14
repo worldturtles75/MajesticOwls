@@ -45,13 +45,14 @@ class DashBoard extends React.Component {
   }
 
   searchGoogle(location) {
-    $.getJSON('https://crossorigin.me/https://maps.googleapis.com/maps/api/place/textsearch/json?query=new+york+city+point+of+interest&language=en&key=' + (process.env.GOOGLE_KEY || require('../config/config').GOOGLE_KEY))
-      .then((data) => {
-        console.log('data', data);
-        this.setState({
-          sights: data.results
-        })
-      });
+    $.get('/sights', {
+      location: location
+    })
+    .done((data) => {
+      this.setState({
+        sights: data
+      })
+    })
   }
 
   databaseFlightSearch() {

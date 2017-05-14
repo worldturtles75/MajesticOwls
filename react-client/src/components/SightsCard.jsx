@@ -53,7 +53,9 @@ const SightsCard = (props) => (
             subtitle={<b>{sight.formatted_address}</b>}
             actionIcon={<IconButton><StarBorder color="white" /></IconButton>}
           >
+            <a target="_blank" href={sight.url}>
             <img src={sight.img} />
+            </a>
           </GridTile>
         ))}
       </GridList>

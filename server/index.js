@@ -69,11 +69,38 @@ app.get('/trip', (req, res) => {
   res.sendFile(path.join(__dirname, '/../react-client/dist/index.html'));
 })
 
+app.get('/sights', (req, res) => {
+  let params = {
+    query: (req.query.location || 'San Francisco') + ' attractions'
+  };
+  const getSights = new Promise((resolve, reject) => {
+    place.textSearch(params, (err, res) => {
+      if (err) console.error(err);
+      resolve(res.results);
+    });
+  });
+  getSights.then(sights => {
+    let promiseArr = sights.map((sight) => {
+      return new Promise((resolve, reject) => {
+        place.placeDetailsRequest({ placeid: sight.place_id }, (err, res) => {
+          if (err) console.error(err);
+          sight.url = res.result.url;
+          sight.img = 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=' + sight.photos[0].photo_reference + '&key=' + GOOGLE_KEY;
+          resolve(sight);
+        });
+      });
+    });
+    Promise.all(promiseArr).then(sights => {
+      res.send(sights);
+    });
+  });
+});
+
 app.get('/food', (req, res) => {
   let params = {
     query: req.query.location || 'San Francisco',
     type: 'restaurant'
-  }
+  };
   const getRestaurants = new Promise((resolve, reject) => {
     place.textSearch(params, (err, res) => {
       if (err) console.error(err);
@@ -94,8 +121,8 @@ app.get('/food', (req, res) => {
     Promise.all(promiseArr).then(restaurants => {
       res.send(restaurants);
     });
-  })
-})
+  });
+});
 
 
 //FOR ADDING DATA INTO THE DATEBASE
