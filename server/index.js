@@ -20,17 +20,19 @@ app.use(express.static(__dirname + '/../react-client/dist'));
 var userId;
 // check if user has saved data
 var userIdCheck = false;
-const checkUser = () => {
+var checkUser = () => {
   User.find({user: userId}).exec((err,result) => {
     if(err) {
       console.log('Get did not return data');
     } else {
-
       if (typeof result[0] === 'object') {
         userIdCheck = true;
       } else {
         userIdCheck = false;
+<<<<<<< HEAD
 
+=======
+>>>>>>> Auto render location of interest for food and sight
       }
     }
 
@@ -204,7 +206,7 @@ app.post('/database/save', (req,res) => {
         console.log('did not save');
       } else {
         console.log('history saved', result);
-        }
+      }
     })
     res.end();
 });
