@@ -12,6 +12,20 @@ app.use(express.static(__dirname + '/../react-client/dist'));
 
 // Passport/Auth
 var userId;
+// check if user has saved data
+var userIdCheck = false;
+const checkUser = () => {
+  User.find({user: userId}).exec((err,result) => {
+    if(err) {
+      console.log('Get did not return data');
+    } else {
+      if (result.length !== undefined) {
+        userIdCheck = true;
+      }
+    }
+  });
+}
+
 passport.use(new GoogleStrategy({
     clientID: process.env.G_ID || require('./config').G_ID,
     clientSecret: process.env.G_SECRET || require('./config').G_SECRET,
@@ -50,7 +64,12 @@ app.get('/auth/google',
 app.get('/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/sign-in' }),
   (req, res) => {
-    res.redirect('/dashboard');
+    checkUser();
+    if (userIdCheck === true) {
+      res.redirect('/dashboard');
+    } else {
+      res.redirect('/trip');
+    }
   });
 
 app.get('/dashboard', (req, res) => {
