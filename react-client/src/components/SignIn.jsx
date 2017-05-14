@@ -10,7 +10,7 @@ import {
   Link,
 } from 'react-router-dom';
 import {
-  indigo500,
+  indigo500, blue500,
 } from 'material-ui/styles/colors';
 
 const styles = {
@@ -39,6 +39,12 @@ const styles = {
   homeStyle: {
     textDecoration: 'none',
   },
+  header: {
+    fontFamily: "'Roboto', sans-serif",
+    color: 'white',
+    fontSize: '45px',
+    textShadow: '-1px 0 #000000,0 1px #000000,1px 0 #000000,0 -1px #000000',
+  },
 }
 
 const SignIn = () => (
@@ -64,7 +70,10 @@ const SignIn = () => (
     </div>
     <div
       style = {styles.signInStyle} >
-
+      <p
+        style={styles.header}>
+        Your destination awaits, don't be late:
+      </p>
       <a href="/auth/google"
         style = {styles.googleSignInStyle}>
         <GoogleButton />
