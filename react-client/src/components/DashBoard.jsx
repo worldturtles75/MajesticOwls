@@ -67,6 +67,9 @@ class DashBoard extends React.Component {
         flightsArray:data
       })
       context.flightSearch(data[0].Airline,data[0].flight,data[0].month,data[0].day,data[0].year);
+      context.searchGoogle(data[0].destination);
+      context.searchFood(data[0].destination);
+
       console.log('success GET', data);
       })
     .fail(function(err) {
@@ -129,6 +132,8 @@ class DashBoard extends React.Component {
     }, function() {
       var flight = this.state.flightsArray[index];
       this.flightSearch(flight.Airline,flight.flight,flight.month,flight.day,flight.year);
+      this.searchGoogle(flight.destination);
+      this.searchFood(flight.destination);
     });
   }
 
@@ -144,9 +149,7 @@ class DashBoard extends React.Component {
   }
 
   componentDidMount() {
-    this.searchGoogle();
     this.databaseFlightSearch();
-    this.searchFood();
   }
 
   render() {

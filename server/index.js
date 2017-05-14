@@ -26,7 +26,7 @@ var checkUser = () => {
       if (typeof result[0] === 'object') {
         userIdCheck = true;
       } else {
-        userIdCheck = false; 
+        userIdCheck = false;
       }
     }
   });
