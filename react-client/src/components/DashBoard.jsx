@@ -105,7 +105,7 @@ class DashBoard extends React.Component {
         minutes = flightDuration - (hours * 60);
         flightDuration = hours.toString() + ' Hour(s) ' + minutes.toString() + ' Minutes(s)'
       }
-      dateOnly = dateOnly.slice(8,10) + '-' + dateOnly.slice(5,7) + '-' + dateOnly.slice(0,4);
+      dateOnly = dateOnly[5] === '0' ? (dateOnly.slice(6,7) + '/' + dateOnly.slice(8,10) + '/' + dateOnly.slice(0,4)) : (dateOnly.slice(5,7) + '/' + dateOnly.slice(8,10) + '/' + dateOnly.slice(0,4));
       var obj = {
         departurePort: data.appendix.airports[0].fs,
         arrivalPort: data.appendix.airports[1].fs,
@@ -157,7 +157,6 @@ class DashBoard extends React.Component {
         overflowY: 'auto',
         marginLeft: 20,
         marginRight: 20,
-        marginTop: 20,
       },
       fab: {
         margin: 0,
@@ -178,38 +177,39 @@ class DashBoard extends React.Component {
     return(
       <div>
         <SignOutToolBar/>
-        <MuiThemeProvider>
-          <SelectField
-            floatingLabelText='Trips'
-            onChange={this.historyChange}
-            value={this.state.index}
-            style={styles.hist}>
-            {this.state.flightsArray.map((index, ind) => {
-              return <MenuItem value={ind} label={index.Airline + ' ' +index.flight} primaryText={index.Airline + ' ' +index.flight} />
-            })}
-          </SelectField>
-        </MuiThemeProvider>
-        <MuiThemeProvider>
-          <GridList
-            cellHeight={400}
-            cols = {3}
-            style={styles.gridList}
-            padding = {25}>
-            <MuiThemeProvider><WeatherCard/></MuiThemeProvider>
-            <MuiThemeProvider><FlightCard flight={this.state.flight}/></MuiThemeProvider>
-            <MuiThemeProvider><FoodCard food={this.state.food}/></MuiThemeProvider>
-            <MuiThemeProvider><SightsCard sights={this.state.sights}/></MuiThemeProvider>
-          </GridList>
-        </MuiThemeProvider>
-        <MuiThemeProvider>
-          <Link to='/trip'>
-            <FloatingActionButton
-              style={styles.fab}
-              backgroundColor = {amber500}
-              label="Search"><ContentAdd />
-            </FloatingActionButton>
-          </Link>
-        </MuiThemeProvider>
+        <div
+          style={styles.gridList}>
+          <MuiThemeProvider>
+            <SelectField
+              floatingLabelText='Trips'
+              onChange={this.historyChange}
+              value={this.state.index}>
+              {this.state.flightsArray.map((index, ind) => {
+                return <MenuItem value={ind} label={index.Airline + ' ' +index.flight} primaryText={index.Airline + ' ' +index.flight} />
+              })}
+            </SelectField>
+          </MuiThemeProvider>
+          <MuiThemeProvider>
+            <GridList
+              cellHeight={400}
+              cols = {3}
+              padding = {25}>
+              <MuiThemeProvider><WeatherCard/></MuiThemeProvider>
+              <MuiThemeProvider><FlightCard flight={this.state.flight}/></MuiThemeProvider>
+              <MuiThemeProvider><FoodCard food={this.state.food}/></MuiThemeProvider>
+              <MuiThemeProvider><SightsCard sights={this.state.sights}/></MuiThemeProvider>
+            </GridList>
+          </MuiThemeProvider>
+          <MuiThemeProvider>
+            <Link to='/trip'>
+              <FloatingActionButton
+                style={styles.fab}
+                backgroundColor = {amber500}
+                label="Search"><ContentAdd />
+              </FloatingActionButton>
+            </Link>
+          </MuiThemeProvider>
+        </div>
       </div>
     )
   }
