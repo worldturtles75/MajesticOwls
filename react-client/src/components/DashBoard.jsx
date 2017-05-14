@@ -35,7 +35,7 @@ class DashBoard extends React.Component {
       sights: [],
       flight: {},
       flightsArray:[],
-      index: '0',
+      index: 0,
     }
     this.searchGoogle = this.searchGoogle.bind(this);
     this.flightSearch = this.flightSearch.bind(this);
@@ -75,6 +75,7 @@ class DashBoard extends React.Component {
   }
 
   flightSearch(airline,flight,month,day,year,flightNumber) {
+    console.log('airline', airline);
     return $.getJSON('https://crossorigin.me/https://api.flightstats.com/flex/flightstatus/rest/v2/json/flight/status/'+airline+'/'+flight+'/arr/'+year+'/'+day+'/'+month+'?appId=' + require('../config/config').FLIGHTSTATUS.API_KEY + '&appKey=' + require('../config/config').FLIGHTSTATUS.APP_KEY + '&utc=false')
     .then((data) => {
       console.log('data',data);
@@ -123,11 +124,11 @@ class DashBoard extends React.Component {
   }
 
   historyChange(event, index, value) {
-    this.setState({
-      index: index,
-    });
     value = JSON.parse(value);
-    this.flightSearch(value.Airline,value.flight,value.month,value.day,value.year, value.flight);
+    this.flightSearch(value.Airline,value.flight,value.month,value.day,value.year, value.flight)
+    /*this.setState({
+      index: index,
+    });*/
   }
 
   searchFood(location) {
@@ -182,8 +183,8 @@ class DashBoard extends React.Component {
             onChange={this.historyChange}
             value={this.state.index}
             style={styles.hist}>
-            {this.state.flightsArray.map((flight, index) => {
-              return <MenuItem value={JSON.stringify(index)} label={flight.Airline + ' ' + flight.flight} primaryText={flight.Airline + ' ' + flight.flight} />
+            {this.state.flightsArray.map((index, ind) => {
+              return <MenuItem value={JSON.stringify(index)} label={index.Airline + ' ' +index.flight} primaryText={index.Airline + ' ' +index.flight} />
             })}
           </SelectField>
         </MuiThemeProvider>
