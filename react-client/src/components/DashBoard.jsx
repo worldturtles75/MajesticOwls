@@ -71,6 +71,7 @@ class DashBoard extends React.Component {
       context.flightSearch(data[0].Airline,data[0].flight,data[0].month,data[0].day,data[0].year);
       context.searchGoogle(data[0].destination);
       context.searchFood(data[0].destination);
+      context.searchWeather(data[0].destination);
 
       console.log('success GET', data);
       })
