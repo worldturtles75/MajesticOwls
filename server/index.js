@@ -20,11 +20,14 @@ app.use(express.static(__dirname + '/../react-client/dist'));
 var userId;
 // check if user has saved data
 var userIdCheck = false;
-var checkUser = () => {
+
+const checkUser = () => {
+
   User.find({user: userId}).exec((err,result) => {
     if(err) {
       console.log('Get did not return data');
     } else {
+
       if (typeof result[0] === 'object') {
         userIdCheck = true;
       } else {
@@ -75,6 +78,7 @@ app.get('/auth/google',
 app.get('/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/sign-in' }),
   (req, res) => {
+    checkUser();
     if (userIdCheck === true) {
       res.redirect('/dashboard');
     } else {
