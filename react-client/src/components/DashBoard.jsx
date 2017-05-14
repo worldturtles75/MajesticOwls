@@ -34,11 +34,10 @@ class DashBoard extends React.Component {
       food: [],
       sights: [],
       flight: {},
-      flightsArray:[]
+      flightsArray:[],
     }
     this.searchGoogle = this.searchGoogle.bind(this);
     this.flightSearch = this.flightSearch.bind(this);
-
     this.databaseFlightSearch = this.databaseFlightSearch.bind(this);
     this.historyChange = this.historyChange.bind(this);
     this.searchFood = this.searchFood.bind(this);
@@ -66,7 +65,7 @@ class DashBoard extends React.Component {
       context.setState({
         flightsArray:data
       })
-      context.flightSearch(data[0].Airline,data[0].flight,data[0].month,data[0].day,data[0].year);
+      context.flightSearch(data[0].Airline,data[0].flight,data[0].month,data[0].day,data[0].year, data[0].flight);
       console.log('success GET', data);
       })
     .fail(function(err) {
@@ -74,63 +73,59 @@ class DashBoard extends React.Component {
     })
   }
 
-  flightSearch(airline,flight,month,day,year) {
+  flightSearch(airline,flight,month,day,year,flightNumber) {
     return $.getJSON('https://crossorigin.me/https://api.flightstats.com/flex/flightstatus/rest/v2/json/flight/status/'+airline+'/'+flight+'/arr/'+year+'/'+day+'/'+month+'?appId=' + require('../config/config').FLIGHTSTATUS.API_KEY + '&appKey=' + require('../config/config').FLIGHTSTATUS.APP_KEY + '&utc=false')
-        .then((data) => {
-          console.log('data',data);
-          var dateTime = data.flightStatuses[0].departureDate.dateLocal;
-          var newTime;
-          var dateOnly;
-          var hours;
-          var minutes;
-          var count = 0;
-        for (var i = 0; i < dateTime.length; i++) {
-          if (dateTime[i] === 'T') {
-            dateOnly = dateTime.slice(0,i);
-            newTime =dateTime.slice(i+1,dateTime.length);
-          }
+    .then((data) => {
+      console.log('data',data);
+      var dateTime = data.flightStatuses[0].departureDate.dateLocal;
+      var newTime;
+      var dateOnly;
+      var hours;
+      var minutes;
+      var count = 0;
+      for (var i = 0; i < dateTime.length; i++) {
+        if (dateTime[i] === 'T') {
+          dateOnly = dateTime.slice(0,i);
+          newTime =dateTime.slice(i+1,dateTime.length);
         }
-          hours = newTime.slice(0,2);
-          minutes = newTime.slice(3,5);
-          hours = Number(hours);
-
-          if (hours > 12) {
-              newTime = (Math.floor(hours - 12)).toString()+ ':' + minutes + ' PM'
-          } else {
-              newTime = hours.toString() + ':'+ minutes + ' AM'
-          }
-          var flightDuration = data.flightStatuses[0].flightDurations.scheduledAirMinutes;
-
-          if (flightDuration > 60) {
-            hours = Math.floor(flightDuration / 60);
-            minutes = flightDuration - (hours * 60);
-
-            flightDuration = hours.toString() + ' Hour(s) ' + minutes.toString() + ' Minutes(s)'
-          }
-
-          dateOnly = dateOnly.slice(8,10) + '-' + dateOnly.slice(5,7) + '-' + dateOnly.slice(0,4);
-
-          var obj = {
-              departurePort: data.appendix.airports[0].fs,
-              arrivalPort: data.appendix.airports[1].fs,
-              departureCity: data.appendix.airports[0].city + ', '+data.appendix.airports[0].stateCode,
-              arrivalCity: data.appendix.airports[1].city + ',' + data.appendix.airports[1].stateCode,
-              leaveTime: newTime,
-              flightDuration: flightDuration,
-              airline: data.appendix.airlines[0].name,
-              leaveDate: dateOnly
-
-            };
-
-          this.setState({
-              flight: obj
-          });
-        });
-
       }
+      hours = newTime.slice(0,2);
+      minutes = newTime.slice(3,5);
+      hours = Number(hours);
+      if (hours > 12) {
+        newTime = (Math.floor(hours - 12)).toString()+ ':' + minutes + ' PM'
+      } else {
+        newTime = hours.toString() + ':'+ minutes + ' AM'
+      }
+      var flightDuration = data.flightStatuses[0].flightDurations.scheduledAirMinutes;
+      if (flightDuration > 60) {
+        hours = Math.floor(flightDuration / 60);
+        minutes = flightDuration - (hours * 60);
+        flightDuration = hours.toString() + ' Hour(s) ' + minutes.toString() + ' Minutes(s)'
+      }
+      dateOnly = dateOnly.slice(8,10) + '-' + dateOnly.slice(5,7) + '-' + dateOnly.slice(0,4);
+      var obj = {
+        departurePort: data.appendix.airports[0].fs,
+        arrivalPort: data.appendix.airports[1].fs,
+        departureCity: data.appendix.airports[0].city + ', '+data.appendix.airports[0].stateCode,
+        arrivalCity: data.appendix.airports[1].city + ',' + data.appendix.airports[1].stateCode,
+        leaveTime: newTime,
+        flightDuration: flightDuration,
+        airline: data.appendix.airlines[0].name,
+        leaveDate: dateOnly,
+        flightNumber: flightNumber,
+      };
+      this.setState({
+        flight: obj
+      });
+    });
+  }
 
   historyChange(event, index, value) {
     value = JSON.parse(value);
+    this.setState({
+      index: index,
+    })
     this.flightSearch(value.Airline,value.flight,value.month,value.day,value.year);
   }
 
@@ -181,40 +176,31 @@ class DashBoard extends React.Component {
     }
     return(
       <div>
-
         <SignOutToolBar/>
-
         <MuiThemeProvider>
           <GridList
             cellHeight={400}
             cols = {3}
             style={styles.gridList}
-            padding = {25}
-          >
-
+            padding = {25}>
             <MuiThemeProvider><WeatherCard/></MuiThemeProvider>
             <MuiThemeProvider><FlightCard flight={this.state.flight}/></MuiThemeProvider>
             <MuiThemeProvider><FoodCard food={this.state.food}/></MuiThemeProvider>
             <MuiThemeProvider><SightsCard sights={this.state.sights}/></MuiThemeProvider>
           </GridList>
         </MuiThemeProvider>
-
         <MuiThemeProvider>
-          <GridList
-
-          >
-          <SelectField
-            floatingLabelText='History'
-            onChange={this.historyChange}
-            style={styles.hist}
-          >
-          {this.state.flightsArray.map((index) => {
-            return <MenuItem value={JSON.stringify(index)} label={index.Airline + ' ' +index.flight} primaryText={index.Airline + ' ' +index.flight} />
-          })}
+          <GridList>
+            <SelectField
+              floatingLabelText='History'
+              onChange={this.historyChange}
+              style={styles.hist}>
+              {this.state.flightsArray.map((index) => {
+                return <MenuItem value={JSON.stringify(index)} label={index.Airline + ' ' +index.flight} primaryText={index.Airline + ' ' +index.flight} />
+              })}
             </SelectField>
-            </GridList>
+          </GridList>
         </MuiThemeProvider>
-
         <MuiThemeProvider>
           <Link to='/trip'>
             <FloatingActionButton

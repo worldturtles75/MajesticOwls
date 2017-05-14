@@ -25,33 +25,16 @@ import {
     const styles = {
       gridList: {
         width: '100%',
-        height: 400,
+        height: '40%',
         overflowY: 'auto',
+
       },
       card: {
         width: '100%',
         height: 400,
       },
-      mainTitle: {
-
-      },
       avatar: {
         backgroundColor: teal500,
-      },
-      iconrotate: {
-        transform: [{ rotate: '45deg'}]
-      },
-      main:{
-        textAlign: 'center',
-        fontSize: 60,
-      },
-      main1:{
-        textAlign: 'center',
-        fontSize: 10,
-      },
-      avatar1:{
-        align: 60,
-
       },
       cardHeader: {
         height: '20%',
@@ -59,60 +42,65 @@ import {
       center: {
         position: 'absolute',
         top: '50%',
+        left: '75%',
+        transform: 'translate(-50%, -50%)',
+      },
+      centerArrow: {
+        position: 'absolute',
+        top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
       },
-
-
+      centerDiv: {
+        position: 'relative',
+      }
     }
-
-
-
-
     return (
       <div>
         <MuiThemeProvider>
-
-
           <Card style={styles.card}>
-
             <CardHeader
               title="Flight Information"
               avatar={<Avatar icon={<ActionFlightTakeoff />}
                 style={styles.avatar}
                 color={white}/>}
-              style={styles.cardHeader}
-            />
+              style={styles.cardHeader}/>
             <Divider/>
             <CardTitle
-              title={this.props.flight.airline}
-              subtitle={'Leaving at: ' + this.props.flight.leaveTime}
-
-            />
+              title={this.props.flight.airline + ' ' + this.props.flight.flightNumber}
+              subtitle={'Leaving at: ' + this.props.flight.leaveTime + ' on ' + this.props.flight.leaveDate} />
             <GridList
               style = {styles.gridList}
-              cols = {5}
-            >
+              cols = {7} >
               <GridTile
-                cols = {2}
-              >
+                cols = {3}
+                style = {styles.centerDiv} >
                 <CardHeader
                   title={this.props.flight.departurePort}
-                  subtitle={this.props.flight.departureCity}>
+                  subtitle={this.props.flight.departureCity}
+                  style = {styles.center} >
                 </CardHeader>
               </GridTile>
-              <GridTile>
-                <Arrow/>
+              <GridTile
+                style = {styles.centerDiv} >
+                <Arrow
+                  style = {styles.centerArrow} />
               </GridTile>
               <GridTile
-                cols = {2}
-              >
+                cols = {3} 
+                style = {styles.centerDiv} >
                 <CardHeader
                   title={this.props.flight.arrivalPort}
-                  subtitle={this.props.flight.arrivalCity}>
+                  subtitle={this.props.flight.arrivalCity}
+                  style={styles.center}>
                 </CardHeader>
               </GridTile>
             </GridList>
+            <CardHeader
+              title='Status: On-Time'
+              subtitle={'Flight Duration ' + this.props.flight.flightDuration}
+              style={styles.cardHeader}>
+            </CardHeader>
           </Card>
         </MuiThemeProvider>
       </div>
