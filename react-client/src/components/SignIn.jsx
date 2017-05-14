@@ -45,6 +45,12 @@ const styles = {
     fontSize: '45px',
     textShadow: '-1px 0 #000000,0 1px #000000,1px 0 #000000,0 -1px #000000',
   },
+  image: {
+    width:'100%',
+    height:'100%',
+    objectFit: 'cover',
+    overflow: 'hidden',
+  }
 }
 
 const SignIn = () => (
@@ -66,7 +72,7 @@ const SignIn = () => (
       </Toolbar>
     </MuiThemeProvider>
     <div>
-      <img src='http://page-turnbull.com/wp-content/uploads/Ferry_Building_5.jpg' height='100%' width='100%'/>
+      <img src='http://page-turnbull.com/wp-content/uploads/Ferry_Building_5.jpg' style={styles.image}/>
     </div>
     <div
       style = {styles.signInStyle} >

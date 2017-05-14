@@ -71,6 +71,12 @@ class App extends React.Component {
         fontSize: '36px',
         textShadow: '-1px 0 #000000,0 1px #000000,1px 0 #000000,0 -1px #000000',
       },
+      image: {
+        width:'100%',
+        height:'100%',
+        objectFit: 'cover',
+        overflow: 'hidden',
+      }
     }
 
     const Home = () => (
@@ -99,7 +105,7 @@ class App extends React.Component {
           </Toolbar>
         </MuiThemeProvider>
         <div>
-          <img src='https://www.homeadvisor.com/images/consumer/hhi/hero-photos/city/SanFrancisco.jpg' height='100%' width='100%'/>
+          <img src='https://www.homeadvisor.com/images/consumer/hhi/hero-photos/city/SanFrancisco.jpg' style={styles.image}/>
         </div>
         <div
           style={styles.centerStyle}>

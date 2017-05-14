@@ -185,8 +185,9 @@ class DashBoard extends React.Component {
     const styles = {
       gridList: {
         width: 'auto',
+        overflowX:'hidden',
         height: 'auto',
-        overflowY: 'auto',
+        overflowY:'hidden',
         marginLeft: 20,
         marginRight: 20,
       },
