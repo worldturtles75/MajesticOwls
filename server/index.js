@@ -106,7 +106,11 @@ app.get('/sights', (req, res) => {
         place.placeDetailsRequest({ placeid: sight.place_id }, (err, res) => {
           if (err) console.error(err);
           sight.url = res.result.url;
-          sight.img = 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=' + sight.photos[0].photo_reference + '&key=' + GOOGLE_KEY;
+          if ( sight.photos ) {
+            sight.img = 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=' + sight.photos[0].photo_reference + '&key=' + GOOGLE_KEY;
+          } else {
+            sight.img = '';
+          }
           resolve(sight);
         });
       });
@@ -134,7 +138,7 @@ app.get('/food', (req, res) => {
         place.placeDetailsRequest({ placeid: restaurant.place_id }, (err, res) => {
           if (err) console.error(err);
           restaurant.url = res.result.url;
-          if ( restaurant.photo ) {
+          if ( restaurant.photos ) {
             restaurant.photo = 'https://maps.googleapis.com/maps/api/place/photo?maxheight=100&photoreference=' + restaurant.photos[0].photo_reference + '&key=' + GOOGLE_KEY;
           } else {
             restaurant.photo = '';
