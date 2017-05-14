@@ -34,14 +34,16 @@ class DashBoard extends React.Component {
       food: [],
       sights: [],
       flight: {},
-      flightsArray:[],
+      flightsArray: [],
       index: 0,
+      weather: []
     }
     this.searchGoogle = this.searchGoogle.bind(this);
     this.flightSearch = this.flightSearch.bind(this);
     this.databaseFlightSearch = this.databaseFlightSearch.bind(this);
     this.historyChange = this.historyChange.bind(this);
     this.searchFood = this.searchFood.bind(this);
+    this.searchWeather = this.searchWeather.bind(this);
   }
 
   searchGoogle(location) {
@@ -134,6 +136,7 @@ class DashBoard extends React.Component {
       this.flightSearch(flight.Airline,flight.flight,flight.month,flight.day,flight.year);
       this.searchGoogle(flight.destination);
       this.searchFood(flight.destination);
+      this.searchWeather(flight.destination);
     });
   }
 
@@ -144,6 +147,17 @@ class DashBoard extends React.Component {
     .done((data) => {
       this.setState({
         food: data
+      })
+    })
+  }
+
+  searchWeather(location) {
+    $.get('/weather', {
+      location: location
+    })
+    .done((data) => {
+      this.setState({
+        weather: data
       })
     })
   }
@@ -197,7 +211,7 @@ class DashBoard extends React.Component {
               cellHeight={400}
               cols = {3}
               padding = {25}>
-              <MuiThemeProvider><WeatherCard/></MuiThemeProvider>
+              <MuiThemeProvider><WeatherCard weather={this.state.weather}/></MuiThemeProvider>
               <MuiThemeProvider><FlightCard flight={this.state.flight}/></MuiThemeProvider>
               <MuiThemeProvider><FoodCard food={this.state.food}/></MuiThemeProvider>
               <MuiThemeProvider><SightsCard sights={this.state.sights}/></MuiThemeProvider>
