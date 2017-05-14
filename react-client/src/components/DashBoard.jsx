@@ -82,8 +82,19 @@ class DashBoard extends React.Component {
 
   flightSearch(airline,flight,month,day,year) {
     console.log('airline', airline);
-    return $.getJSON('https://crossorigin.me/https://api.flightstats.com/flex/flightstatus/rest/v2/json/flight/status/'+airline+'/'+flight+'/arr/'+year+'/'+day+'/'+month+'?appId=' + require('../config/config').FLIGHTSTATUS.API_KEY + '&appKey=' + require('../config/config').FLIGHTSTATUS.APP_KEY + '&utc=false')
-    .then((data) => {
+    $.ajax({
+      type:'POST',
+      url: '/flightStatus',
+      contentType: 'application/JSON',
+      data: JSON.stringify({
+        airline: airline,
+        flight: flight,
+        month: month,
+        day: day,
+        year: year
+      })
+    })
+    .done((data) => {
       console.log('data',data);
       var dateTime = data.flightStatuses[0].departureDate.dateLocal;
       var newTime;
@@ -129,6 +140,7 @@ class DashBoard extends React.Component {
         flight: obj
       });
     });
+
   }
 
   historyChange(event, index) {
