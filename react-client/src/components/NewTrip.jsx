@@ -24,7 +24,7 @@ class NewTrip extends React.Component {
     this.state = {
       finished: false,
       stepIndex: 0,
-      airline: 'AL',
+      airline: 'AS',
       flightNumber: '',
       finalDestination: '',
       date:''
@@ -74,7 +74,7 @@ class NewTrip extends React.Component {
                     value={this.state.airline}
                     onChange={this.handleChange}
                   >
-                    <MenuItem value='AL' label='Alaska Airlines (AL)' primaryText='Alaska Airlines' />
+                    <MenuItem value='AS' label='Alaska Airlines (AS)' primaryText='Alaska Airlines' />
                     <MenuItem value='AA' label='American Airlines (AA)' primaryText="American Airlines" />
                     <MenuItem value='DL' label='Delta Airlines (DL)' primaryText="Delta Airlines" />
                     <MenuItem value='F9' label='Frontier Airlines (F9)' primaryText='Frontier Airlines' />
