@@ -29,10 +29,7 @@ var checkUser = () => {
         userIdCheck = true;
       } else {
         userIdCheck = false;
-<<<<<<< HEAD
 
-=======
->>>>>>> Auto render location of interest for food and sight
       }
     }
 
