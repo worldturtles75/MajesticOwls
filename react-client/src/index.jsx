@@ -6,13 +6,14 @@ import NewTrip from './components/NewTrip.jsx';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import FlatButton from 'material-ui/FlatButton';
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
+import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import {
   BrowserRouter as Router,
   Route,
   Link,
 } from 'react-router-dom';
 import {
-  indigo500,
+  indigo500, grey300,
 } from 'material-ui/styles/colors';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
@@ -52,33 +53,63 @@ class App extends React.Component {
       homeStyle: {
         textDecoration: 'none',
       },
+      centerStyle: {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+      },
+      header: {
+        fontFamily: "'Roboto', sans-serif",
+        color: 'white',
+        fontSize: '45px',
+      },
+      subHeader: {
+        fontFamily: "'Roboto', sans-serif",
+        color: grey300,
+        fontSize: '36px',
+      },
     }
 
     const Home = () => (
       <div>
-          <MuiThemeProvider>
-            <Toolbar
-              style = {styles.toolbarStyle}>
-              <ToolbarGroup firstChild={true} style={styles.titleStyle}>
-                <Link to='/'
-                  style={styles.homeStyle}
-                >
-                  <ToolbarTitle 
-                  text="Via·tor"
+        <MuiThemeProvider>
+          <Toolbar
+            style = {styles.toolbarStyle}>
+            <ToolbarGroup firstChild={true} style={styles.titleStyle}>
+              <Link to='/'
+                style={styles.homeStyle}
+              >
+                <ToolbarTitle 
+                text="Via·tor"
+                style={styles.whiteTextStyle}
+                />
+              </Link>
+            </ToolbarGroup>
+            <ToolbarGroup style={styles.signInStyle}>
+              <Link to='/sign-in'>
+                <FlatButton
                   style={styles.whiteTextStyle}
-                  />
-                </Link>
-              </ToolbarGroup>
-              <ToolbarGroup style={styles.signInStyle}>
-                <Link to='/sign-in'>
-                  <FlatButton
-                    style={styles.whiteTextStyle}
-                    label="Sign In"
-                  />
-                </Link>
-              </ToolbarGroup>
-            </Toolbar>
-          </MuiThemeProvider>
+                  label="Sign In"
+                />
+              </Link>
+            </ToolbarGroup>
+          </Toolbar>
+        </MuiThemeProvider>
+        <div>
+          <img src='https://www.homeadvisor.com/images/consumer/hhi/hero-photos/city/SanFrancisco.jpg' height='100%' width='100%'/>
+        </div>
+        <div
+          style={styles.centerStyle}>
+          <p
+            style={styles.header}>
+            Via·tor [Latin] Wayfarer, Traveller
+          </p>
+          <p
+            style={styles.subHeader}>
+            Where you're going, we'll help you along the way.
+          </p>
+        </div>
       </div>
     )
 

@@ -45,7 +45,7 @@ const FoodCard = (props) => (
           key={restaurant.place_id}
           leftAvatar={<Avatar src={restaurant.photo} />}
           primaryText={restaurant.name}
-          secondaryText={restaurant.rating}
+          secondaryText={restaurant.formatted_address + ' · Rating:' + restaurant.rating}
           target="_blank"
           href={restaurant.url}
         />
