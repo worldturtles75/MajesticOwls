@@ -14,13 +14,15 @@ app.use(express.static(__dirname + '/../react-client/dist'));
 var userId;
 // check if user has saved data
 var userIdCheck = false;
-const checkUser = () => {
+var checkUser = () => {
   User.find({user: userId}).exec((err,result) => {
     if(err) {
       console.log('Get did not return data');
     } else {
-      if (result.length !== undefined) {
+      if (typeof result[0] === 'object') {
         userIdCheck = true;
+      } else {
+        userIdCheck = false; 
       }
     }
   });
@@ -33,6 +35,7 @@ passport.use(new GoogleStrategy({
   },
   (accessToken, refreshToken, profile, done) => {
       userId = profile.id;
+      checkUser();
     User.findOrCreate({ googleId: profile.id }, (err, user) => {
       return done(err, user);
     });
@@ -64,7 +67,6 @@ app.get('/auth/google',
 app.get('/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/sign-in' }),
   (req, res) => {
-    checkUser();
     if (userIdCheck === true) {
       res.redirect('/dashboard');
     } else {
@@ -120,11 +122,11 @@ app.post('/database/save', (req,res) => {
 
 //RETURNS LIST OF THE USERS HISTORY
 app.get('/database/return', (req,res) => {
-  User.find({user: userId}).sort([['updatedAt', 'descending']]).limit(5).exec((err,result) => {
+  User.find({user: userId}).limit(10).exec((err,result) => {
     if(err) {
       console.log('Get did not return data');
     } else {
-      console.log(result);
+      result = result.reverse();
       res.json(result);
     }
   })
