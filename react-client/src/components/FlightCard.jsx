@@ -59,6 +59,7 @@ import {
           <Card style={styles.card}>
             <CardHeader
               title="Flight Information"
+              subtitle='Status: On-Time'
               avatar={<Avatar icon={<ActionFlightTakeoff />}
                 style={styles.avatar}
                 color={white}/>}
@@ -95,8 +96,7 @@ import {
               </GridTile>
             </GridList>
             <CardHeader
-              title='Status: On-Time'
-              subtitle={'Flight Duration ' + this.props.flight.flightDuration}
+              title={'Flight Duration ' + this.props.flight.flightDuration}
               style={styles.cardHeader}>
             </CardHeader>
           </Card>

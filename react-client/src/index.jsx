@@ -106,11 +106,11 @@ class App extends React.Component {
           style={styles.centerStyle}>
           <p
             style={styles.header}>
-            Via·tor [Latin] Wayfarer, Traveller
+            Via·tor [Latin] Wayfarer, Traveller 
           </p>
           <p
             style={styles.subHeader}>
-            Where you're going, we'll help you along the way.
+            Wherever you're going, we'll help you along the way.
           </p>
         </div>
       </div>

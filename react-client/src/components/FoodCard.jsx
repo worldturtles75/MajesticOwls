@@ -29,6 +29,7 @@ const FoodCard = (props) => (
     <Card style={styles.card}>
       <CardHeader
         title="Food"
+        subtitle={props.food.length + ' restaurants nearby'}
         avatar={<Avatar
           icon={<MapsLocalDining />}
           style={styles.avatar}
