@@ -12,6 +12,7 @@ const GooglePlaces = require('googleplaces');
 const GOOGLE_KEY = process.env.GOOGLE_KEY || require('./config').GOOGLE_KEY;
 const DARK_SKY_KEY = process.env.DARK_SKY_KEY || require('./config').DARK_SKY_KEY;
 
+
 const place = new GooglePlaces(GOOGLE_KEY, 'json');
 
 app.use(express.static(__dirname + '/../react-client/dist'));
@@ -171,6 +172,16 @@ app.get('/food', (req, res) => {
     });
   });
 });
+
+app.post('/flightStatus', (req,res) => {
+  console.log(req.body);
+  request.get('https://api.flightstats.com/flex/flightstatus/rest/v2/json/flight/status/'+req.body.airline+'/'+req.body.flight+'/arr/'+req.body.year+'/'+req.body.day+'/'+req.body.month+'?appId=' + require('./config').FLIGHT_API_KEY + '&appKey=' + require('./config').FLIGHT_APP_KEY + '&utc=false',
+
+  (error, response, body) => {
+    if (error) console.error(error);
+    res.send(JSON.parse(body));
+  });
+})
 
 
 //FOR ADDING DATA INTO THE DATEBASE
