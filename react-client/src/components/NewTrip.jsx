@@ -130,24 +130,24 @@ class NewTrip extends React.Component {
 saveData() {
   var context = this;
   console.log(context.state.airline);
-    $.ajax({
-      type: 'POST',
-      url: '/database/save',
-      contentType: 'application/JSON',
-      data: JSON.stringify({
-          airline: context.state.airline,
-          flightNumber: context.state.flightNumber,
-          finalDestination: context.state.finalDestination,
-          date: context.state.date
-            })
-          })
-          .done(function(data) {
-
-          console.log('POST Successful');
-          })
-          .fail(function(err) {
-          console.error('POST failed');
+  $.ajax({
+    type: 'POST',
+    url: '/database/save',
+    contentType: 'application/JSON',
+    data: JSON.stringify({
+      airline: context.state.airline,
+      flightNumber: context.state.flightNumber,
+      finalDestination: context.state.finalDestination,
+      date: context.state.date
         })
+      })
+      .done(function(data) {
+
+      console.log('POST Successful');
+      })
+      .fail(function(err) {
+      console.error('POST failed');
+    })
   };
 
   render () {

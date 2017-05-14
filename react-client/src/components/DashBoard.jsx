@@ -35,6 +35,7 @@ class DashBoard extends React.Component {
       sights: [],
       flight: {},
       flightsArray:[],
+      index: '0',
     }
     this.searchGoogle = this.searchGoogle.bind(this);
     this.flightSearch = this.flightSearch.bind(this);
@@ -122,11 +123,11 @@ class DashBoard extends React.Component {
   }
 
   historyChange(event, index, value) {
-    value = JSON.parse(value);
     this.setState({
       index: index,
-    })
-    this.flightSearch(value.Airline,value.flight,value.month,value.day,value.year);
+    });
+    value = JSON.parse(value);
+    this.flightSearch(value.Airline,value.flight,value.month,value.day,value.year, value.flight);
   }
 
   searchFood(location) {
@@ -166,10 +167,8 @@ class DashBoard extends React.Component {
         position: 'fixed',
       },
       hist:{
-        margin: 5,
-        top: 20,
-        bottom: 'auto',
-        left: 'auto',
+        top: 50,
+        left: 30,
         zIndex: 100,
         position: 'fixed',
       }
@@ -177,6 +176,17 @@ class DashBoard extends React.Component {
     return(
       <div>
         <SignOutToolBar/>
+        <MuiThemeProvider>
+          <SelectField
+            floatingLabelText='Trips'
+            onChange={this.historyChange}
+            value={this.state.index}
+            style={styles.hist}>
+            {this.state.flightsArray.map((flight, index) => {
+              return <MenuItem value={JSON.stringify(index)} label={flight.Airline + ' ' + flight.flight} primaryText={flight.Airline + ' ' + flight.flight} />
+            })}
+          </SelectField>
+        </MuiThemeProvider>
         <MuiThemeProvider>
           <GridList
             cellHeight={400}
@@ -187,18 +197,6 @@ class DashBoard extends React.Component {
             <MuiThemeProvider><FlightCard flight={this.state.flight}/></MuiThemeProvider>
             <MuiThemeProvider><FoodCard food={this.state.food}/></MuiThemeProvider>
             <MuiThemeProvider><SightsCard sights={this.state.sights}/></MuiThemeProvider>
-          </GridList>
-        </MuiThemeProvider>
-        <MuiThemeProvider>
-          <GridList>
-            <SelectField
-              floatingLabelText='History'
-              onChange={this.historyChange}
-              style={styles.hist}>
-              {this.state.flightsArray.map((index) => {
-                return <MenuItem value={JSON.stringify(index)} label={index.Airline + ' ' +index.flight} primaryText={index.Airline + ' ' +index.flight} />
-              })}
-            </SelectField>
           </GridList>
         </MuiThemeProvider>
         <MuiThemeProvider>

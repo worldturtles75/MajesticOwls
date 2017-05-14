@@ -26,8 +26,6 @@ import {
       gridList: {
         width: '100%',
         height: '40%',
-        overflowY: 'auto',
-
       },
       card: {
         width: '100%',
