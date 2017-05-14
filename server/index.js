@@ -30,12 +30,8 @@ const checkUser = () => {
         userIdCheck = true;
       } else {
         userIdCheck = false;
-<<<<<<< HEAD
 
-        }
-=======
       }
->>>>>>> Auto render location of interest for food and sight
     }
 
   });
@@ -208,7 +204,7 @@ app.post('/database/save', (req,res) => {
         console.log('did not save');
       } else {
         console.log('history saved', result);
-      }
+        }
     })
     res.end();
 });
