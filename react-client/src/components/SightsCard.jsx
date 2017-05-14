@@ -37,7 +37,6 @@ const SightsCard = (props) => (
     >
       <CardHeader
         title="Places of Interest"
-        subtitle="Subtitle here"
         avatar={<Avatar icon={<MapsPlace />} style={styles.avatar} />}
         style={styles.cardHeader}
       />
