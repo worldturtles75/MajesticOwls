@@ -204,7 +204,7 @@ app.post('/database/save', (req,res) => {
         console.log('did not save');
       } else {
         console.log('history saved', result);
-      }
+        }
     })
     res.end();
 });
