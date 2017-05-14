@@ -78,6 +78,7 @@ class NewTrip extends React.Component {
                     <MenuItem value='AA' label='American Airlines (AA)' primaryText="American Airlines" />
                     <MenuItem value='DL' label='Delta Airlines (DL)' primaryText="Delta Airlines" />
                     <MenuItem value='F9' label='Frontier Airlines (F9)' primaryText='Frontier Airlines' />
+                    <MenuItem value='B6' label='JetBlue (B6)' primaryText='JetBlue' />
                     <MenuItem value='WN' label='Southwest Airlines (WN)' primaryText='Southwest Airlines'/>
                     <MenuItem value='NK' label='Spirit Airlines (NK)' primaryText='Spirit Airlines' />
                     <MenuItem value='UA' label='United Airlines (UA)' primaryText='United Airlines' />

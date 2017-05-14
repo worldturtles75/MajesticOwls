@@ -32,6 +32,7 @@ const WeatherCard = (props) => (
     <Card style={styles.card}>
       <CardHeader
         title="Weather"
+        subtitle={props.location}
         avatar={<Avatar
           icon={<FileCloud />}
           style={styles.avatar}
@@ -46,7 +47,7 @@ const WeatherCard = (props) => (
           <ListItem
             key={day.time}
             primaryText={<div>{weekdays[new Date(day.time * 1000).getDay()]}, {months[new Date(day.time * 1000).getMonth()]} {new Date(day.time * 1000).getDate()}</div>}
-            secondaryText={<div>{Math.round(day.temperatureMax)} {Math.round(day.temperatureMin)}</div>}
+            secondaryText={<div>{Math.round(day.temperatureMax) + '/' + Math.round(day.temperatureMin)}</div>}
             rightAvatar={<Avatar icon={<FileCloud />} />}
           />
         ))}

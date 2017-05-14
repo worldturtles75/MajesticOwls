@@ -78,7 +78,7 @@ const SignIn = () => (
       style = {styles.signInStyle} >
       <p
         style={styles.header}>
-        Your destination awaits, don't be late:
+        Your destination awaits, don't be late.
       </p>
       <a href="/auth/google"
         style = {styles.googleSignInStyle}>
