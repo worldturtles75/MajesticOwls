@@ -156,7 +156,8 @@ class DashBoard extends React.Component {
     })
     .done((data) => {
       this.setState({
-        food: data
+        food: data,
+        location: location
       })
     })
   }
@@ -167,7 +168,8 @@ class DashBoard extends React.Component {
     })
     .done((data) => {
       this.setState({
-        weather: data
+        weather: data,
+        location: location
       })
     })
   }
