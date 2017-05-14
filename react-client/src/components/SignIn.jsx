@@ -59,8 +59,12 @@ const SignIn = () => (
         </ToolbarGroup>
       </Toolbar>
     </MuiThemeProvider>
+    <div>
+      <img src='http://page-turnbull.com/wp-content/uploads/Ferry_Building_5.jpg' height='100%' width='100%'/>
+    </div>
     <div
       style = {styles.signInStyle} >
+
       <a href="/auth/google"
         style = {styles.googleSignInStyle}>
         <GoogleButton />

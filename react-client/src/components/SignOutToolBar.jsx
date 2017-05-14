@@ -53,7 +53,7 @@ const SignOutToolBar = () => (
           <Link to='/'>
             <FlatButton
               style={styles.whiteTextStyle}
-              label="Sign Out"
+              label="SIGN OUT"
             />
           </Link>
         </ToolbarGroup>
