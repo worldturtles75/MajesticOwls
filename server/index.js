@@ -134,7 +134,11 @@ app.get('/food', (req, res) => {
         place.placeDetailsRequest({ placeid: restaurant.place_id }, (err, res) => {
           if (err) console.error(err);
           restaurant.url = res.result.url;
-          restaurant.photo = 'https://maps.googleapis.com/maps/api/place/photo?maxheight=100&photoreference=' + restaurant.photos[0].photo_reference + '&key=' + GOOGLE_KEY;
+          if ( restaurant.photo ) {
+            restaurant.photo = 'https://maps.googleapis.com/maps/api/place/photo?maxheight=100&photoreference=' + restaurant.photos[0].photo_reference + '&key=' + GOOGLE_KEY;
+          } else {
+            restaurant.photo = '';
+          }
           resolve(restaurant);
         });
       });
