@@ -58,13 +58,11 @@ class App extends React.Component {
         fontFamily: "'Roboto', sans-serif",
         color: 'white',
         fontSize: '45px',
-        textShadow: '-1px 0 #000000,0 1px #000000,1px 0 #000000,0 -1px #000000',
       },
       subHeader: {
         fontFamily: "'Roboto', sans-serif",
         color: grey300,
         fontSize: '36px',
-        textShadow: '-1px 0 #000000,0 1px #000000,1px 0 #000000,0 -1px #000000',
       },
       image: {
         width:'100%',

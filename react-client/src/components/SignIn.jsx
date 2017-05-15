@@ -43,7 +43,6 @@ const styles = {
     fontFamily: "'Roboto', sans-serif",
     color: 'white',
     fontSize: '45px',
-    textShadow: '-1px 0 #000000,0 1px #000000,1px 0 #000000,0 -1px #000000',
   },
   image: {
     width:'100%',
@@ -72,7 +71,7 @@ const SignIn = () => (
       </Toolbar>
     </MuiThemeProvider>
     <div>
-      <img src='http://page-turnbull.com/wp-content/uploads/Ferry_Building_5.jpg' style={styles.image}/>
+      <img src='http://24.media.tumblr.com/40614d640a1355924b2982ef2258be9c/tumblr_n6e8t8xbTu1tv2nyvo1_500.gif' style={styles.image}/>
     </div>
     <div
       style = {styles.signInStyle} >
