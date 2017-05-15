@@ -20,12 +20,15 @@ import {
   constructor (props) {
     super(props);
     this.state = {
-      data:[]
+      config: {},
+      data:[],
+      dates: [],
+      count:[]
     }
   }
 
-
 getInitialState(){
+
         this.setState({
           config: {
               /* HighchartsConfig */
@@ -59,7 +62,6 @@ getInitialState(){
                   name: 'Miles',
                   showInLegend: false,
                   data: [300.9, 500.5, 106.4, 129.2, 144.0, 176.0]
-
               }]
           }
         })
@@ -90,7 +92,6 @@ getInitialState(){
         <Card
           style={styles.card}>
           <CardHeader
-
             title="Flight Milage"
             avatar={<Avatar icon={<MapNavigation />}
               style={styles.avatar}
