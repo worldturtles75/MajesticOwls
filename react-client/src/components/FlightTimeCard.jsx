@@ -12,11 +12,11 @@ import Divider from 'material-ui/Divider';
 import $ from 'jquery';
 import ReactHighcharts from 'react-highcharts';
 import {
-  grey500, white, yellow500,
+  grey500, white, green500,
 } from 'material-ui/styles/colors';
 
 
- class FlightTime extends React.Component {
+class FlightTime extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
@@ -27,49 +27,47 @@ import {
     }
   }
 
-getInitialState(){
-
-        this.setState({
-          config: {
-              /* HighchartsConfig */
-              chart: {
-                type: 'bar',
-                height: 300,
-                width:400,
-                fontFamily: "'Roboto', sans-serif",
-              },
-              shadow: {
-                color: 'yellow',
-                width: 10,
-                offsetX: 0,
-                offsetY: 0
-              },
-              yAxis: {
-                title: {
-                  text: 'Miles'
-                }
-              },
-
-              title: {
-                style: {
-                    display: 'none'
-                    }
-              },
-              xAxis: {
-                  categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun']
-              },
-              series: [{
-                  name: 'Miles',
-                  showInLegend: false,
-                  data: [300.9, 500.5, 106.4, 129.2, 144.0, 176.0]
-              }]
+  getInitialState(){
+    this.setState({
+      config: {
+        /* HighchartsConfig */
+        chart: {
+          type: 'bar',
+          height: 300,
+          width:400,
+          fontFamily: "'Roboto', sans-serif",
+        },
+        shadow: {
+          color: 'yellow',
+          width: 10,
+          offsetX: 0,
+          offsetY: 0
+        },
+        yAxis: {
+          title: {
+            text: 'Miles'
           }
-        })
+        },
+        title: {
+          style: {
+            display: 'none'
+          }
+        },
+        xAxis: {
+          categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun']
+        },
+        series: [{
+          name: 'Miles',
+          showInLegend: false,
+          data: [300.9, 500.5, 106.4, 129.2, 144.0, 176.0]
+        }]
       }
+    })
+  }
 
-      componentDidMount(){
-          this.getInitialState();
-        }
+  componentDidMount(){
+    this.getInitialState();
+  }
 
   render() {
     const styles = {
@@ -78,7 +76,7 @@ getInitialState(){
         height: 400,
       },
       avatar: {
-        backgroundColor: yellow500,
+        backgroundColor: green500,
       },
       cardHeader: {
         height: '20%',
