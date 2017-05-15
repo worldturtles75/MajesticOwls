@@ -26,7 +26,7 @@ const styles = {
     backgroundColor: lightBlue500,
   },
   icons: {
-    backgroundColor: white,
+    backgroundColor: lightBlue500,
     height: 70,
     width: 70
   },
@@ -53,6 +53,18 @@ const icons = {
   'snow': './weather-icons/snow.png',
   'wind': './weather-icons/wind.png'
 };
+const condition = {
+  'clear-day': 'Sunny',
+  'clear-night': 'Clear',
+  'cloudy': 'Cloudy',
+  'fog': 'Fog',
+  'partly-cloudy-day': 'Partly Cloudy',
+  'partly-cloudy-night': 'Partly Cloudy',
+  'rain': 'Rain',
+  'sleet': 'Sleet',
+  'snow': 'Snow',
+  'wind': 'Wind'
+}
 
 const WeatherCard = (props) => (
   <div>
@@ -77,7 +89,7 @@ const WeatherCard = (props) => (
             style={styles.listItem}
           >
           <div style={styles.dateText} >{weekdays[new Date(day.time * 1000).getDay()]}, {months[new Date(day.time * 1000).getMonth()]} {new Date(day.time * 1000).getDate()}</div>
-          <h1 style={styles.tempText} >{Math.round(day.temperatureMax) + ' / ' + Math.round(day.temperatureMin)}</h1>
+          <h1 style={styles.tempText} >{Math.round(day.temperatureMax) + '° / ' + Math.round(day.temperatureMin) + '° · ' + condition[day.icon]}</h1>
           </ListItem>
         ))}
       </List>
