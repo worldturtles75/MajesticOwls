@@ -12,6 +12,7 @@ import Divider from 'material-ui/Divider';
 import {
   grey500, white, deepPurple500,
 } from 'material-ui/styles/colors';
+import GoogleMapReact from 'google-map-react';
 
 
  class NavigationCard extends React.Component {
@@ -31,7 +32,15 @@ import {
       cardHeader: {
         height: '20%',
       },
+      center: {
+        lat: 37.7749,
+        lng: -122.42,
+      },
+      map: {
+        height: '60%',
+      }
     }
+
     return (
       <div>
         <Card
@@ -44,6 +53,14 @@ import {
                 color={white}/>}
               style={styles.cardHeader}/>
               <Divider/>
+              <div
+                style={styles.map}>
+                <GoogleMapReact
+                  defaultCenter={styles.center}
+                  defaultZoom={11}
+                >
+                </GoogleMapReact>
+              </div>
         </Card>
       </div>
     )

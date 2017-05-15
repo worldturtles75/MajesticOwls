@@ -10,19 +10,21 @@ var config = {
     path: BUILD_DIR,
     filename: 'bundle.js'
   },
-
+  devServer: {
+    historyApiFallback: true,
+  }
   module : {
-  loaders : [
-    {
-      test : /\.jsx?/,
-      include : APP_DIR,
-      loader : 'babel-loader',
-      query: {
-          presets: ['react', 'es2015']
-       }
-    }
-  ]
-}
+    loaders : [
+      {
+        test : /\.jsx?/,
+        include : APP_DIR,
+        loader : 'babel-loader',
+        query: {
+            presets: ['react', 'es2015']
+         }
+      }
+    ]
+  }
 };
 
 module.exports = config;

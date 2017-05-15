@@ -19,7 +19,7 @@ import {
   Link,
 } from 'react-router-dom';
 import {
-  amber500,
+  amberA700,
 } from 'material-ui/styles/colors';
 import $ from 'jquery';
 import SignOutToolBar from './SignOutToolBar.jsx';
@@ -236,7 +236,7 @@ class DashBoard extends React.Component {
             <Link to='/trip'>
               <FloatingActionButton
                 style={styles.fab}
-                backgroundColor = {amber500}
+                backgroundColor = {amberA700}
                 label="Search"><ContentAdd />
               </FloatingActionButton>
             </Link>
