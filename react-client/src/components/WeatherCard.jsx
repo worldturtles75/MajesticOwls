@@ -26,7 +26,7 @@ const styles = {
     backgroundColor: lightBlue500,
   },
   icons: {
-    backgroundColor: lightBlue500,
+    backgroundColor: white,
     height: 70,
     width: 70
   },

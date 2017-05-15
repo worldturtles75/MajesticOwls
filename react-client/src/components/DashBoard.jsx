@@ -7,6 +7,7 @@ import FlightCard from './FlightCard.jsx';
 import FoodCard from './FoodCard.jsx';
 import SightsCard from './SightsCard.jsx';
 import WeatherCard from './WeatherCard.jsx';
+import NavigationCard from './NavigationCard.jsx';
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
 import GridList from 'material-ui/GridList';
 import GoogleButton from 'react-google-button';
@@ -184,7 +185,7 @@ class DashBoard extends React.Component {
         width: 'auto',
         overflowX:'hidden',
         height: 'auto',
-        overflowY:'hidden',
+        overflowY:'visible',
         marginLeft: 20,
         marginRight: 20,
       },
@@ -228,6 +229,7 @@ class DashBoard extends React.Component {
               <MuiThemeProvider><FlightCard flight={this.state.flight}/></MuiThemeProvider>
               <MuiThemeProvider><FoodCard food={this.state.food}/></MuiThemeProvider>
               <MuiThemeProvider><SightsCard sights={this.state.sights}/></MuiThemeProvider>
+              <MuiThemeProvider><NavigationCard/></MuiThemeProvider>
             </GridList>
           </MuiThemeProvider>
           <MuiThemeProvider>
