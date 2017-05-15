@@ -4,3 +4,4 @@ module.exports.FLIGHTSTATUS = {
   APP_KEY: 'e276d93bc5207238c1eacdd21bec0653',
   API_KEY: 'a187a7bc'
 };
+
