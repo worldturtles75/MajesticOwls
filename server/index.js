@@ -229,6 +229,14 @@ app.get('/database/return', (req,res) => {
 
 })
 
+app.get('/flightDuration', (req, res) => {
+  request.get(`https://api.flightstats.com/flex/flightstatus/rest/v2/json/flight/status/${req.query.airline}/${req.query.flight}/arr/${req.query.year}/${req.query.day}/${req.query.month}?appId=${FLIGHT_API_KEY}&appKey=${FLIGHT_APP_KEY}&utc=false`,
+  (error, response, body) => {
+    if (error) console.error(error);
+    res.send(JSON.parse(body));
+  });
+})
+
 
 const port = process.env.PORT || 1337;
 app.listen(port, () => {

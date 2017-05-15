@@ -8,6 +8,7 @@ import FoodCard from './FoodCard.jsx';
 import SightsCard from './SightsCard.jsx';
 import WeatherCard from './WeatherCard.jsx';
 import NavigationCard from './NavigationCard.jsx';
+import FlightTimeCard from './FlightTimeCard.jsx';
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
 import GridList from 'material-ui/GridList';
 import GoogleButton from 'react-google-button';
@@ -112,6 +113,7 @@ class DashBoard extends React.Component {
       } else {
         newTime = hours.toString() + ':'+ minutes + ' AM'
       }
+
       var flightDuration = data.flightStatuses[0].flightDurations.scheduledAirMinutes;
       if (flightDuration > 60) {
         hours = Math.floor(flightDuration / 60);
@@ -230,6 +232,7 @@ class DashBoard extends React.Component {
               <MuiThemeProvider><FoodCard food={this.state.food}/></MuiThemeProvider>
               <MuiThemeProvider><SightsCard sights={this.state.sights}/></MuiThemeProvider>
               <MuiThemeProvider><NavigationCard/></MuiThemeProvider>
+              <MuiThemeProvider><FlightTimeCard duration={this.state.flightsArray}/></MuiThemeProvider>
             </GridList>
           </MuiThemeProvider>
           <MuiThemeProvider>
