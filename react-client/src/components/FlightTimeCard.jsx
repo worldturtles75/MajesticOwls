@@ -90,7 +90,7 @@ class FlightTime extends React.Component {
         <Card
           style={styles.card}>
           <CardHeader
-            title="Flight Milage"
+            title="Flight Mileage"
             avatar={<Avatar icon={<MapNavigation />}
               style={styles.avatar}
               color={white}/>}
