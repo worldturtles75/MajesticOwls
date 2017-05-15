@@ -16,6 +16,13 @@ import DatePicker from 'material-ui/DatePicker';
 import Divider from 'material-ui/Divider';
 import SignOutToolBar from './SignOutToolBar.jsx';
 import $ from 'jquery';
+import Avatar from 'material-ui/Avatar';
+import Chip from 'material-ui/Chip';
+import ActionFlightTakeoff from 'material-ui/svg-icons/action/flight-takeoff';
+import {
+  pink300, pink500, white
+} from 'material-ui/styles/colors';
+
 
 
 class NewTrip extends React.Component {
@@ -65,6 +72,15 @@ class NewTrip extends React.Component {
     this.setState({finalDestination: address});
   };
   getStepContent(stepIndex) {
+    const styles = {
+      wrapper: {
+        display: 'flex',
+        flexWrap: 'wrap',
+      },
+      chip: {
+        margin: 4,
+      }
+    };
     let DateTimeFormat = global.Intl.DateTimeFormat;
     switch (stepIndex) {
       case 0:
@@ -89,15 +105,18 @@ class NewTrip extends React.Component {
       case 1:
         return (<div>
                   <MuiThemeProvider>
-                    <TextField
-                      floatingLabelText="Flight Number"
-                      onChange={this.handleFlightNumber}
-                      hintText="007"
-                      floatingLabelFixed={true}
-                    />
-                  </MuiThemeProvider>
-                  <MuiThemeProvider>
-                    <Divider />
+                    <Chip
+                      backgroundColor={pink300}
+                      style={styles.chip}
+                    >
+                      <Avatar 
+                        backgroundColor = {white} 
+                        color={pink500} 
+                        size={40}
+                        icon={<ActionFlightTakeoff/>} 
+                      />
+                      {this.state.airline}
+                    </Chip>
                   </MuiThemeProvider>
                   <MuiThemeProvider>
                     <DatePicker
@@ -110,17 +129,64 @@ class NewTrip extends React.Component {
                         year: 'numeric',
                       }).format}/>
                   </MuiThemeProvider>
+                  <MuiThemeProvider>
+                    <Divider />
+                  </MuiThemeProvider>
+                  <MuiThemeProvider>
+                    <TextField
+                      floatingLabelText="Flight Number"
+                      onChange={this.handleFlightNumber}
+                      hintText="007"
+                      id={2}
+                      defaultValue={this.state.flightNumber}
+                      floatingLabelFixed={true}
+                    />
+                  </MuiThemeProvider>
                 </div>
                 );
       case 2:
-        return (<MuiThemeProvider>
-                  <TextField
-                    floatingLabelText="Destination Address"
-                    onChange={this.handleFinalDestination}
-                    hintText="944 Market Street San Francisco"
-                    floatingLabelFixed={true}
-                  />
-                </MuiThemeProvider>
+        return (<div>
+                  <div style={styles.wrapper}>
+                    <MuiThemeProvider>
+                      <Chip
+                        style = {styles.chip}
+                        backgroundColor={pink300}
+                      >
+                        <Avatar 
+                          backgroundColor = {white} 
+                          color={pink500} 
+                          size={40}
+                          icon={<ActionFlightTakeoff/>} 
+                        />
+                        {this.state.airline}
+                      </Chip>
+                    </MuiThemeProvider>
+                    <MuiThemeProvider>
+                      <Chip
+                        style = {styles.chip}
+                        backgroundColor={pink300}
+                      >
+                        <Avatar 
+                          backgroundColor = {white} 
+                          color={pink500} 
+                          size={40}>
+                          #
+                        </Avatar>
+                        {this.state.flightNumber}
+                      </Chip>
+                    </MuiThemeProvider>
+                  </div>
+                  <MuiThemeProvider>
+                    <TextField
+                      id={1}
+                      floatingLabelText="Destination Address"
+                      onChange={this.handleFinalDestination}
+                      defaultValue={this.state.finalDestination}
+                      hintText="944 Market Street San Francisco"
+                      floatingLabelFixed={true}
+                    />
+                  </MuiThemeProvider>
+                </div>
                 );
       default:
         return 'You\'ve somehow found a bug in our code, well done!';

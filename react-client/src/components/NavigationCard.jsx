@@ -13,6 +13,7 @@ import {
   grey500, white, deepPurple500,
 } from 'material-ui/styles/colors';
 import GoogleMapReact from 'google-map-react';
+import FlatButton from 'material-ui/FlatButton';
 
 
  class NavigationCard extends React.Component {
@@ -37,7 +38,10 @@ import GoogleMapReact from 'google-map-react';
         lng: -122.42,
       },
       map: {
-        height: '60%',
+        height: '65%',
+      },
+      actions: {
+        height: '20%',
       }
     }
 
@@ -46,8 +50,8 @@ import GoogleMapReact from 'google-map-react';
         <Card
           style={styles.card}>
           <CardHeader
-              title="Navigation"
-              subtitle='TEST ADDRESS HERE'
+              title="Navigation from Airport"
+              subtitle='Address should go here.'
               avatar={<Avatar icon={<MapNavigation />}
                 style={styles.avatar}
                 color={white}/>}
@@ -61,6 +65,10 @@ import GoogleMapReact from 'google-map-react';
                 >
                 </GoogleMapReact>
               </div>
+              <CardActions style={styles.actions}>
+                <FlatButton primary = {true} label="NAVIGATE" />
+                <FlatButton label="SHARE" />
+              </CardActions>
         </Card>
       </div>
     )
