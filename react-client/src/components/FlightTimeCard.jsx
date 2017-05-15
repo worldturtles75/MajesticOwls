@@ -5,14 +5,12 @@ import {GridList, GridTile} from 'material-ui/GridList';
 import IconButton from 'material-ui/IconButton';
 import Subheader from 'material-ui/Subheader';
 import StarBorder from 'material-ui/svg-icons/toggle/star-border';
-import MapNavigation from 'material-ui/svg-icons/maps/navigation';
+import MapNavigation from 'material-ui/svg-icons/action/cached';
 import Avatar from 'material-ui/Avatar';
 import Arrow from 'material-ui/svg-icons/navigation/arrow-forward';
 import Divider from 'material-ui/Divider';
 import $ from 'jquery';
 import ReactHighcharts from 'react-highcharts';
-
-
 import {
   grey500, white, yellow500,
 } from 'material-ui/styles/colors';
@@ -23,33 +21,13 @@ import {
     super(props);
     this.state = {
       config: {},
-      data:[]
+      data:[],
+      dates: [],
+      count:[]
     }
   }
-  databaseFlightSearch() {
 
-    var context = this;
-    $.ajax({
-      type: 'GET',
-      url: '/database/return',
-      datatype: 'json'
-    })
-    .done(function(data) {
-      context.setState({
-        data:data
-      })
-      context.getInitialState();
-
-      console.log('success GET', data);
-      })
-    .fail(function(err) {
-      console.log('failed to GET', err);
-    })
-  }
-
-  getInitialState(){
-console.log(this.state.data);
-
+getInitialState(){
 
         this.setState({
           config: {
@@ -57,7 +35,8 @@ console.log(this.state.data);
               chart: {
                 type: 'bar',
                 height: 300,
-                width:400
+                width:400,
+                fontFamily: "'Roboto', sans-serif",
               },
               shadow: {
                 color: 'yellow',
@@ -72,7 +51,9 @@ console.log(this.state.data);
               },
 
               title: {
-                text: 'Flight Milage'
+                style: {
+                    display: 'none'
+                    }
               },
               xAxis: {
                   categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun']
@@ -80,14 +61,14 @@ console.log(this.state.data);
               series: [{
                   name: 'Miles',
                   showInLegend: false,
-                  data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6]
+                  data: [300.9, 500.5, 106.4, 129.2, 144.0, 176.0]
               }]
           }
         })
       }
 
       componentDidMount(){
-          this.databaseFlightSearch();
+          this.getInitialState();
         }
 
   render() {
@@ -111,8 +92,7 @@ console.log(this.state.data);
         <Card
           style={styles.card}>
           <CardHeader
-            title="Air Time"
-            subtitle='TEST ADDRESS HERE'
+            title="Flight Milage"
             avatar={<Avatar icon={<MapNavigation />}
               style={styles.avatar}
               color={white}/>}
