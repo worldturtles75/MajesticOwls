@@ -50,7 +50,7 @@ import FlatButton from 'material-ui/FlatButton';
         <Card
           style={styles.card}>
           <CardHeader
-              title="Navigation"
+              title="Navigation from Airport"
               subtitle='Address should go here.'
               avatar={<Avatar icon={<MapNavigation />}
                 style={styles.avatar}

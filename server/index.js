@@ -182,7 +182,6 @@ app.get('/flightStatus', (req, res) => {
   });
 })
 
-
 //FOR ADDING DATA INTO THE DATEBASE
 app.post('/database/save', (req, res) => {
 
