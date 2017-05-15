@@ -40,7 +40,7 @@ import {
       center: {
         position: 'absolute',
         top: '50%',
-        left: '75%',
+        left: '50%',
         transform: 'translate(-50%, -50%)',
       },
       centerArrow: {
@@ -51,7 +51,14 @@ import {
       },
       centerDiv: {
         position: 'relative',
-      }
+      },
+      city: {
+        fontWeight: 300,
+        color: grey500
+      },
+      airport: {
+        fontWeight: 300,
+      },
     }
     return (
       <div>
@@ -70,15 +77,21 @@ import {
               subtitle={'Leaving at: ' + this.props.flight.leaveTime + ' on ' + this.props.flight.leaveDate} />
             <GridList
               style = {styles.gridList}
-              cols = {7} >
+              cols = {9} >
               <GridTile
-                cols = {3}
+                cols = {4}
                 style = {styles.centerDiv} >
-                <CardHeader
-                  title={this.props.flight.departurePort}
-                  subtitle={this.props.flight.departureCity}
+                <div
                   style = {styles.center} >
-                </CardHeader>
+                  <h3
+                    style = {styles.airport}>
+                    {this.props.flight.departurePort}
+                  </h3>
+                  <h2
+                    style = {styles.city}>
+                    {this.props.flight.departureCity}
+                  </h2>
+                </div>
               </GridTile>
               <GridTile
                 style = {styles.centerDiv} >
@@ -86,13 +99,19 @@ import {
                   style = {styles.centerArrow} />
               </GridTile>
               <GridTile
-                cols = {3} 
+                cols = {4} 
                 style = {styles.centerDiv} >
-                <CardHeader
-                  title={this.props.flight.arrivalPort}
-                  subtitle={this.props.flight.arrivalCity}
-                  style={styles.center}>
-                </CardHeader>
+                <div
+                  style = {styles.center} >
+                  <h3
+                    style = {styles.airport}>
+                    {this.props.flight.arrivalPort}
+                  </h3>
+                  <h2
+                    style = {styles.city}>
+                    {this.props.flight.arrivalCity}
+                  </h2>
+                </div>
               </GridTile>
             </GridList>
             <CardHeader

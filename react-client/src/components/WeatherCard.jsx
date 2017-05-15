@@ -31,7 +31,8 @@ const styles = {
     width: 70
   },
   dateText: {
-    paddingBottom: 16
+    fontWeight: 300,
+    paddingBottom: 16,
   },
   tempText: {
     fontWeight: 300,
@@ -88,8 +89,8 @@ const WeatherCard = (props) => (
             rightAvatar={<Avatar src={icons[day.icon]} style={styles.icons} />}
             style={styles.listItem}
           >
-          <div style={styles.dateText} >{weekdays[new Date(day.time * 1000).getDay()]}, {months[new Date(day.time * 1000).getMonth()]} {new Date(day.time * 1000).getDate()}</div>
-          <h1 style={styles.tempText} >{Math.round(day.temperatureMax) + '° / ' + Math.round(day.temperatureMin) + '° · ' + condition[day.icon]}</h1>
+          <h3 style={styles.dateText} >{weekdays[new Date(day.time * 1000).getDay()]}, {months[new Date(day.time * 1000).getMonth()]} {new Date(day.time * 1000).getDate()}</h3>
+          <h2 style={styles.tempText} >{Math.round(day.temperatureMax) + '° / ' + Math.round(day.temperatureMin) + '° · ' + condition[day.icon]}</h2>
           </ListItem>
         ))}
       </List>
