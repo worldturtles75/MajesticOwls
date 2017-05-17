@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import SignIn from './components/SignIn.jsx';
 import DashBoard from './components/DashBoard.jsx';
 import NewTrip from './components/NewTrip.jsx';
+import LocationForm from './components/LocationForm.jsx';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'; // All Material-UI components must be wrapped in MuiThemeProvider
 import FlatButton from 'material-ui/FlatButton';
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
@@ -109,7 +110,8 @@ class App extends React.Component {
           <p
             style={styles.subHeader}>
             Wherever you're going, we'll help you along the way.
-          </p>
+          </p><br />
+          <LocationForm styles={styles} />
         </div>
       </div>
     )
@@ -117,7 +119,7 @@ class App extends React.Component {
     return (
       <Router>
         <div>
-          <Route exact path="/" component={DashBoard}/>
+          <Route exact path="/" component={Home}/>
           <Route path="/sign-in" component={SignIn}/>
           <Route path="/dashboard" component={DashBoard}/>
           <Route path="/trip" component={NewTrip}/>
