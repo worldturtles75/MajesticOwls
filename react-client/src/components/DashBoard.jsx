@@ -54,6 +54,7 @@ class DashBoard extends React.Component {
       location: location
     })
     .done((data) => {
+      console.log('places DATA', data);
       this.setState({
         sights: data
       })
@@ -157,6 +158,7 @@ class DashBoard extends React.Component {
       location: location
     })
     .done((data) => {
+      console.log('FOOD DATA', data);
       this.setState({
         food: data,
         location: location
@@ -169,6 +171,7 @@ class DashBoard extends React.Component {
       location: location
     })
     .done((data) => {
+      console.log('weather DATA', data);      
       this.setState({
         weather: data,
         location: location
