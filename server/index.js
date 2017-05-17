@@ -165,12 +165,15 @@ app.get('/food', (req, res) => {
   // Call Places API to get array of restaurants
   const getRestaurants = new Promise((resolve, reject) => {
     place.textSearch(params, (err, res) => {
+      console.log('err', err)
+      console.log('res', res)
       if (err) console.error(err);
       resolve(res.results);
     });
   });
   getRestaurants.then(restaurants => {
     // Create array of promises that gets details for each restaurant
+      // console.log('restaurants', restaurants)
     promiseArr = restaurants.map((restaurant) => {
       return new Promise((resolve, reject) => {
         place.placeDetailsRequest({ placeid: restaurant.place_id }, (err, res) => {
