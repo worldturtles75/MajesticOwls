@@ -56,7 +56,7 @@ class DashBoard extends React.Component {
 
   componentDidMount() {
     // this.databaseFlightSearch();
-    this.searchWeather('San Francisco');
+    // this.searchWeather('San Francisco');
     // this.searchFood('San Francisco');
     // this.searchGoogle('San Francisco');
   }
@@ -192,14 +192,28 @@ class DashBoard extends React.Component {
     })
   }
 
-  addToFav(obj) {
+  addToFav(obj, checked) {
     console.log('obj', obj);
-    // var allMarkers = this.state.allMarkers;
-    // allMarkers.push(obj);
-    // this.setState({
-    //   allMarkers: allMarkers
-    // })
-    // console.log('this.state.allMarkers', this.state.allMarkers)
+
+    if (checked) {
+      var allMarkers = this.state.allMarkers;
+      allMarkers.push(obj);
+      this.setState({
+        allMarkers: allMarkers
+      })      
+    } else {
+      var allMarkers = this.state.allMarkers;
+      for (var i=0; i< allMarkers.length; i++){
+        if (allMarkers[i].name === obj.name){
+          allMarkers.splice(i,1);
+        }
+      }
+      this.setState({
+        allMarkers: allMarkers
+      })           
+    }
+
+    console.log('this.state.allMarkers', this.state.allMarkers)
   }
 
   render() {

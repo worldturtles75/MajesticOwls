@@ -30,9 +30,6 @@ const styles = {
   block: {
     maxWidth: 250,
   },
-  // checkbox: {
-  //   marginBottom: 20,
-  // }  
 }
 
 class PlacesToEatCard extends React.Component {
@@ -41,9 +38,8 @@ class PlacesToEatCard extends React.Component {
     this.handleCheck = this.handleCheck.bind(this);
   }
 
-  handleCheck(restaurant) {
-    console.log('checked inside handleCheck')
-    console.log(e)
+  handleCheck(restaurant, checked) {
+    this.props.handleFavFood(restaurant, checked);
   }
 
   render () {
@@ -68,7 +64,10 @@ class PlacesToEatCard extends React.Component {
                 key={i}
                 rightAvatar={<Avatar src={restaurant.image_url} />}
                 leftAvatar={<Checkbox 
-                  onCheck={ () => {this.handleCheck(restaurant)} }
+                  onCheck={ (e,checked) => {
+                    // console.log('e',e)
+                    // console.log('checked',checked)
+                    this.handleCheck(restaurant, checked)} }
                   />}
                 primaryText={i+1 + '. ' + restaurant.name}
                 secondaryText={'# Reviews: ' + restaurant.review_count + ' | Rating: ' + restaurant.rating + ' | ' + restaurant.categories[0].title}
