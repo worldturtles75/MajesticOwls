@@ -3,6 +3,9 @@ import {render} from 'react-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
+
+import PlacesToEatCard from './PlacesToEatCard.jsx';
+
 import FlightCard from './FlightCard.jsx';
 import FoodCard from './FoodCard.jsx';
 import SightsCard from './SightsCard.jsx';
@@ -26,8 +29,7 @@ import $ from 'jquery';
 import SignOutToolBar from './SignOutToolBar.jsx';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
-
-
+var yelpSample = require ('../../../dummyData/yelpSFtop10.js');
 
 class DashBoard extends React.Component {
   constructor (props) {
@@ -40,6 +42,8 @@ class DashBoard extends React.Component {
       index: 0,
       weather: [],
       location: '',
+      placesToEat: [],
+      allMarkers: []
     }
     this.searchGoogle = this.searchGoogle.bind(this);
     this.flightSearch = this.flightSearch.bind(this);
@@ -47,8 +51,16 @@ class DashBoard extends React.Component {
     this.historyChange = this.historyChange.bind(this);
     this.searchFood = this.searchFood.bind(this);
     this.searchWeather = this.searchWeather.bind(this);
+    this.addToFav = this.addToFav.bind(this);
   }
 
+  componentDidMount() {
+    // this.databaseFlightSearch();
+    // this.searchWeather('San Francisco');
+    // this.searchFood('San Francisco');
+    // this.searchGoogle('San Francisco');
+  }
+  
   searchGoogle(location) {
     $.get('/sights', {
       location: location
@@ -61,6 +73,7 @@ class DashBoard extends React.Component {
     })
   }
 
+  
   databaseFlightSearch() {
     var context = this;
     $.ajax({
@@ -179,11 +192,28 @@ class DashBoard extends React.Component {
     })
   }
 
-  componentDidMount() {
-    // this.databaseFlightSearch();
-    this.searchWeather('San Francisco');
-    this.searchFood('San Francisco');
-    this.searchGoogle('San Francisco');
+  addToFav(obj, checked) {
+    console.log('obj', obj);
+
+    if (checked) {
+      var allMarkers = this.state.allMarkers;
+      allMarkers.push(obj);
+      this.setState({
+        allMarkers: allMarkers
+      })      
+    } else {
+      var allMarkers = this.state.allMarkers;
+      for (var i=0; i< allMarkers.length; i++){
+        if (allMarkers[i].name === obj.name){
+          allMarkers.splice(i,1);
+        }
+      }
+      this.setState({
+        allMarkers: allMarkers
+      })           
+    }
+
+    console.log('this.state.allMarkers', this.state.allMarkers)
   }
 
   render() {
@@ -232,10 +262,11 @@ class DashBoard extends React.Component {
               cellHeight={400}
               cols = {3}
               padding = {25}>
-              <MuiThemeProvider><WeatherCard weather={this.state.weather} location={this.state.location}/></MuiThemeProvider>
+              {/*<MuiThemeProvider><WeatherCard weather={this.state.weather} location={this.state.location}/></MuiThemeProvider>*/}
+              <MuiThemeProvider><PlacesToEatCard food={yelpSample.results} location={this.state.location} handleFavFood={this.addToFav}/></MuiThemeProvider>
               {/*<MuiThemeProvider><FlightCard flight={this.state.flight}/></MuiThemeProvider>*/}
-              <MuiThemeProvider><FoodCard food={this.state.food}/></MuiThemeProvider>
-              <MuiThemeProvider><SightsCard sights={this.state.sights}/></MuiThemeProvider>
+              {/*<MuiThemeProvider><FoodCard food={this.state.food}/></MuiThemeProvider>*/}
+              {/*<MuiThemeProvider><SightsCard sights={this.state.sights}/></MuiThemeProvider>*/}
               {/*<MuiThemeProvider><NavigationCard/></MuiThemeProvider>*/}
               {/*<MuiThemeProvider><FlightTimeCard duration={this.state.flightsArray}/></MuiThemeProvider>*/}
             </GridList>
