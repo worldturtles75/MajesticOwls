@@ -8,6 +8,7 @@ module.exports.getYelp = function(req, res) {
   const clientId = '0jgaCvkiiSDmlRChqiBxdw';
   const clientSecret = 'YymoKgxeD7oOKZNI4Musd0iKqdLVi8pUbRWidhwSDRN9n6W7JR5YD96BsT6cGhEP';
 
+  console.log(req.query);
   const searchRequest = {
     term:'food',
     location: req.query.location,
@@ -15,19 +16,21 @@ module.exports.getYelp = function(req, res) {
     sort_by: 'review_count'
   };
 
-  yelp.accessToken(clientId, clientSecret)
-    .then(response => {
-      const client = yelp.client(response.jsonBody.access_token);
+  // yelp.accessToken(clientId, clientSecret)
+  //   .then(response => {
+  //     const client = yelp.client(response.jsonBody.access_token);
 
-      client.search(searchRequest).then(response => {
-        const searchResults = response.jsonBody.businesses;
-        const prettyJson = JSON.stringify(searchResults, null, 4);
-        res.send(searchResults);
-      });
-    })
-    .catch(e => {
-      console.log(e);
-    });
+  //     client.search(searchRequest).then(response => {
+  //       const searchResults = response.jsonBody.businesses;
+  //       const prettyJson = JSON.stringify(searchResults, null, 4);
+  //       res.send(searchResults);
+  //     });
+  //   })
+  //   .catch(e => {
+  //     console.log(e);
+  //   });
+
+  res.end('hi')
 };
 
 module.exports.getFourSquare = function(req, res) {

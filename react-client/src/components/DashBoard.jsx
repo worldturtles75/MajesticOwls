@@ -31,7 +31,7 @@ import SignOutToolBar from './SignOutToolBar.jsx';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 var yelpSample = require ('../../../dummyData/yelpSFtop10.js');
-var fsSample = require ('../../../dummyData/fsSFtop10.js');
+// var fsSample = require ('../../../dummyData/fsSFtop10.js');
 
 class DashBoard extends React.Component {
   constructor (props) {
@@ -63,7 +63,7 @@ class DashBoard extends React.Component {
     this.setState({
       location: this.props.location.state.destination
     })
-    this.getPlacesToGo();
+    this.getPlacesToGo(this.props.location.state.destination);
     // this.databaseFlightSearch();
     // this.searchWeather('San Francisco');
     // this.searchFood('San Francisco');
@@ -221,12 +221,12 @@ class DashBoard extends React.Component {
   }
 
   getPlacesToGo(location) {
-    var location = this.state.location || 'San Francisco, CA'; 
-    console.log('location!!!', location)
+    console.log('location passed in', location)
+    var location = location || 'San Francisco, CA'; 
     $.get('/getYelp', {location: location})
       .done ( (data) => {
-        console.log('data', data);
-        
+        console.log('YELP API RESULT', data);
+
       })
   } 
 
@@ -290,7 +290,6 @@ class DashBoard extends React.Component {
     }
     return(
       <div>
-        {console.log(fsSample.response.groups[0].items)}
         <SignOutToolBar/>
         <div
           style={styles.gridList}>
@@ -310,7 +309,7 @@ class DashBoard extends React.Component {
               cols = {3}
               padding = {25}>
               {/*<MuiThemeProvider><WeatherCard weather={this.state.weather} location={this.state.location}/></MuiThemeProvider>*/}
-              <MuiThemeProvider><PlacesToGoCard places={fsSample.response.groups[0].items} location={this.state.location} handleFavPlace={this.addToFav}/></MuiThemeProvider>
+              {/*<MuiThemeProvider><PlacesToGoCard places={fsSample.response.groups[0].items} location={this.state.location} handleFavPlace={this.addToFav}/></MuiThemeProvider>*/}
               <MuiThemeProvider><PlacesToEatCard food={yelpSample.results} location={this.state.location} handleFavFood={this.addToFav}/></MuiThemeProvider>
               {/*<MuiThemeProvider><FlightCard flight={this.state.flight}/></MuiThemeProvider>*/}
               {/*<MuiThemeProvider><FoodCard food={this.state.food}/></MuiThemeProvider>*/}
