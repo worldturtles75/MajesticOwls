@@ -10,6 +10,7 @@ const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const request = require('request');
 const GooglePlaces = require('googleplaces');
 
+
 // Config variables
 const G_ID = process.env.G_ID || require('./config').G_ID;
 const G_SECRET = process.env.G_SECRET || require('./config').G_SECRET;

@@ -234,9 +234,9 @@ class DashBoard extends React.Component {
               padding = {25}>
               <MuiThemeProvider><WeatherCard weather={this.state.weather} location={this.state.location}/></MuiThemeProvider>
               {/*<MuiThemeProvider><FlightCard flight={this.state.flight}/></MuiThemeProvider>*/}
-              <MuiThemeProvider><FoodCard food={this.state.food}/></MuiThemeProvider>
-              <MuiThemeProvider><SightsCard sights={this.state.sights}/></MuiThemeProvider>
-              {/*<MuiThemeProvider><NavigationCard/></MuiThemeProvider>*/}
+              {/*<MuiThemeProvider><FoodCard food={this.state.food}/></MuiThemeProvider>*/}
+              {/*<MuiThemeProvider><SightsCard sights={this.state.sights}/></MuiThemeProvider>*/}
+              <MuiThemeProvider><NavigationCard location={this.state.location} /></MuiThemeProvider>
               {/*<MuiThemeProvider><FlightTimeCard duration={this.state.flightsArray}/></MuiThemeProvider>*/}
             </GridList>
           </MuiThemeProvider>
