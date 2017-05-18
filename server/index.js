@@ -10,6 +10,8 @@ const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const request = require('request');
 const GooglePlaces = require('googleplaces');
 
+const router = require('./api/routes.js')
+
 
 // Config variables
 const G_ID = process.env.G_ID || require('./config').G_ID;
@@ -24,6 +26,12 @@ const FLIGHT_APP_KEY = process.env.FLIGHT_APP_KEY || require('./config').FLIGHT_
 const place = new GooglePlaces(GOOGLE_KEY, 'json');
 
 app.use(express.static(__dirname + '/../react-client/dist'));
+
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
+
+app.use('/', router)
+
 
 var userId;
 // check if user has saved data
