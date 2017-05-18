@@ -52,6 +52,8 @@ class DashBoard extends React.Component {
     this.searchFood = this.searchFood.bind(this);
     this.searchWeather = this.searchWeather.bind(this);
     this.addToFav = this.addToFav.bind(this);
+    this.handleMarkerClick = this.handleMarkerClick.bind(this);
+    this.handleMarkerClose = this.handleMarkerClose.bind(this);
   }
 
   componentDidMount() {
@@ -61,6 +63,25 @@ class DashBoard extends React.Component {
     // this.searchGoogle('San Francisco');
   }
   
+  handleMarkerClick(targetMarker) {
+    this.state.allMarkers.map(marker => {
+      if (marker === targetMarker){
+        marker.markerstate.showInfo = true
+        this.setState({marker});
+      }
+    })
+    
+  }
+
+  handleMarkerClose(targetMarker) {
+    this.state.allMarkers.map(marker => {
+      if (marker === targetMarker){
+        marker.markerstate.showInfo = false
+        this.setState({marker});
+      }
+    })
+  }
+
   searchGoogle(location) {
     $.get('/sights', {
       location: location
@@ -197,7 +218,14 @@ class DashBoard extends React.Component {
 
     if (checked) {
       var allMarkers = this.state.allMarkers;
-      allMarkers.push(obj);
+      allMarkers.push({
+        markerstate: {
+          position: new google.maps.LatLng(obj.coordinates.latitude, obj.coordinates.longitude), 
+          showInfo: false, 
+          infoContent: obj.name
+        },
+        name: obj.name
+      });
       this.setState({
         allMarkers: allMarkers
       })      
@@ -267,7 +295,11 @@ class DashBoard extends React.Component {
               {/*<MuiThemeProvider><FlightCard flight={this.state.flight}/></MuiThemeProvider>*/}
               {/*<MuiThemeProvider><FoodCard food={this.state.food}/></MuiThemeProvider>*/}
               {/*<MuiThemeProvider><SightsCard sights={this.state.sights}/></MuiThemeProvider>*/}
-              <MuiThemeProvider><NavigationCard location={this.state.location} /></MuiThemeProvider>
+              <MuiThemeProvider><NavigationCard 
+                markers={this.state.allMarkers} 
+                handleMarkerClick = {this.handleMarkerClick}
+                handleMarkerClose = {this.handleMarkerClose}
+                location={this.state.location} /></MuiThemeProvider>
 
               {/*<MuiThemeProvider><FlightTimeCard duration={this.state.flightsArray}/></MuiThemeProvider>*/}
             </GridList>

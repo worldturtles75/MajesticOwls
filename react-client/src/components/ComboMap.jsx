@@ -6,12 +6,12 @@ const ComboMap = withGoogleMap(props => (
     {props.markers.map((marker, index) => (
       <Marker
         key={index}
-        position={marker.position}
+        position={marker.markerstate.position}
         onClick={() => props.onMarkerClick(marker)}
       >
-        {marker.showInfo && (
+        {marker.markerstate.showInfo && (
           <InfoWindow onCloseClick={() => props.onMarkerClose(marker)}>
-            <div>{marker.infoContent}</div>
+            <div>{marker.markerstate.infoContent}</div>
           </InfoWindow>
         )}
       </Marker>
