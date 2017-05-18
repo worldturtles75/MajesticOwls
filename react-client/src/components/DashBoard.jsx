@@ -68,18 +68,13 @@ class DashBoard extends React.Component {
       // this.databaseFlightSearch();
       // this.searchWeather(this.state.location);
       // this.searchFood(this.state.location);
-      // this.searchGoogle(this.state.location);
-      // this.getPlacesToGo(this.state.location);
-      
+      // this.searchGoogle(this.state.location);      
       console.log('STATE AFTER DID MOUNT', this.state.location)
+
+      this.getPlacesToGo(this.state.location);
+      this.getPlacesToEat(this.state.location);
     })
-    
-    this.getPlacesToGo(this.props.location.state.destination);
-    this.getPlacesToEat(this.props.location.state.destination);
-    // this.databaseFlightSearch();
-    // this.searchWeather('San Francisco');
-    // this.searchFood('San Francisco');
-    // this.searchGoogle('San Francisco');
+
   }
   
   handleMarkerClick(targetMarker) {
@@ -233,17 +228,18 @@ class DashBoard extends React.Component {
   }
 
   getPlacesToGo(location) {
-    console.log('location passed in', location)
     var location = location || 'San Francisco, CA'; 
     $.get('/getFourSquare', {location: location})
       .done ( (data) => {
-        console.log('FS API RESULT', data);
-
+        var top10 = JSON.parse(data).response.groups[0].items
+        console.log('FourSquare API RESULT', top10);
+        this.setState({
+          placesToGo: top10
+        })        
       })
   } 
 
   getPlacesToEat(location) {
-    console.log('location passed in', location)
     var location = location || 'San Francisco, CA'; 
     $.get('/getYelp', {location: location})
       .done ( (data) => {
@@ -338,7 +334,7 @@ class DashBoard extends React.Component {
               padding = {25}>
               {/*<MuiThemeProvider><WeatherCard weather={this.state.weather} location={this.state.location}/></MuiThemeProvider>*/}
               {/*<MuiThemeProvider><PlacesToGoCard places={fsSample.response.groups[0].items} location={this.state.location} handleFavPlace={this.addToFav}/></MuiThemeProvider>*/}
-              <MuiThemeProvider><PlacesToEatCard food={yelpSample.results} location={this.state.location} handleFavFood={this.addToFav}/></MuiThemeProvider>
+              <MuiThemeProvider><PlacesToEatCard food={this.state.placesToEat} location={this.state.location} handleFavFood={this.addToFav}/></MuiThemeProvider>
               {/*<MuiThemeProvider><FlightCard flight={this.state.flight}/></MuiThemeProvider>*/}
               {/*<MuiThemeProvider><FoodCard food={this.state.food}/></MuiThemeProvider>*/}
               {/*<MuiThemeProvider><SightsCard sights={this.state.sights}/></MuiThemeProvider>*/}
