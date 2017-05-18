@@ -3,7 +3,6 @@ import {render} from 'react-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
-
 import PlacesToEatCard from './PlacesToEatCard.jsx';
 import PlacesToGoCard from './PlacesToGoCard.jsx';
 
@@ -29,6 +28,7 @@ import {
 import $ from 'jquery';
 import SignOutToolBar from './SignOutToolBar.jsx';
 import SelectField from 'material-ui/SelectField';
+import TextField from 'material-ui/TextField';
 import MenuItem from 'material-ui/MenuItem';
 var yelpSample = require ('../../../dummyData/yelpSFtop10.js');
 // var fsSample = require ('../../../dummyData/fsSFtop10.js');
@@ -62,12 +62,15 @@ class DashBoard extends React.Component {
   componentDidMount() {
     this.setState({
       location: this.props.location.state.destination
+    }, function() {
+      // this.databaseFlightSearch();
+      // this.searchWeather(this.state.location);
+      // this.searchFood(this.state.location);
+      // this.searchGoogle(this.state.location);
+      // this.getPlacesToGo(this.state.location);
+      
+      console.log('STATE AFTER DID MOUNT', this.state.location)
     })
-    this.getPlacesToGo(this.props.location.state.destination);
-    // this.databaseFlightSearch();
-    // this.searchWeather('San Francisco');
-    // this.searchFood('San Francisco');
-    // this.searchGoogle('San Francisco');
   }
   
   handleMarkerClick(targetMarker) {
@@ -302,6 +305,9 @@ class DashBoard extends React.Component {
                 return <MenuItem key={ind} value={ind} label={index.Airline + ' ' +index.flight} primaryText={index.Airline + ' ' +index.flight} />
               })}
             </SelectField>
+          </MuiThemeProvider>
+          <MuiThemeProvider>
+            <TextField hintText="Hint Text"/>
           </MuiThemeProvider>
           <MuiThemeProvider>
             <GridList
