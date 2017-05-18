@@ -267,7 +267,8 @@ class DashBoard extends React.Component {
               {/*<MuiThemeProvider><FlightCard flight={this.state.flight}/></MuiThemeProvider>*/}
               {/*<MuiThemeProvider><FoodCard food={this.state.food}/></MuiThemeProvider>*/}
               {/*<MuiThemeProvider><SightsCard sights={this.state.sights}/></MuiThemeProvider>*/}
-              {/*<MuiThemeProvider><NavigationCard/></MuiThemeProvider>*/}
+              <MuiThemeProvider><NavigationCard location={this.state.location} /></MuiThemeProvider>
+
               {/*<MuiThemeProvider><FlightTimeCard duration={this.state.flightsArray}/></MuiThemeProvider>*/}
             </GridList>
           </MuiThemeProvider>

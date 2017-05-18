@@ -12,13 +12,68 @@ import Divider from 'material-ui/Divider';
 import {
   grey500, white, deepPurple500,
 } from 'material-ui/styles/colors';
-import GoogleMapReact from 'google-map-react';
+// import { GoogleMapReact } from 'google-map-react';
+import { withGoogleMap, GoogleMap, Marker, InfoWindow } from "react-google-maps";
 import FlatButton from 'material-ui/FlatButton';
+import ComboMap from './ComboMap.jsx';
+import ItinList from './ItinList.jsx';
+const GOOGLE_KEY = process.env.GOOGLE_KEY || require('../../../server/config').GOOGLE_KEY;
 
 
  class NavigationCard extends React.Component {
   constructor (props) {
     super(props);
+
+    this.state={
+      markers: [
+        {
+          position: new google.maps.LatLng(37.7829016035273, -122.419043442957),
+          showInfo: false,
+          infoContent: "Brendas <p><a href=`https://www.google.com`>Google</a></p>"
+        }, 
+        {
+          position: new google.maps.LatLng(37.7614250022004, -122.424051321456),
+          showInfo: false,
+          infoContent: "hello"
+        },
+      ]
+    }
+
+    this.handleMarkerClick = this.handleMarkerClick.bind(this);
+    this.handleMarkerClose = this.handleMarkerClose.bind(this);
+
+  }
+
+  // ComponentDidMount () {
+  //   var incomingArr = this.props.foodFav; 
+  //   var favFoodArr = [];
+  //   for (var i=0; i< incomingArr.length; i++){
+  //     var obj = {};
+  //     obj.position = 
+  //   }
+
+  //   this.setSate({
+  //     bob
+  //   })
+  // }
+
+  handleMarkerClick(targetMarker) {
+    this.state.markers.map(marker => {
+      if (marker === targetMarker){
+        marker.showInfo = true
+        this.setState({marker});
+      }
+    })
+    
+  }
+
+  handleMarkerClose(targetMarker) {
+    this.state.markers.map(marker => {
+      if (marker === targetMarker){
+        marker.showInfo = false
+        this.setState({marker});
+      }
+    })
   }
 
   render() {
@@ -50,8 +105,8 @@ import FlatButton from 'material-ui/FlatButton';
         <Card
           style={styles.card}>
           <CardHeader
-              title="Navigation from Airport"
-              subtitle='Address should go here.'
+              title={this.props.location}
+              subtitle='Your Sights + Restaurants'
               avatar={<Avatar icon={<MapNavigation />}
                 style={styles.avatar}
                 color={white}/>}
@@ -59,12 +114,16 @@ import FlatButton from 'material-ui/FlatButton';
               <Divider/>
               <div
                 style={styles.map}>
-                <GoogleMapReact
-                  bootstrapURLKeys={{ key: 'AIzaSyC2opYTjIyzGVfixZEyKmUtsT9igDbiAK4' }}
-                  defaultCenter={styles.center}
-                  defaultZoom={11}
-                >
-                </GoogleMapReact>
+               
+                <ComboMap 
+                  containerElement={
+                    <div style={{ height: `100%` }} />
+                  }
+                  mapElement={
+                    <div style={{ height: `100%` }} />
+                  }
+                  markers={this.state.markers} onMarkerClick={this.handleMarkerClick} onMarkerClose={this.handleMarkerClose} />
+
               </div>
               <CardActions style={styles.actions}>
                 <FlatButton primary = {true} label="NAVIGATE" />
