@@ -45,6 +45,7 @@ class DashBoard extends React.Component {
       weather: [],
       location: '',
       placesToEat: [],
+      placesToGo: [],
       allMarkers: []
     }
     this.searchGoogle = this.searchGoogle.bind(this);
@@ -54,6 +55,7 @@ class DashBoard extends React.Component {
     this.searchFood = this.searchFood.bind(this);
     this.searchWeather = this.searchWeather.bind(this);
     this.getPlacesToGo = this.getPlacesToGo.bind(this);
+    this.getPlacesToEat = this.getPlacesToEat.bind(this);
     this.addToFav = this.addToFav.bind(this);
     this.handleMarkerClick = this.handleMarkerClick.bind(this);
     this.handleMarkerClose = this.handleMarkerClose.bind(this);
@@ -71,6 +73,13 @@ class DashBoard extends React.Component {
       
       console.log('STATE AFTER DID MOUNT', this.state.location)
     })
+    
+    this.getPlacesToGo(this.props.location.state.destination);
+    this.getPlacesToEat(this.props.location.state.destination);
+    // this.databaseFlightSearch();
+    // this.searchWeather('San Francisco');
+    // this.searchFood('San Francisco');
+    // this.searchGoogle('San Francisco');
   }
   
   handleMarkerClick(targetMarker) {
@@ -226,12 +235,25 @@ class DashBoard extends React.Component {
   getPlacesToGo(location) {
     console.log('location passed in', location)
     var location = location || 'San Francisco, CA'; 
-    $.get('/getYelp', {location: location})
+    $.get('/getFourSquare', {location: location})
       .done ( (data) => {
-        console.log('YELP API RESULT', data);
+        console.log('FS API RESULT', data);
 
       })
   } 
+
+  getPlacesToEat(location) {
+    console.log('location passed in', location)
+    var location = location || 'San Francisco, CA'; 
+    $.get('/getYelp', {location: location})
+      .done ( (data) => {
+        console.log('YELP API RESULT', data);
+        this.setState({
+          placesToEat: data
+        })
+      })
+  } 
+
 
   addToFav(obj, checked) {
     console.log('obj', obj);

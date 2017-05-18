@@ -1,7 +1,7 @@
-const express = require('express')
-const router = express.Router()
+const express = require('express');
+const router = express.Router();
+const request = require('request');
 const yelp = require('yelp-fusion');
-const bodyParser = require('body-parser');
 
 module.exports.getYelp = function(req, res) {
   //Yelp Fusion's OAuth 2.0 credentials https://www.yelp.com/developers/v3/manage_app
@@ -30,9 +30,16 @@ module.exports.getYelp = function(req, res) {
   //     console.log(e);
   //   });
 
-  res.end('hi')
+  // res.end('hi from Yelp')
 };
 
 module.exports.getFourSquare = function(req, res) {
 
+  var url = 'https://api.foursquare.com/v2/venues/explore?oauth_token=4MVKT2MMAUFFFU3FODWZEU2LLLC4KXPZE0F0NJM0CYCTGHM5&near=san_francisco&limit=10&v=20170517&query=Popular with Visitors&photos=1'
+
+  request.get(url)
+    .done( (data) => {
+      console.log(data);
+    } )
+  res.end('hi from FS')
 }
