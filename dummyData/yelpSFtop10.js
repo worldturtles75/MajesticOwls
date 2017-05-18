@@ -6,7 +6,7 @@ results: [
         "image_url": "https://s3-media3.fl.yelpcdn.com/bphoto/mEzEYZ1lIM6mYfbKgHwCjw/o.jpg",
         "is_closed": false,
         "url": "https://www.yelp.com/biz/brendas-french-soul-food-san-francisco?adjust_creative=0jgaCvkiiSDmlRChqiBxdw&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=0jgaCvkiiSDmlRChqiBxdw",
-        "review_count": 7681,
+        "review_count": 7685,
         "categories": [
             {
                 "alias": "breakfast_brunch",
@@ -51,7 +51,7 @@ results: [
         "image_url": "https://s3-media1.fl.yelpcdn.com/bphoto/vTLu8G86IqIazm7BRqIH4g/o.jpg",
         "is_closed": false,
         "url": "https://www.yelp.com/biz/tartine-bakery-and-cafe-san-francisco?adjust_creative=0jgaCvkiiSDmlRChqiBxdw&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=0jgaCvkiiSDmlRChqiBxdw",
-        "review_count": 6549,
+        "review_count": 6551,
         "categories": [
             {
                 "alias": "bakeries",
@@ -96,7 +96,7 @@ results: [
         "image_url": "https://s3-media1.fl.yelpcdn.com/bphoto/92JlAhOLz0B5S0dK0TQiIA/o.jpg",
         "is_closed": false,
         "url": "https://www.yelp.com/biz/burma-superstar-san-francisco-2?adjust_creative=0jgaCvkiiSDmlRChqiBxdw&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=0jgaCvkiiSDmlRChqiBxdw",
-        "review_count": 5705,
+        "review_count": 5706,
         "categories": [
             {
                 "alias": "burmese",
@@ -133,7 +133,7 @@ results: [
         "image_url": "https://s3-media4.fl.yelpcdn.com/bphoto/P5_EgBQbRm9Am9Mmynvwxw/o.jpg",
         "is_closed": false,
         "url": "https://www.yelp.com/biz/san-tung-san-francisco-2?adjust_creative=0jgaCvkiiSDmlRChqiBxdw&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=0jgaCvkiiSDmlRChqiBxdw",
-        "review_count": 5467,
+        "review_count": 5470,
         "categories": [
             {
                 "alias": "chinese",
@@ -178,7 +178,7 @@ results: [
         "image_url": "https://s3-media1.fl.yelpcdn.com/bphoto/uXxVZfHdCF_qUlCvsxioJg/o.jpg",
         "is_closed": false,
         "url": "https://www.yelp.com/biz/hog-island-oyster-co-san-francisco?adjust_creative=0jgaCvkiiSDmlRChqiBxdw&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=0jgaCvkiiSDmlRChqiBxdw",
-        "review_count": 4195,
+        "review_count": 4198,
         "categories": [
             {
                 "alias": "seafood",
@@ -224,7 +224,7 @@ results: [
         "image_url": "https://s3-media1.fl.yelpcdn.com/bphoto/OPnKCvgBR2-lQ1-yahrpiA/o.jpg",
         "is_closed": false,
         "url": "https://www.yelp.com/biz/el-farolito-san-francisco-2?adjust_creative=0jgaCvkiiSDmlRChqiBxdw&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=0jgaCvkiiSDmlRChqiBxdw",
-        "review_count": 4031,
+        "review_count": 4032,
         "categories": [
             {
                 "alias": "mexican",
@@ -269,7 +269,7 @@ results: [
         "image_url": "https://s3-media2.fl.yelpcdn.com/bphoto/hUZgDmue1VRfvIXai6I0wg/o.jpg",
         "is_closed": false,
         "url": "https://www.yelp.com/biz/tropisue%C3%B1o-san-francisco-3?adjust_creative=0jgaCvkiiSDmlRChqiBxdw&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=0jgaCvkiiSDmlRChqiBxdw",
-        "review_count": 3270,
+        "review_count": 3272,
         "categories": [
             {
                 "alias": "mexican",
@@ -355,7 +355,7 @@ results: [
         "image_url": "https://s3-media2.fl.yelpcdn.com/bphoto/sa6Hv0hkKYMiTJ8yXgeQuw/o.jpg",
         "is_closed": false,
         "url": "https://www.yelp.com/biz/nicks-crispy-tacos-san-francisco-2?adjust_creative=0jgaCvkiiSDmlRChqiBxdw&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=0jgaCvkiiSDmlRChqiBxdw",
-        "review_count": 2938,
+        "review_count": 2939,
         "categories": [
             {
                 "alias": "mexican",

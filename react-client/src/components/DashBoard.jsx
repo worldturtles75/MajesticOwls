@@ -5,6 +5,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 
 import PlacesToEatCard from './PlacesToEatCard.jsx';
+import PlacesToGoCard from './PlacesToGoCard.jsx';
 
 import FlightCard from './FlightCard.jsx';
 import FoodCard from './FoodCard.jsx';
@@ -30,6 +31,7 @@ import SignOutToolBar from './SignOutToolBar.jsx';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 var yelpSample = require ('../../../dummyData/yelpSFtop10.js');
+var fsSample = require ('../../../dummyData/fsSFtop10.js');
 
 class DashBoard extends React.Component {
   constructor (props) {
@@ -51,6 +53,7 @@ class DashBoard extends React.Component {
     this.historyChange = this.historyChange.bind(this);
     this.searchFood = this.searchFood.bind(this);
     this.searchWeather = this.searchWeather.bind(this);
+    this.getPlacesToGo = this.getPlacesToGo.bind(this);
     this.addToFav = this.addToFav.bind(this);
     this.handleMarkerClick = this.handleMarkerClick.bind(this);
     this.handleMarkerClose = this.handleMarkerClose.bind(this);
@@ -60,6 +63,7 @@ class DashBoard extends React.Component {
     this.setState({
       location: this.props.location.state.destination
     })
+    this.getPlacesToGo();
     // this.databaseFlightSearch();
     // this.searchWeather('San Francisco');
     // this.searchFood('San Francisco');
@@ -216,6 +220,16 @@ class DashBoard extends React.Component {
     })
   }
 
+  getPlacesToGo(location) {
+    var location = this.state.location || 'San Francisco, CA'; 
+    console.log('location!!!', location)
+    $.get('/getYelp', {location: location})
+      .done ( (data) => {
+        console.log('data', data);
+        
+      })
+  } 
+
   addToFav(obj, checked) {
     console.log('obj', obj);
 
@@ -248,7 +262,7 @@ class DashBoard extends React.Component {
   }
 
   render() {
-    console.log(this.state.location)
+    // console.log(this.state.location)
     const styles = {
       gridList: {
         width: 'auto',
@@ -276,6 +290,7 @@ class DashBoard extends React.Component {
     }
     return(
       <div>
+        {console.log(fsSample.response.groups[0].items)}
         <SignOutToolBar/>
         <div
           style={styles.gridList}>
@@ -294,7 +309,8 @@ class DashBoard extends React.Component {
               cellHeight={400}
               cols = {3}
               padding = {25}>
-              <MuiThemeProvider><WeatherCard weather={this.state.weather} location={this.state.location}/></MuiThemeProvider>
+              {/*<MuiThemeProvider><WeatherCard weather={this.state.weather} location={this.state.location}/></MuiThemeProvider>*/}
+              <MuiThemeProvider><PlacesToGoCard places={fsSample.response.groups[0].items} location={this.state.location} handleFavPlace={this.addToFav}/></MuiThemeProvider>
               <MuiThemeProvider><PlacesToEatCard food={yelpSample.results} location={this.state.location} handleFavFood={this.addToFav}/></MuiThemeProvider>
               {/*<MuiThemeProvider><FlightCard flight={this.state.flight}/></MuiThemeProvider>*/}
               {/*<MuiThemeProvider><FoodCard food={this.state.food}/></MuiThemeProvider>*/}
