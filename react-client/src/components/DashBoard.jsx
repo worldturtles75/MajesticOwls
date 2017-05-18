@@ -44,6 +44,7 @@ class DashBoard extends React.Component {
       index: 0,
       weather: [],
       location: '',
+      newLocation: '',
       placesToEat: [],
       placesToGo: [],
       allMarkers: []
@@ -59,24 +60,29 @@ class DashBoard extends React.Component {
     this.addToFav = this.addToFav.bind(this);
     this.handleMarkerClick = this.handleMarkerClick.bind(this);
     this.handleMarkerClose = this.handleMarkerClose.bind(this);
+    this.handleLocationChange = this.handleLocationChange.bind(this);
+    this.handleLocationSubmit = this.handleLocationSubmit.bind(this);
+    this.fetch = this.fetch.bind(this);
   }
 
   componentDidMount() {
     this.setState({
       location: this.props.location.state.destination
-    }, function() {
-      // this.databaseFlightSearch();
-      // this.searchWeather(this.state.location);
-      // this.searchFood(this.state.location);
-      // this.searchGoogle(this.state.location);      
+    }, () => {
+      this.fetch(this.state.location)
       console.log('STATE AFTER DID MOUNT', this.state.location)
-
-      this.getPlacesToGo(this.state.location);
-      this.getPlacesToEat(this.state.location);
     })
 
   }
   
+  fetch(location) {
+    // this.searchWeather(location);    
+    // this.searchFood(location);
+    // this.searchGoogle(location);
+    // this.getPlacesToGo(location);
+    // this.getPlacesToEat(this.state.location);
+  }
+
   handleMarkerClick(targetMarker) {
     this.state.allMarkers.map(marker => {
       if (marker === targetMarker){
@@ -282,8 +288,21 @@ class DashBoard extends React.Component {
     console.log('this.state.allMarkers', this.state.allMarkers)
   }
 
+  handleLocationChange(e) {
+    // console.log(e.target.value)
+    this.setState({newLocation: e.target.value});
+  }
+
+  handleLocationSubmit(e) {
+    e.preventDefault();
+    this.setState({location: this.state.newLocation}, () => {
+      console.log('A New Location was submitted: ' + this.state.location);
+      this.fetch(this.state.location);      
+    })
+  }
+
+
   render() {
-    // console.log(this.state.location)
     const styles = {
       gridList: {
         width: 'auto',
@@ -302,16 +321,30 @@ class DashBoard extends React.Component {
         zIndex: 100,
         position: 'fixed',
       },
-      hist:{
+      hist: {
         top: 50,
         left: 30,
         zIndex: 100,
         position: 'fixed',
+      },
+      center: {
+        width: "800px",
+        margin: "0 auto"
       }
     }
     return(
       <div>
         <SignOutToolBar/>
+        <div style={styles.center}>
+          <form onSubmit={this.handleLocationSubmit}>
+            <MuiThemeProvider>
+              <TextField hintText="Enter Location" floatingLabelText="Change Location" onChange={this.handleLocationChange}/>
+            </MuiThemeProvider>
+            <MuiThemeProvider>
+              <FlatButton label="Submit" onClick={this.handleLocationSubmit} />
+            </MuiThemeProvider>
+          </form>
+        </div>
         <div
           style={styles.gridList}>
           <MuiThemeProvider>
@@ -323,9 +356,6 @@ class DashBoard extends React.Component {
                 return <MenuItem key={ind} value={ind} label={index.Airline + ' ' +index.flight} primaryText={index.Airline + ' ' +index.flight} />
               })}
             </SelectField>
-          </MuiThemeProvider>
-          <MuiThemeProvider>
-            <TextField hintText="Hint Text"/>
           </MuiThemeProvider>
           <MuiThemeProvider>
             <GridList
