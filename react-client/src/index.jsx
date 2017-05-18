@@ -111,7 +111,7 @@ class App extends React.Component {
             style={styles.subHeader}>
             Wherever you're going, we'll help you along the way.
           </p><br />
-          <LocationForm styles={styles} />
+          <LocationForm />
         </div>
       </div>
     )

@@ -57,6 +57,9 @@ class DashBoard extends React.Component {
   }
 
   componentDidMount() {
+    this.setState({
+      location: this.props.location.state.destination
+    })
     // this.databaseFlightSearch();
     // this.searchWeather('San Francisco');
     // this.searchFood('San Francisco');
@@ -245,6 +248,7 @@ class DashBoard extends React.Component {
   }
 
   render() {
+    console.log(this.state.location)
     const styles = {
       gridList: {
         width: 'auto',
@@ -290,7 +294,7 @@ class DashBoard extends React.Component {
               cellHeight={400}
               cols = {3}
               padding = {25}>
-              {/*<MuiThemeProvider><WeatherCard weather={this.state.weather} location={this.state.location}/></MuiThemeProvider>*/}
+              <MuiThemeProvider><WeatherCard weather={this.state.weather} location={this.state.location}/></MuiThemeProvider>
               <MuiThemeProvider><PlacesToEatCard food={yelpSample.results} location={this.state.location} handleFavFood={this.addToFav}/></MuiThemeProvider>
               {/*<MuiThemeProvider><FlightCard flight={this.state.flight}/></MuiThemeProvider>*/}
               {/*<MuiThemeProvider><FoodCard food={this.state.food}/></MuiThemeProvider>*/}
