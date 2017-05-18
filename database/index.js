@@ -14,22 +14,7 @@ db.once('open', () => {
 });
 
 
-const userSchema = mongoose.Schema({
 
-    user: String,
-    month: String,
-    day: String,
-    year: String,
-    Airline: String,
-    flight: String,
-    destination: String
-
-  });
 
 // userSchema.plugin(findOrCreate);
 
-
-const historyStorage = mongoose.model('historyStorage', userSchema);
-
-
-module.exports = historyStorage;
