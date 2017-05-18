@@ -45,6 +45,7 @@ class DashBoard extends React.Component {
       weather: [],
       location: '',
       placesToEat: [],
+      placesToGo: [],
       allMarkers: []
     }
     this.searchGoogle = this.searchGoogle.bind(this);
@@ -54,6 +55,7 @@ class DashBoard extends React.Component {
     this.searchFood = this.searchFood.bind(this);
     this.searchWeather = this.searchWeather.bind(this);
     this.getPlacesToGo = this.getPlacesToGo.bind(this);
+    this.getPlacesToEat = this.getPlacesToEat.bind(this);
     this.addToFav = this.addToFav.bind(this);
     this.handleMarkerClick = this.handleMarkerClick.bind(this);
     this.handleMarkerClose = this.handleMarkerClose.bind(this);
@@ -66,11 +68,13 @@ class DashBoard extends React.Component {
       // this.databaseFlightSearch();
       // this.searchWeather(this.state.location);
       // this.searchFood(this.state.location);
-      // this.searchGoogle(this.state.location);
-      // this.getPlacesToGo(this.state.location);
-      
+      // this.searchGoogle(this.state.location);      
       console.log('STATE AFTER DID MOUNT', this.state.location)
+
+      this.getPlacesToGo(this.state.location);
+      this.getPlacesToEat(this.state.location);
     })
+
   }
   
   handleMarkerClick(targetMarker) {
@@ -224,14 +228,28 @@ class DashBoard extends React.Component {
   }
 
   getPlacesToGo(location) {
-    console.log('location passed in', location)
+    var location = location || 'San Francisco, CA'; 
+    $.get('/getFourSquare', {location: location})
+      .done ( (data) => {
+        var top10 = JSON.parse(data).response.groups[0].items
+        console.log('FourSquare API RESULT', top10);
+        this.setState({
+          placesToGo: top10
+        })        
+      })
+  } 
+
+  getPlacesToEat(location) {
     var location = location || 'San Francisco, CA'; 
     $.get('/getYelp', {location: location})
       .done ( (data) => {
         console.log('YELP API RESULT', data);
-
+        this.setState({
+          placesToEat: data
+        })
       })
   } 
+
 
   addToFav(obj, checked) {
     console.log('obj', obj);
@@ -316,7 +334,7 @@ class DashBoard extends React.Component {
               padding = {25}>
               {/*<MuiThemeProvider><WeatherCard weather={this.state.weather} location={this.state.location}/></MuiThemeProvider>*/}
               {/*<MuiThemeProvider><PlacesToGoCard places={fsSample.response.groups[0].items} location={this.state.location} handleFavPlace={this.addToFav}/></MuiThemeProvider>*/}
-              <MuiThemeProvider><PlacesToEatCard food={yelpSample.results} location={this.state.location} handleFavFood={this.addToFav}/></MuiThemeProvider>
+              <MuiThemeProvider><PlacesToEatCard food={this.state.placesToEat} location={this.state.location} handleFavFood={this.addToFav}/></MuiThemeProvider>
               {/*<MuiThemeProvider><FlightCard flight={this.state.flight}/></MuiThemeProvider>*/}
               {/*<MuiThemeProvider><FoodCard food={this.state.food}/></MuiThemeProvider>*/}
               {/*<MuiThemeProvider><SightsCard sights={this.state.sights}/></MuiThemeProvider>*/}
