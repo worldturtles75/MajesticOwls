@@ -21,12 +21,11 @@ class LocationForm extends React.Component {
   }
 
   handleSubmit(e) {
-    console.log('A locaiton was submitted: ' + this.state.value);
+    console.log('A location was submitted: ' + this.state.value);
     e.preventDefault();
     this.setState({
       submitted: true
     })
-    console.log(this.state.submitted)
   }
 
   render() {
@@ -50,22 +49,15 @@ class LocationForm extends React.Component {
     const {submitted} = this.state;
     return (
       <div>
-        {/*<MuiThemeProvider>
-          <TextField
-            floatingLabelText="Enter Location"
-            onChange={this.handleChange}
-            hintText="San Francisco"
-            id={2}
-            floatingLabelFixed={false}
-            style={styles.subHeader}
-          />
-        </MuiThemeProvider>*/}
         <form onSubmit={this.handleSubmit}>
           <input style={styles.subHeader} type="text" value={this.state.value} onChange={this.handleChange} placeholder="Enter Location" />
           <br/>
           <input style={styles.button} type="submit" value="Submit" />
         </form>
-        {submitted ? <Redirect push to="/dashboard" /> : null }
+        {submitted ? <Redirect to={{
+                            pathname: "/dashboard",
+                            state: {destination: this.state.value}
+                          }} /> : null }
       </div>
     );
   }
