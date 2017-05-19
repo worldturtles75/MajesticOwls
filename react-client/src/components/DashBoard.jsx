@@ -63,6 +63,7 @@ class DashBoard extends React.Component {
     this.handleLocationChange = this.handleLocationChange.bind(this);
     this.handleLocationSubmit = this.handleLocationSubmit.bind(this);
     this.fetch = this.fetch.bind(this);
+    this.savelocation = this.savelocation.bind(this);
   }
 
   componentDidMount() {
@@ -70,19 +71,23 @@ class DashBoard extends React.Component {
       location: this.props.location.state.destination
     }, () => {
       // creates the destination into the database 
-      $.get('/savelocation', { location: this.state.location })
-       .done((data) => {
-          console.log(data)
-       })
-       .catch((err) => {
-          console.log(err)
-       })
-      this.fetch(this.state.location)
+      this.savelocation();
       console.log('STATE AFTER DID MOUNT', this.state.location)
     })
 
   }
   
+  savelocation(){
+    $.get('/savelocation', { location: this.state.location })
+       .done((data) => {
+          console.log(data)
+          this.fetch(this.state.location);  
+       })
+       .catch((err) => {
+          console.log(err)
+       })
+  }
+
   fetch(location) {
     // this.searchWeather(location);    
     // this.searchFood(location);
@@ -305,8 +310,8 @@ class DashBoard extends React.Component {
   handleLocationSubmit(e) {
     e.preventDefault();
     this.setState({location: this.state.newLocation.toLowerCase()}, () => {
-      console.log('A New Location was submitted: ' + this.state.location);
-      this.fetch(this.state.location);      
+      console.log('A New Location was submitted: ' + this.state.location);    
+      this.savelocation();
     })
   }
 
@@ -386,7 +391,7 @@ class DashBoard extends React.Component {
               {/*<MuiThemeProvider><FlightTimeCard duration={this.state.flightsArray}/></MuiThemeProvider>*/}
             </GridList>
           </MuiThemeProvider>
-          <MuiThemeProvider>
+          {/*<MuiThemeProvider>
             <Link to='/trip'>
               <FloatingActionButton
                 style={styles.fab}
@@ -394,7 +399,7 @@ class DashBoard extends React.Component {
                 label="Search"><ContentAdd />
               </FloatingActionButton>
             </Link>
-          </MuiThemeProvider>
+          </MuiThemeProvider>*/}
         </div>
       </div>
     )
