@@ -70,7 +70,7 @@ class DashBoard extends React.Component {
     this.addToItinerary = this.addToItinerary.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.setState({
       location: this.props.location.state.destination
     }, () => {
@@ -414,26 +414,22 @@ class DashBoard extends React.Component {
               cols = {3}
               padding = {25}>
               {/*<MuiThemeProvider><WeatherCard weather={this.state.weather} location={this.state.location}/></MuiThemeProvider>*/}
-
-              {/*<MuiThemeProvider><PlacesToGoCard places={fsSample.response.groups[0].items} location={this.state.location} handleFavPlace={this.addToFav}/></MuiThemeProvider>*/}
               <MuiThemeProvider><PlacesToEatCard food={this.state.placesToEat} location={this.state.location} handleFavFood={this.addToFav} addToItinerary={this.addToItinerary}/></MuiThemeProvider>
-
-        
-
+              <MuiThemeProvider><SightsCard sights = {this.state.placesToGo} location={this.state.location} addToItinerary={this.addToItinerary} addToMaps={this.addToFav}/></MuiThemeProvider>
               {/*<MuiThemeProvider><FlightCard flight={this.state.flight}/></MuiThemeProvider>*/}
               {/*<MuiThemeProvider><FoodCard food={this.state.food}/></MuiThemeProvider>*/}
-              {<MuiThemeProvider><SightsCard sights = {foursquareSample.response.groups[0].items} location={this.state.location} addToItinerary={this.addToItinerary} addToMaps={this.addToFav}/></MuiThemeProvider>}
               <MuiThemeProvider><NavigationCard 
                 markers={this.state.allMarkers} 
                 handleMarkerClick = {this.handleMarkerClick}
                 handleMarkerClose = {this.handleMarkerClose}
                 coordinates={this.state.coordinates}
-                location={this.state.location} /></MuiThemeProvider>
+                location={this.state.location} />
+              </MuiThemeProvider>
 
               {/*<MuiThemeProvider><FlightTimeCard duration={this.state.flightsArray}/></MuiThemeProvider>*/}
+              <MuiThemeProvider><ItinList itinItems={this.state.itineraryItems}/></MuiThemeProvider>
             </GridList>
           </MuiThemeProvider>
-              {<MuiThemeProvider><ItinList itinItems={this.state.itineraryItems}/></MuiThemeProvider>}
           {/*<MuiThemeProvider>
             <Link to='/trip'>
               <FloatingActionButton

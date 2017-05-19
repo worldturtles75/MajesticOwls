@@ -98,7 +98,7 @@ module.exports.getFourSquare = function(req, res) {
       const location = req.query.location;
 
       const getData = new Promise((resolve, reject) => {
-        var url = `https://api.foursquare.com/v2/venues/explore?oauth_token=${token}&near=${location}&limit=10&v=20170517&query=Popular with Visitors&photos=1`
+        var url = `https://api.foursquare.com/v2/venues/explore?oauth_token=${token}&near=${location}&limit=10&v=20170517&query=Popular with Visitors&venuePhotos=1`
         request.get(url, (err, result) => {
           resolve(result);
         })
@@ -124,6 +124,3 @@ module.exports.getFourSquare = function(req, res) {
     }
   })
 };
-
-// 
-

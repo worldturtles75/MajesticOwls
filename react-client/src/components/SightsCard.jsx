@@ -72,7 +72,7 @@ class SightsCard extends React.Component {
             {this.props.sights.map((attraction, i) => (
               <ListItem
                 key={i}
-                rightAvatar={<Avatar src='' />}
+                rightAvatar={<Avatar src= {attraction.venue.photos.groups[0].items[0].prefix + 'width960' + attraction.venue.photos.groups[0].items[0].suffix} />}
                 leftCheckbox={<Checkbox 
                   checkedIcon={<ActionFavorite />}
                   uncheckedIcon={<ActionFavoriteBorder />}
