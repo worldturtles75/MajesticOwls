@@ -124,6 +124,3 @@ module.exports.getFourSquare = function(req, res) {
     }
   })
 };
-
-// 
-
