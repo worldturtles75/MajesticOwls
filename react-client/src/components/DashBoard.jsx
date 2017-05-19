@@ -65,10 +65,18 @@ class DashBoard extends React.Component {
     this.fetch = this.fetch.bind(this);
   }
 
-  componentDidMount() {
+  componentWillMount() {
     this.setState({
       location: this.props.location.state.destination
     }, () => {
+      // creates the destination into the database 
+      $.get('/savelocation', { location: this.state.location })
+       .done((data) => {
+          console.log(data)
+       })
+       .catch((err) => {
+          console.log(err)
+       })
       this.fetch(this.state.location)
       console.log('STATE AFTER DID MOUNT', this.state.location)
     })
@@ -79,8 +87,8 @@ class DashBoard extends React.Component {
     // this.searchWeather(location);    
     // this.searchFood(location);
     // this.searchGoogle(location);
-    // this.getPlacesToGo(location);
-    // this.getPlacesToEat(this.state.location);
+    this.getPlacesToGo(location);
+    this.getPlacesToEat(this.state.location);
   }
 
   handleMarkerClick(targetMarker) {

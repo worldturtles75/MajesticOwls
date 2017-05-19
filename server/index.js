@@ -3,15 +3,14 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
-const User = require('../database/index');
-const app = express();
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const request = require('request');
 const GooglePlaces = require('googleplaces');
-
 const router = require('./api/routes.js')
-
+const User = require('../database/models/user');
+const Destination = require('../database/models/destination');
+const mongoose = require('mongoose')
 
 // Config variables
 const G_ID = process.env.G_ID || require('./config').G_ID;
@@ -24,6 +23,27 @@ const FLIGHT_API_KEY = process.env.FLIGHT_API_KEY || require('./config').FLIGHT_
 const FLIGHT_APP_KEY = process.env.FLIGHT_APP_KEY || require('./config').FLIGHT_APP_KEY;
 
 const place = new GooglePlaces(GOOGLE_KEY, 'json');
+
+const app = express();
+// const findOrCreate = require('mongoose-find-or-create');
+mongoose.connect('mongodb://localhost/greenfield');
+// mongoose.connect('mongodb://group:Hackreactor21@ds127101.mlab.com:27101/greenfield');
+// mongoose.Promise = require('bluebird');
+mongoose.connection.on('error', () => {
+  console.log('mongoose connection error');
+});
+
+mongoose.connection.once('open', () => {
+  console.log('mongoose connected successfully');
+});
+
+
+
+
+// userSchema.plugin(findOrCreate);
+
+
+
 
 app.use(express.static(__dirname + '/../react-client/dist'));
 
