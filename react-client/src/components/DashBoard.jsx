@@ -49,7 +49,8 @@ class DashBoard extends React.Component {
       placesToEat: [],
       placesToGo: [],
       allMarkers: [],
-      itineraryItems:[]
+      itineraryItems:[],
+      coordinates: { lat: 37.77493, lng: -122.41942 }
     }
     this.searchGoogle = this.searchGoogle.bind(this);
     this.flightSearch = this.flightSearch.bind(this);
@@ -67,7 +68,6 @@ class DashBoard extends React.Component {
     this.fetch = this.fetch.bind(this);
     this.savelocation = this.savelocation.bind(this);
     this.addToItinerary = this.addToItinerary.bind(this);
-    this.getCityCoords = this.getCityCoords.bind(this);
   }
 
   componentWillMount() {
@@ -84,13 +84,8 @@ class DashBoard extends React.Component {
   savelocation(){
     $.get('/savelocation', { location: this.state.location })
        .then((data) => {
-          console.log(data)
           this.fetch(this.state.location);  
-          return data;
-       })
-       .then((data) => {
-          this.getCityCoords(location);          
-       })       
+       }) 
        .catch((err) => {
           console.log(err)
        })
@@ -102,6 +97,7 @@ class DashBoard extends React.Component {
     // this.searchGoogle(location);
     this.getPlacesToGo(location);
     this.getPlacesToEat(location);
+    // this.getCityCoords(location);          
   }
 
   handleMarkerClick(targetMarker) {
@@ -254,26 +250,24 @@ class DashBoard extends React.Component {
     })
   }
 
-  getCityCoords(location) {
-    var location = location || 'San Francisco, CA'; 
-    $.get('/getCityCoords', {location: location})
-      .done ( (data) => {
-        console.log('GET COORDS', data);
-        this.setState({
-          coordinates: data
-        })        
-      })
-  } 
-
   getPlacesToGo(location) {
     var location = location || 'San Francisco, CA'; 
     $.get('/getFourSquare', {location: location})
-      .done ( (data) => {
+      .then ( (data) => {
         var top10 = JSON.parse(data).response.groups[0].items
         console.log('FourSquare API RESULT', top10);
         this.setState({
           placesToGo: top10
         })        
+      })
+      .then(() => {
+        $.get('/getCityCoords', {location: location})
+          .done ( (data) => {
+            console.log('GET COORDS', data);
+            this.setState({
+              coordinates: data
+            })        
+          })
       })
   } 
 
