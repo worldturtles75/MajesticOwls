@@ -16,7 +16,6 @@ import { withGoogleMap, GoogleMap, Marker, InfoWindow } from "react-google-maps"
 import FlatButton from 'material-ui/FlatButton';
 import ComboMap from './ComboMap.jsx';
 import $ from 'jquery';
-const GOOGLE_KEY = process.env.GOOGLE_KEY || require('../../../server/config').GOOGLE_KEY;
 
 
  class NavigationCard extends React.Component {
