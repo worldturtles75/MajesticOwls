@@ -7,6 +7,13 @@ const mongoose = require('mongoose')
 
 const Destination = require('../../database/models/destination');
 
+module.exports.getCityCoords = function(req, res){
+  Destination.find({ destination: req.query.location }, function (err, data){
+    if (err) { console.log(err) }
+    res.send(data[0].coordinates)
+  })
+}
+
 module.exports.saveLocation = function(req, res) {
   Destination.create({
     destination: req.query.location
