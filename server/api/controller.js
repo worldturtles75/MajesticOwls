@@ -10,6 +10,7 @@ const Destination = require('../../database/models/destination');
 module.exports.getCityCoords = function(req, res){
   Destination.find({ destination: req.query.location }, function (err, data){
     if (err) { console.log(err) }
+    console.log("SERVER COORDINATES", data[0].coordinates)
     res.send(data[0].coordinates)
   })
 }

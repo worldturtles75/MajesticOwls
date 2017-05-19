@@ -52,7 +52,7 @@ class SightsCard extends React.Component {
   }
 
   render () {
-    console.log('list :', this.props.sights)
+    // console.log('list :', this.props.sights)
     return (
       <div>
         <Card style={styles.card}>
