@@ -14,7 +14,7 @@
     "start": "node server/index.js",
     "test": "mocha",
     "db": "mongod",
-    "heroku-postbuild": "webpack -d"
+    "heroku-postbuild": "webpack -p"
   },
   "dependencies": {
     "babel-core": "^6.24.1",
