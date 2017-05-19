@@ -28,7 +28,8 @@ module.exports.getYelp = function(req, res) {
     if (data[0].toptenEats.length !== 0){
       res.send(data[0].toptenEats)
     } else {
-
+      console.log('went in NEW API call')
+      console.log('req.query.location', req.query.location)
       //Yelp Fusion's OAuth 2.0 credentials https://www.yelp.com/developers/v3/manage_app
       const clientId = '0jgaCvkiiSDmlRChqiBxdw';
       const clientSecret = 'YymoKgxeD7oOKZNI4Musd0iKqdLVi8pUbRWidhwSDRN9n6W7JR5YD96BsT6cGhEP';
@@ -96,8 +97,12 @@ module.exports.getFourSquare = function(req, res) {
       });
 
       getData.then( result => {
+        // console.log("RESULT", result)
+        var parsedbody = JSON.parse(result.body)
+        // console.log("FOUR SQUARE RESULT BODY RESPONSE", parsedbody.response.geocode.center)
+        // console.log("FOUR SQUARE API CALL RESULT", result.body.response.geocode.center);
         Destination.update({ destination: req.query.location },
-          { $set: { toptenSights: result.body } }, 
+          { $set: { toptenSights: result.body, coordinates: parsedbody.response.geocode.center } }, 
           function(err, data){
             if (err){
               console.log(err)
@@ -111,4 +116,6 @@ module.exports.getFourSquare = function(req, res) {
     }
   })
 };
+
+// 
 
