@@ -1,7 +1,7 @@
 module.exports = {
   "meta": {
     "code": 200,
-    "requestId": "591d2cccf594df7c0a0fded2"
+    "requestId": "591e35246a60716413ec24b7"
   },
   "notifications": [
     {
@@ -16,12 +16,12 @@ module.exports = {
       "header": "Tap to show:",
       "filters": [
         {
-          "name": "Open now",
-          "key": "openNow"
-        },
-        {
           "name": "I haven't been",
           "key": "novelty"
+        },
+        {
+          "name": "$-$$$$",
+          "key": "price"
         }
       ]
     },
@@ -121,8 +121,8 @@ module.exports = {
               ],
               "verified": true,
               "stats": {
-                "checkinsCount": 245000,
-                "usersCount": 78460,
+                "checkinsCount": 245004,
+                "usersCount": 78463,
                 "tipCount": 761
               },
               "url": "http://www.sfgiants.com",
@@ -152,17 +152,75 @@ module.exports = {
                 "isLocalHoliday": false
               },
               "photos": {
-                "count": 0,
-                "groups": []
+                "count": 1,
+                "groups": [
+                  {
+                    "type": "venue",
+                    "name": "Venue photos",
+                    "count": 1,
+                    "items": [
+                      {
+                        "id": "51ddd071498eadcc7f4dc874",
+                        "createdAt": 1373491313,
+                        "prefix": "https://igx.4sqi.net/img/general/",
+                        "suffix": "/469656_kHGIrXCWcL-_9exGv8unvnc-LnRupeQv_4u19srYwJg.jpg",
+                        "width": 612,
+                        "height": 612,
+                        "user": {
+                          "id": "469656",
+                          "firstName": "Steve",
+                          "lastName": "Derico",
+                          "gender": "male",
+                          "photo": {
+                            "prefix": "https://igx.4sqi.net/img/user/",
+                            "suffix": "/2XPRAXZB0BAQP5DO.jpg"
+                          }
+                        },
+                        "visibility": "public"
+                      }
+                    ]
+                  }
+                ]
               },
               "venuePage": {
                 "id": "32698099"
               },
               "storeId": "",
               "hereNow": {
-                "count": 0,
-                "summary": "Nobody here",
-                "groups": []
+                "count": 1,
+                "summary": "One other person is here",
+                "groups": [
+                  {
+                    "type": "others",
+                    "name": "Other people here",
+                    "count": 1,
+                    "items": []
+                  }
+                ]
+              },
+              "featuredPhotos": {
+                "count": 1,
+                "items": [
+                  {
+                    "id": "51ddd071498eadcc7f4dc874",
+                    "createdAt": 1373491313,
+                    "prefix": "https://igx.4sqi.net/img/general/",
+                    "suffix": "/469656_kHGIrXCWcL-_9exGv8unvnc-LnRupeQv_4u19srYwJg.jpg",
+                    "width": 612,
+                    "height": 612,
+                    "user": {
+                      "id": "469656",
+                      "firstName": "Steve",
+                      "lastName": "Derico",
+                      "gender": "male",
+                      "photo": {
+                        "prefix": "https://igx.4sqi.net/img/user/",
+                        "suffix": "/2XPRAXZB0BAQP5DO.jpg"
+                      }
+                    },
+                    "visibility": "public"
+                  }
+                ]
               }
             },
             "tips": [
@@ -253,8 +311,8 @@ module.exports = {
               ],
               "verified": false,
               "stats": {
-                "checkinsCount": 8533,
-                "usersCount": 6207,
+                "checkinsCount": 8536,
+                "usersCount": 6209,
                 "tipCount": 33
               },
               "url": "http://parksconservancy.org/visit/park-sites/lands-end.html",
@@ -267,17 +325,69 @@ module.exports = {
                 "lastCheckinExpiredAt": 0
               },
               "hours": {
-                "isOpen": false,
+                "status": "Likely open",
+                "isOpen": true,
                 "isLocalHoliday": false
               },
               "photos": {
-                "count": 0,
-                "groups": []
+                "count": 1,
+                "groups": [
+                  {
+                    "type": "venue",
+                    "name": "Venue photos",
+                    "count": 1,
+                    "items": [
+                      {
+                        "id": "5095f647e4b0b6c7180130eb",
+                        "createdAt": 1352005191,
+                        "prefix": "https://igx.4sqi.net/img/general/",
+                        "suffix": "/2191835_Fp6pMkLN5INEsqTFVuiboOQqFeJJ6KMrabQ9OtuM9zc.jpg",
+                        "width": 612,
+                        "height": 612,
+                        "user": {
+                          "id": "2191835",
+                          "firstName": "Wes",
+                          "lastName": "Yun",
+                          "gender": "male",
+                          "photo": {
+                            "prefix": "https://igx.4sqi.net/img/user/",
+                            "suffix": "/3W1QVZ1ZZASHDAIZ.jpg"
+                          }
+                        },
+                        "visibility": "public"
+                      }
+                    ]
+                  }
+                ]
               },
               "hereNow": {
                 "count": 0,
                 "summary": "Nobody here",
                 "groups": []
+              },
+              "featuredPhotos": {
+                "count": 1,
+                "items": [
+                  {
+                    "id": "5095f647e4b0b6c7180130eb",
+                    "createdAt": 1352005191,
+                    "prefix": "https://igx.4sqi.net/img/general/",
+                    "suffix": "/2191835_Fp6pMkLN5INEsqTFVuiboOQqFeJJ6KMrabQ9OtuM9zc.jpg",
+                    "width": 612,
+                    "height": 612,
+                    "user": {
+                      "id": "2191835",
+                      "firstName": "Wes",
+                      "lastName": "Yun",
+                      "gender": "male",
+                      "photo": {
+                        "prefix": "https://igx.4sqi.net/img/user/",
+                        "suffix": "/3W1QVZ1ZZASHDAIZ.jpg"
+                      }
+                    },
+                    "visibility": "public"
+                  }
+                ]
               }
             },
             "tips": [
@@ -360,8 +470,8 @@ module.exports = {
               ],
               "verified": false,
               "stats": {
-                "checkinsCount": 34103,
-                "usersCount": 21729,
+                "checkinsCount": 34107,
+                "usersCount": 21731,
                 "tipCount": 246
               },
               "url": "http://sfrecpark.org/destination/twin-peaks/",
@@ -378,18 +488,69 @@ module.exports = {
                 "isLocalHoliday": false
               },
               "photos": {
-                "count": 0,
-                "groups": []
+                "count": 1,
+                "groups": [
+                  {
+                    "type": "venue",
+                    "name": "Venue photos",
+                    "count": 1,
+                    "items": [
+                      {
+                        "id": "50ce60cce4b0821760ac4597",
+                        "createdAt": 1355702476,
+                        "prefix": "https://igx.4sqi.net/img/general/",
+                        "suffix": "/1537661_NNXoj_9ZTCcYnKeuiQJ2lUeIe9RlBW_ttt34PetoqUc.jpg",
+                        "width": 612,
+                        "height": 612,
+                        "user": {
+                          "id": "1537661",
+                          "firstName": "Jose",
+                          "lastName": "Kwan",
+                          "gender": "male",
+                          "photo": {
+                            "prefix": "https://igx.4sqi.net/img/user/",
+                            "suffix": "/1537661-0NROVMMBQFDHM4FA.jpg"
+                          }
+                        },
+                        "visibility": "public"
+                      }
+                    ]
+                  }
+                ]
               },
               "hereNow": {
-                "count": 1,
-                "summary": "One other person is here",
+                "count": 3,
+                "summary": "3 people are here",
                 "groups": [
                   {
                     "type": "others",
                     "name": "Other people here",
-                    "count": 1,
+                    "count": 3,
                     "items": []
+                  }
+                ]
+              },
+              "featuredPhotos": {
+                "count": 1,
+                "items": [
+                  {
+                    "id": "50ce60cce4b0821760ac4597",
+                    "createdAt": 1355702476,
+                    "prefix": "https://igx.4sqi.net/img/general/",
+                    "suffix": "/1537661_NNXoj_9ZTCcYnKeuiQJ2lUeIe9RlBW_ttt34PetoqUc.jpg",
+                    "width": 612,
+                    "height": 612,
+                    "user": {
+                      "id": "1537661",
+                      "firstName": "Jose",
+                      "lastName": "Kwan",
+                      "gender": "male",
+                      "photo": {
+                        "prefix": "https://igx.4sqi.net/img/user/",
+                        "suffix": "/1537661-0NROVMMBQFDHM4FA.jpg"
+                      }
+                    },
+                    "visibility": "public"
                   }
                 ]
               }
@@ -482,8 +643,8 @@ module.exports = {
               ],
               "verified": false,
               "stats": {
-                "checkinsCount": 38858,
-                "usersCount": 28289,
+                "checkinsCount": 38860,
+                "usersCount": 28291,
                 "tipCount": 192
               },
               "url": "http://www.palaceoffinearts.org",
@@ -496,8 +657,8 @@ module.exports = {
                 "lastCheckinExpiredAt": 0
               },
               "hours": {
-                "status": "Closed until 6:00 AM tomorrow",
-                "isOpen": false,
+                "status": "Open until 9:00 PM",
+                "isOpen": true,
                 "isLocalHoliday": false
               },
               "events": {
@@ -546,13 +707,71 @@ module.exports = {
                 ]
               },
               "photos": {
-                "count": 0,
-                "groups": []
+                "count": 1,
+                "groups": [
+                  {
+                    "type": "venue",
+                    "name": "Venue photos",
+                    "count": 1,
+                    "items": [
+                      {
+                        "id": "520a5cba11d2663753248bfd",
+                        "createdAt": 1376410810,
+                        "prefix": "https://igx.4sqi.net/img/general/",
+                        "suffix": "/16306051_m8JdvNlNlobEV-P-tfP7QiJpo1WaEzQG4YeEzW-HlrQ.jpg",
+                        "width": 612,
+                        "height": 612,
+                        "user": {
+                          "id": "16306051",
+                          "firstName": "Sanem",
+                          "lastName": "Surel",
+                          "gender": "female",
+                          "photo": {
+                            "prefix": "https://igx.4sqi.net/img/user/",
+                            "suffix": "/XTVM21LZ1IQHA5YX.jpg"
+                          }
+                        },
+                        "visibility": "public"
+                      }
+                    ]
+                  }
+                ]
               },
               "hereNow": {
-                "count": 0,
-                "summary": "Nobody here",
-                "groups": []
+                "count": 2,
+                "summary": "2 people are here",
+                "groups": [
+                  {
+                    "type": "others",
+                    "name": "Other people here",
+                    "count": 2,
+                    "items": []
+                  }
+                ]
+              },
+              "featuredPhotos": {
+                "count": 1,
+                "items": [
+                  {
+                    "id": "520a5cba11d2663753248bfd",
+                    "createdAt": 1376410810,
+                    "prefix": "https://igx.4sqi.net/img/general/",
+                    "suffix": "/16306051_m8JdvNlNlobEV-P-tfP7QiJpo1WaEzQG4YeEzW-HlrQ.jpg",
+                    "width": 612,
+                    "height": 612,
+                    "user": {
+                      "id": "16306051",
+                      "firstName": "Sanem",
+                      "lastName": "Surel",
+                      "gender": "female",
+                      "photo": {
+                        "prefix": "https://igx.4sqi.net/img/user/",
+                        "suffix": "/XTVM21LZ1IQHA5YX.jpg"
+                      }
+                    },
+                    "visibility": "public"
+                  }
+                ]
               }
             },
             "tips": [
@@ -640,8 +859,8 @@ module.exports = {
               ],
               "verified": true,
               "stats": {
-                "checkinsCount": 68677,
-                "usersCount": 43066,
+                "checkinsCount": 68680,
+                "usersCount": 43067,
                 "tipCount": 466
               },
               "url": "http://www.calacademy.org",
@@ -660,13 +879,40 @@ module.exports = {
                 "lastCheckinExpiredAt": 0
               },
               "hours": {
-                "status": "Closed until 9:30 AM tomorrow",
-                "isOpen": false,
+                "status": "Open until 5:00 PM",
+                "isOpen": true,
                 "isLocalHoliday": false
               },
               "photos": {
-                "count": 0,
-                "groups": []
+                "count": 1,
+                "groups": [
+                  {
+                    "type": "venue",
+                    "name": "Venue photos",
+                    "count": 1,
+                    "items": [
+                      {
+                        "id": "4fe6576ae4b00ca0d01e6999",
+                        "createdAt": 1340495722,
+                        "prefix": "https://igx.4sqi.net/img/general/",
+                        "suffix": "/3PODsivMWoOV5DOeZjyk1uMYSqYmtc_MtQGi1e3yD-M.jpg",
+                        "width": 537,
+                        "height": 720,
+                        "user": {
+                          "id": "21663454",
+                          "firstName": "Kelvin",
+                          "lastName": "Liang",
+                          "gender": "male",
+                          "photo": {
+                            "prefix": "https://igx.4sqi.net/img/user/",
+                            "suffix": "/XWRAFTSBERUBAQ2X.jpg"
+                          }
+                        },
+                        "visibility": "public"
+                      }
+                    ]
+                  }
+                ]
               },
               "venuePage": {
                 "id": "68180815"
@@ -676,6 +922,30 @@ module.exports = {
                 "count": 0,
                 "summary": "Nobody here",
                 "groups": []
+              },
+              "featuredPhotos": {
+                "count": 1,
+                "items": [
+                  {
+                    "id": "4fe6576ae4b00ca0d01e6999",
+                    "createdAt": 1340495722,
+                    "prefix": "https://igx.4sqi.net/img/general/",
+                    "suffix": "/3PODsivMWoOV5DOeZjyk1uMYSqYmtc_MtQGi1e3yD-M.jpg",
+                    "width": 537,
+                    "height": 720,
+                    "user": {
+                      "id": "21663454",
+                      "firstName": "Kelvin",
+                      "lastName": "Liang",
+                      "gender": "male",
+                      "photo": {
+                        "prefix": "https://igx.4sqi.net/img/user/",
+                        "suffix": "/XWRAFTSBERUBAQ2X.jpg"
+                      }
+                    },
+                    "visibility": "public"
+                  }
+                ]
               }
             },
             "tips": [
@@ -773,7 +1043,7 @@ module.exports = {
               ],
               "verified": true,
               "stats": {
-                "checkinsCount": 12144,
+                "checkinsCount": 12146,
                 "usersCount": 8533,
                 "tipCount": 102
               },
@@ -796,13 +1066,40 @@ module.exports = {
                 "lastCheckinExpiredAt": 0
               },
               "hours": {
-                "status": "Closed until 10:00 AM tomorrow",
-                "isOpen": false,
+                "status": "Open until 5:00 PM",
+                "isOpen": true,
                 "isLocalHoliday": false
               },
               "photos": {
-                "count": 0,
-                "groups": []
+                "count": 1,
+                "groups": [
+                  {
+                    "type": "venue",
+                    "name": "Venue photos",
+                    "count": 1,
+                    "items": [
+                      {
+                        "id": "5030421fe4b021f7a574f275",
+                        "createdAt": 1345339935,
+                        "prefix": "https://igx.4sqi.net/img/general/",
+                        "suffix": "/LudrWINjpFEGrRluBraWYHmtbwvJSkJyTKLNaM428UU.jpg",
+                        "width": 612,
+                        "height": 612,
+                        "user": {
+                          "id": "15085805",
+                          "firstName": "Peter",
+                          "lastName": "Virth",
+                          "gender": "male",
+                          "photo": {
+                            "prefix": "https://igx.4sqi.net/img/user/",
+                            "suffix": "/5AYMRHHI2QWRSX5U.jpg"
+                          }
+                        },
+                        "visibility": "public"
+                      }
+                    ]
+                  }
+                ]
               },
               "venuePage": {
                 "id": "32902388"
@@ -812,6 +1109,30 @@ module.exports = {
                 "count": 0,
                 "summary": "Nobody here",
                 "groups": []
+              },
+              "featuredPhotos": {
+                "count": 1,
+                "items": [
+                  {
+                    "id": "5030421fe4b021f7a574f275",
+                    "createdAt": 1345339935,
+                    "prefix": "https://igx.4sqi.net/img/general/",
+                    "suffix": "/LudrWINjpFEGrRluBraWYHmtbwvJSkJyTKLNaM428UU.jpg",
+                    "width": 612,
+                    "height": 612,
+                    "user": {
+                      "id": "15085805",
+                      "firstName": "Peter",
+                      "lastName": "Virth",
+                      "gender": "male",
+                      "photo": {
+                        "prefix": "https://igx.4sqi.net/img/user/",
+                        "suffix": "/5AYMRHHI2QWRSX5U.jpg"
+                      }
+                    },
+                    "visibility": "public"
+                  }
+                ]
               }
             },
             "tips": [
@@ -916,17 +1237,69 @@ module.exports = {
                 "lastCheckinExpiredAt": 0
               },
               "hours": {
-                "isOpen": false,
+                "status": "Likely open",
+                "isOpen": true,
                 "isLocalHoliday": false
               },
               "photos": {
-                "count": 0,
-                "groups": []
+                "count": 1,
+                "groups": [
+                  {
+                    "type": "venue",
+                    "name": "Venue photos",
+                    "count": 1,
+                    "items": [
+                      {
+                        "id": "4fc40d35e4b04bdf29c0e384",
+                        "createdAt": 1338248501,
+                        "prefix": "https://igx.4sqi.net/img/general/",
+                        "suffix": "/FZ-xEHNYrKleb5keN_P3cYTqfcW-xCiVCd95BFFagg8.jpg",
+                        "width": 612,
+                        "height": 612,
+                        "user": {
+                          "id": "79077",
+                          "firstName": "Steve",
+                          "lastName": "Kirkham",
+                          "gender": "male",
+                          "photo": {
+                            "prefix": "https://igx.4sqi.net/img/user/",
+                            "suffix": "/79077-22IC4MXOOLOMRVCG.jpg"
+                          }
+                        },
+                        "visibility": "public"
+                      }
+                    ]
+                  }
+                ]
               },
               "hereNow": {
                 "count": 0,
                 "summary": "Nobody here",
                 "groups": []
+              },
+              "featuredPhotos": {
+                "count": 1,
+                "items": [
+                  {
+                    "id": "4fc40d35e4b04bdf29c0e384",
+                    "createdAt": 1338248501,
+                    "prefix": "https://igx.4sqi.net/img/general/",
+                    "suffix": "/FZ-xEHNYrKleb5keN_P3cYTqfcW-xCiVCd95BFFagg8.jpg",
+                    "width": 612,
+                    "height": 612,
+                    "user": {
+                      "id": "79077",
+                      "firstName": "Steve",
+                      "lastName": "Kirkham",
+                      "gender": "male",
+                      "photo": {
+                        "prefix": "https://igx.4sqi.net/img/user/",
+                        "suffix": "/79077-22IC4MXOOLOMRVCG.jpg"
+                      }
+                    },
+                    "visibility": "public"
+                  }
+                ]
               }
             },
             "tips": [
@@ -1017,8 +1390,8 @@ module.exports = {
               ],
               "verified": false,
               "stats": {
-                "checkinsCount": 164085,
-                "usersCount": 91512,
+                "checkinsCount": 164106,
+                "usersCount": 91523,
                 "tipCount": 723
               },
               "url": "http://www.goldengatebridge.org/",
@@ -1032,18 +1405,69 @@ module.exports = {
                 "lastCheckinExpiredAt": 0
               },
               "photos": {
-                "count": 0,
-                "groups": []
+                "count": 1,
+                "groups": [
+                  {
+                    "type": "venue",
+                    "name": "Venue photos",
+                    "count": 1,
+                    "items": [
+                      {
+                        "id": "51e1e2ea498ec6955199b0f2",
+                        "createdAt": 1373758186,
+                        "prefix": "https://igx.4sqi.net/img/general/",
+                        "suffix": "/21220925_aayAh4Nd5fVrcfYx_i1mQ6vKFXhAVqNvDEHqT0JVvl4.jpg",
+                        "width": 612,
+                        "height": 612,
+                        "user": {
+                          "id": "21220925",
+                          "firstName": "Evan",
+                          "lastName": "Sheehan",
+                          "gender": "male",
+                          "photo": {
+                            "prefix": "https://igx.4sqi.net/img/user/",
+                            "suffix": "/21220925_ZYMGUVqB_KC7MoL5N8IIrH2gpbn7eF_dv-mpR7JL-0wTQ9hsfZoPgQ8tgsMjy_uejZv0Cs05x.jpg"
+                          }
+                        },
+                        "visibility": "public"
+                      }
+                    ]
+                  }
+                ]
               },
               "hereNow": {
-                "count": 2,
-                "summary": "2 people are here",
+                "count": 4,
+                "summary": "4 people are here",
                 "groups": [
                   {
                     "type": "others",
                     "name": "Other people here",
-                    "count": 2,
+                    "count": 4,
                     "items": []
+                  }
+                ]
+              },
+              "featuredPhotos": {
+                "count": 1,
+                "items": [
+                  {
+                    "id": "51e1e2ea498ec6955199b0f2",
+                    "createdAt": 1373758186,
+                    "prefix": "https://igx.4sqi.net/img/general/",
+                    "suffix": "/21220925_aayAh4Nd5fVrcfYx_i1mQ6vKFXhAVqNvDEHqT0JVvl4.jpg",
+                    "width": 612,
+                    "height": 612,
+                    "user": {
+                      "id": "21220925",
+                      "firstName": "Evan",
+                      "lastName": "Sheehan",
+                      "gender": "male",
+                      "photo": {
+                        "prefix": "https://igx.4sqi.net/img/user/",
+                        "suffix": "/21220925_ZYMGUVqB_KC7MoL5N8IIrH2gpbn7eF_dv-mpR7JL-0wTQ9hsfZoPgQ8tgsMjy_uejZv0Cs05x.jpg"
+                      }
+                    },
+                    "visibility": "public"
                   }
                 ]
               }
@@ -1137,8 +1561,8 @@ module.exports = {
               ],
               "verified": false,
               "stats": {
-                "checkinsCount": 11206,
-                "usersCount": 8449,
+                "checkinsCount": 11208,
+                "usersCount": 8450,
                 "tipCount": 76
               },
               "url": "http://nps.gov/goga/planyourvisit/cliff-house-sutro-baths.htm",
@@ -1151,17 +1575,76 @@ module.exports = {
                 "lastCheckinExpiredAt": 0
               },
               "hours": {
-                "isOpen": false,
+                "status": "Likely open",
+                "isOpen": true,
                 "isLocalHoliday": false
               },
               "photos": {
-                "count": 0,
-                "groups": []
+                "count": 1,
+                "groups": [
+                  {
+                    "type": "venue",
+                    "name": "Venue photos",
+                    "count": 1,
+                    "items": [
+                      {
+                        "id": "4fad6860e4b0e981d8ce3994",
+                        "createdAt": 1336764512,
+                        "prefix": "https://igx.4sqi.net/img/general/",
+                        "suffix": "/IXL0Lr42fGO04mAP1Tu5PQB_hbNtUNQD8-M1LPHBXfM.jpg",
+                        "width": 540,
+                        "height": 540,
+                        "user": {
+                          "id": "8492206",
+                          "firstName": "Kelsey",
+                          "lastName": "Avers",
+                          "gender": "female",
+                          "photo": {
+                            "prefix": "https://igx.4sqi.net/img/user/",
+                            "suffix": "/2OS202I13YWBWDZY.jpg"
+                          }
+                        },
+                        "visibility": "public"
+                      }
+                    ]
+                  }
+                ]
               },
               "hereNow": {
-                "count": 0,
-                "summary": "Nobody here",
-                "groups": []
+                "count": 1,
+                "summary": "One other person is here",
+                "groups": [
+                  {
+                    "type": "others",
+                    "name": "Other people here",
+                    "count": 1,
+                    "items": []
+                  }
+                ]
+              },
+              "featuredPhotos": {
+                "count": 1,
+                "items": [
+                  {
+                    "id": "4fad6860e4b0e981d8ce3994",
+                    "createdAt": 1336764512,
+                    "prefix": "https://igx.4sqi.net/img/general/",
+                    "suffix": "/IXL0Lr42fGO04mAP1Tu5PQB_hbNtUNQD8-M1LPHBXfM.jpg",
+                    "width": 540,
+                    "height": 540,
+                    "user": {
+                      "id": "8492206",
+                      "firstName": "Kelsey",
+                      "lastName": "Avers",
+                      "gender": "female",
+                      "photo": {
+                        "prefix": "https://igx.4sqi.net/img/user/",
+                        "suffix": "/2OS202I13YWBWDZY.jpg"
+                      }
+                    },
+                    "visibility": "public"
+                  }
+                ]
               }
             },
             "tips": [
@@ -1263,17 +1746,69 @@ module.exports = {
                 "lastCheckinExpiredAt": 0
               },
               "hours": {
-                "isOpen": false,
+                "status": "Likely open",
+                "isOpen": true,
                 "isLocalHoliday": false
               },
               "photos": {
-                "count": 0,
-                "groups": []
+                "count": 1,
+                "groups": [
+                  {
+                    "type": "venue",
+                    "name": "Venue photos",
+                    "count": 1,
+                    "items": [
+                      {
+                        "id": "4ff07b30e4b0545aa2432dfc",
+                        "createdAt": 1341160240,
+                        "prefix": "https://igx.4sqi.net/img/general/",
+                        "suffix": "/v3lqM1UPVZER74FHikzDSOEphiARxPVGrVMwoMvHCI4.jpg",
+                        "width": 612,
+                        "height": 612,
+                        "user": {
+                          "id": "158917",
+                          "firstName": "Edgar",
+                          "lastName": "Gamez",
+                          "gender": "male",
+                          "photo": {
+                            "prefix": "https://igx.4sqi.net/img/user/",
+                            "suffix": "/WKFEU0ZU4YXU3NI4.jpg"
+                          }
+                        },
+                        "visibility": "public"
+                      }
+                    ]
+                  }
+                ]
               },
               "hereNow": {
                 "count": 0,
                 "summary": "Nobody here",
                 "groups": []
+              },
+              "featuredPhotos": {
+                "count": 1,
+                "items": [
+                  {
+                    "id": "4ff07b30e4b0545aa2432dfc",
+                    "createdAt": 1341160240,
+                    "prefix": "https://igx.4sqi.net/img/general/",
+                    "suffix": "/v3lqM1UPVZER74FHikzDSOEphiARxPVGrVMwoMvHCI4.jpg",
+                    "width": 612,
+                    "height": 612,
+                    "user": {
+                      "id": "158917",
+                      "firstName": "Edgar",
+                      "lastName": "Gamez",
+                      "gender": "male",
+                      "photo": {
+                        "prefix": "https://igx.4sqi.net/img/user/",
+                        "suffix": "/WKFEU0ZU4YXU3NI4.jpg"
+                      }
+                    },
+                    "visibility": "public"
+                  }
+                ]
               }
             },
             "tips": [
