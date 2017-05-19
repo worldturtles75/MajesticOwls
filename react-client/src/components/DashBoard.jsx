@@ -17,6 +17,7 @@ import GridList from 'material-ui/GridList';
 import GoogleButton from 'react-google-button';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
+import ItinList from './itinList.jsx';
 import {
   BrowserRouter as Router,
   Route,
@@ -31,7 +32,7 @@ import SelectField from 'material-ui/SelectField';
 import TextField from 'material-ui/TextField';
 import MenuItem from 'material-ui/MenuItem';
 var yelpSample = require ('../../../dummyData/yelpSFtop10.js');
-// var fsSample = require ('../../../dummyData/fsSFtop10.js');
+var foursquareSample = require('../../../dummyData/dummySights.js')
 
 class DashBoard extends React.Component {
   constructor (props) {
@@ -47,7 +48,8 @@ class DashBoard extends React.Component {
       newLocation: '',
       placesToEat: [],
       placesToGo: [],
-      allMarkers: []
+      allMarkers: [],
+      itineraryItems:[]
     }
     this.searchGoogle = this.searchGoogle.bind(this);
     this.flightSearch = this.flightSearch.bind(this);
@@ -64,6 +66,7 @@ class DashBoard extends React.Component {
     this.handleLocationSubmit = this.handleLocationSubmit.bind(this);
     this.fetch = this.fetch.bind(this);
     this.savelocation = this.savelocation.bind(this);
+    this.addToItinerary = this.addToItinerary.bind(this);
   }
 
   componentDidMount() {
@@ -302,6 +305,7 @@ class DashBoard extends React.Component {
     console.log('this.state.allMarkers', this.state.allMarkers)
   }
 
+
   handleLocationChange(e) {
     // console.log(e.target.value)
     this.setState({newLocation: e.target.value});
@@ -315,6 +319,26 @@ class DashBoard extends React.Component {
     })
   }
 
+
+  addToItinerary(obj, checked) {
+    console.log('object!!!', obj)
+    var itineraryItems = this.state.itineraryItems;
+    if (checked) {
+      itineraryItems.push(obj);
+      this.setState({
+        itineraryItems: itineraryItems
+      })
+    } else {
+      for (var i=0; i < itineraryItems.length; i++) {
+        if (itineraryItems[i].name === obj.name) {
+          itineraryItems.splice(i, 1);
+        }
+      }
+      this.setState({
+        itineraryItems: itineraryItems
+      })
+    } 
+  }
 
   render() {
     const styles = {
@@ -346,6 +370,9 @@ class DashBoard extends React.Component {
         margin: "0 auto"
       }
     }
+
+    console.log('foursquer', foursquareSample.response.groups[0].items)
+
     return(
       <div>
         <SignOutToolBar/>
@@ -377,11 +404,16 @@ class DashBoard extends React.Component {
               cols = {3}
               padding = {25}>
               {/*<MuiThemeProvider><WeatherCard weather={this.state.weather} location={this.state.location}/></MuiThemeProvider>*/}
+
               {/*<MuiThemeProvider><PlacesToGoCard places={fsSample.response.groups[0].items} location={this.state.location} handleFavPlace={this.addToFav}/></MuiThemeProvider>*/}
-              <MuiThemeProvider><PlacesToEatCard food={this.state.placesToEat} location={this.state.location} handleFavFood={this.addToFav}/></MuiThemeProvider>
+              <MuiThemeProvider><PlacesToEatCard food={this.state.placesToEat} location={this.state.location} handleFavFood={this.addToFav} addToItinerary={this.addToItinerary}/></MuiThemeProvider>
+
+        
+
               {/*<MuiThemeProvider><FlightCard flight={this.state.flight}/></MuiThemeProvider>*/}
               {/*<MuiThemeProvider><FoodCard food={this.state.food}/></MuiThemeProvider>*/}
-              {/*<MuiThemeProvider><SightsCard sights={this.state.sights}/></MuiThemeProvider>*/}
+              {<MuiThemeProvider><SightsCard sights = {foursquareSample.response.groups[0].items} location={this.state.location} addToItinerary={this.addToItinerary} addToMaps={this.addToFav}/></MuiThemeProvider>}
+              {<MuiThemeProvider><ItinList itinItems={this.state.itineraryItems}/></MuiThemeProvider>}
               <MuiThemeProvider><NavigationCard 
                 markers={this.state.allMarkers} 
                 handleMarkerClick = {this.handleMarkerClick}
