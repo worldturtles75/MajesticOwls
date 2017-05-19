@@ -64,7 +64,7 @@ class SightsCard extends React.Component {
             style={styles.avatar}
           />}
             style={styles.cardHeader}
-          />
+          />  
           <Divider/>
           <List
             style={styles.list}

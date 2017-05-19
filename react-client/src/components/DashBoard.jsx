@@ -32,7 +32,6 @@ import SelectField from 'material-ui/SelectField';
 import TextField from 'material-ui/TextField';
 import MenuItem from 'material-ui/MenuItem';
 var yelpSample = require ('../../../dummyData/yelpSFtop10.js');
-var foursquareSample = require('../../../dummyData/dummySights.js')
 
 class DashBoard extends React.Component {
   constructor (props) {
@@ -382,7 +381,6 @@ class DashBoard extends React.Component {
       }
     }
 
-    // console.log('foursquer', foursquareSample.response.groups[0].items)
 
     return(
       <div>
