@@ -65,7 +65,7 @@ class DashBoard extends React.Component {
     this.fetch = this.fetch.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.setState({
       location: this.props.location.state.destination
     }, () => {
@@ -88,7 +88,7 @@ class DashBoard extends React.Component {
     // this.searchFood(location);
     // this.searchGoogle(location);
     this.getPlacesToGo(location);
-    this.getPlacesToEat(this.state.location);
+    this.getPlacesToEat(location);
   }
 
   handleMarkerClick(targetMarker) {
@@ -255,6 +255,7 @@ class DashBoard extends React.Component {
 
   getPlacesToEat(location) {
     var location = location || 'San Francisco, CA'; 
+    console.log(location, "PLACES TO EAT LOCATION")
     $.get('/getYelp', {location: location})
       .done ( (data) => {
         console.log('YELP API RESULT', data);
@@ -303,7 +304,7 @@ class DashBoard extends React.Component {
 
   handleLocationSubmit(e) {
     e.preventDefault();
-    this.setState({location: this.state.newLocation}, () => {
+    this.setState({location: this.state.newLocation.toLowerCase()}, () => {
       console.log('A New Location was submitted: ' + this.state.location);
       this.fetch(this.state.location);      
     })
