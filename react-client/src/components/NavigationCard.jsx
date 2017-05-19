@@ -24,22 +24,9 @@ const GOOGLE_KEY = process.env.GOOGLE_KEY || require('../../../server/config').G
   constructor (props) {
     super(props);
 
-    this.state={
-      citycoords: {}
-    }
-
-    
-
-  }
-
-  componentWillMount() {
-    $.get('/getCityCoords', { location: this.props.location })
-     .done((data) => {
-        this.setState({ citycoords: data})
-     })
-     .catch((err) => {
-          console.log(err)
-      })
+    // this.state={
+    //   citycoords: { lat: 37.77493, lng: -122.41942 }
+    // }
 
   }
 
@@ -67,6 +54,8 @@ const GOOGLE_KEY = process.env.GOOGLE_KEY || require('../../../server/config').G
       }
     }
 
+    console.log("RENDER PROPS COORDS", this.props.coordinates)
+
     return (
       <div>
         <Card
@@ -89,7 +78,7 @@ const GOOGLE_KEY = process.env.GOOGLE_KEY || require('../../../server/config').G
                   mapElement={
                     <div style={{ height: `100%` }} />
                   }
-                  center={this.state.citycoords}
+                  center={this.props.coordinates}
                   markers={this.props.markers} onMarkerClick={this.props.handleMarkerClick} onMarkerClose={this.props.handleMarkerClose} />
 
               </div>

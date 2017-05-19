@@ -67,6 +67,7 @@ class DashBoard extends React.Component {
     this.fetch = this.fetch.bind(this);
     this.savelocation = this.savelocation.bind(this);
     this.addToItinerary = this.addToItinerary.bind(this);
+    this.getCityCoords = this.getCityCoords.bind(this);
   }
 
   componentWillMount() {
@@ -82,10 +83,14 @@ class DashBoard extends React.Component {
   
   savelocation(){
     $.get('/savelocation', { location: this.state.location })
-       .done((data) => {
+       .then((data) => {
           console.log(data)
           this.fetch(this.state.location);  
+          return data;
        })
+       .then((data) => {
+          this.getCityCoords(location);          
+       })       
        .catch((err) => {
           console.log(err)
        })
@@ -249,6 +254,17 @@ class DashBoard extends React.Component {
     })
   }
 
+  getCityCoords(location) {
+    var location = location || 'San Francisco, CA'; 
+    $.get('/getCityCoords', {location: location})
+      .done ( (data) => {
+        console.log('GET COORDS', data);
+        this.setState({
+          coordinates: data
+        })        
+      })
+  } 
+
   getPlacesToGo(location) {
     var location = location || 'San Francisco, CA'; 
     $.get('/getFourSquare', {location: location})
@@ -371,7 +387,7 @@ class DashBoard extends React.Component {
       }
     }
 
-    console.log('foursquer', foursquareSample.response.groups[0].items)
+    // console.log('foursquer', foursquareSample.response.groups[0].items)
 
     return(
       <div>
@@ -413,16 +429,17 @@ class DashBoard extends React.Component {
               {/*<MuiThemeProvider><FlightCard flight={this.state.flight}/></MuiThemeProvider>*/}
               {/*<MuiThemeProvider><FoodCard food={this.state.food}/></MuiThemeProvider>*/}
               {<MuiThemeProvider><SightsCard sights = {foursquareSample.response.groups[0].items} location={this.state.location} addToItinerary={this.addToItinerary} addToMaps={this.addToFav}/></MuiThemeProvider>}
-              {<MuiThemeProvider><ItinList itinItems={this.state.itineraryItems}/></MuiThemeProvider>}
               <MuiThemeProvider><NavigationCard 
                 markers={this.state.allMarkers} 
                 handleMarkerClick = {this.handleMarkerClick}
                 handleMarkerClose = {this.handleMarkerClose}
+                coordinates={this.state.coordinates}
                 location={this.state.location} /></MuiThemeProvider>
 
               {/*<MuiThemeProvider><FlightTimeCard duration={this.state.flightsArray}/></MuiThemeProvider>*/}
             </GridList>
           </MuiThemeProvider>
+              {<MuiThemeProvider><ItinList itinItems={this.state.itineraryItems}/></MuiThemeProvider>}
           {/*<MuiThemeProvider>
             <Link to='/trip'>
               <FloatingActionButton
