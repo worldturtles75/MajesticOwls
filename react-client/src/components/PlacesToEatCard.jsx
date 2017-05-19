@@ -36,10 +36,15 @@ class PlacesToEatCard extends React.Component {
   constructor (props) {
     super(props);
     this.handleCheck = this.handleCheck.bind(this);
+    this.handleFavoritedSight = this.handleFavoritedSight.bind(this);
   }
 
   handleCheck(restaurant, checked) {
     this.props.handleFavFood(restaurant, checked);
+  }
+
+  handleFavoritedSight(place, checked) {
+    this.props.addToItinerary(place, checked);
   }
 
   render () {
@@ -63,7 +68,15 @@ class PlacesToEatCard extends React.Component {
               <ListItem
                 key={i}
                 rightAvatar={<Avatar src={restaurant.image_url} />}
+                leftCheckbox={<Checkbox 
+                  checkedIcon={<ActionFavorite />}
+                  uncheckedIcon={<ActionFavoriteBorder />}
+                  iconStyle={{left: '4'}, {bottom: '3.77'}}
+                  onCheck={ (e,checked) => {
+                    this.handleFavoritedSight(restaurant, checked)} }
+                />}
                 leftAvatar={<Checkbox 
+                  iconStyle={{left: "13"}}
                   onCheck={ (e,checked) => {
                     // console.log('e',e)
                     // console.log('checked',checked)
@@ -74,6 +87,8 @@ class PlacesToEatCard extends React.Component {
                 target="_blank"
                 href={restaurant.url}
               />
+
+
             ))}
           </List>
         </Card>
@@ -81,7 +96,10 @@ class PlacesToEatCard extends React.Component {
     )
   }
 }
+//things to do
+  //need to get it to re-route to url once clicked
 
+  
 // const PlacesToEatCard = (props) => (
 // )
 
