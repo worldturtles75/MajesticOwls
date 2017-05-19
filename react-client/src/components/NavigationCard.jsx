@@ -15,7 +15,6 @@ import {
 import { withGoogleMap, GoogleMap, Marker, InfoWindow } from "react-google-maps";
 import FlatButton from 'material-ui/FlatButton';
 import ComboMap from './ComboMap.jsx';
-import ItinList from './ItinList.jsx';
 import $ from 'jquery';
 const GOOGLE_KEY = process.env.GOOGLE_KEY || require('../../../server/config').GOOGLE_KEY;
 
@@ -23,10 +22,6 @@ const GOOGLE_KEY = process.env.GOOGLE_KEY || require('../../../server/config').G
  class NavigationCard extends React.Component {
   constructor (props) {
     super(props);
-
-    // this.state={
-    //   citycoords: { lat: 37.77493, lng: -122.41942 }
-    // }
 
   }
 
@@ -53,8 +48,6 @@ const GOOGLE_KEY = process.env.GOOGLE_KEY || require('../../../server/config').G
         height: '20%',
       }
     }
-
-    console.log("RENDER PROPS COORDS", this.props.coordinates)
 
     return (
       <div>
