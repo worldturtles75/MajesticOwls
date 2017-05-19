@@ -70,7 +70,7 @@ class DashBoard extends React.Component {
     this.addToItinerary = this.addToItinerary.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.setState({
       location: this.props.location.state.destination
     }, () => {
