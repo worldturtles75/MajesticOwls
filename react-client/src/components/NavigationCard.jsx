@@ -16,6 +16,7 @@ import { withGoogleMap, GoogleMap, Marker, InfoWindow } from "react-google-maps"
 import FlatButton from 'material-ui/FlatButton';
 import ComboMap from './ComboMap.jsx';
 import ItinList from './ItinList.jsx';
+import $ from 'jquery';
 const GOOGLE_KEY = process.env.GOOGLE_KEY || require('../../../server/config').GOOGLE_KEY;
 
 
@@ -24,23 +25,23 @@ const GOOGLE_KEY = process.env.GOOGLE_KEY || require('../../../server/config').G
     super(props);
 
     this.state={
-      markers: []
-        // {
-        //   position: new google.maps.LatLng(37.7829016035273, -122.419043442957),
-        //   showInfo: false,
-        //   infoContent: "Brendas <p><a href=`https://www.google.com`>Google</a></p>"
-        // }, 
-        // {
-        //   position: new google.maps.LatLng(37.7614250022004, -122.424051321456),
-        //   showInfo: false,
-        //   infoContent: "hello"
-        // },
+      citycoords: {}
     }
 
     
 
   }
 
+  componentWillMount() {
+    $.get('/getCityCoords', { location: this.props.location })
+     .done((data) => {
+        this.setState({ citycoords: data})
+     })
+     .catch((err) => {
+          console.log(err)
+      })
+
+  }
 
   render() {
     const styles = {
@@ -66,8 +67,6 @@ const GOOGLE_KEY = process.env.GOOGLE_KEY || require('../../../server/config').G
       }
     }
 
-
-
     return (
       <div>
         <Card
@@ -90,6 +89,7 @@ const GOOGLE_KEY = process.env.GOOGLE_KEY || require('../../../server/config').G
                   mapElement={
                     <div style={{ height: `100%` }} />
                   }
+                  center={this.state.citycoords}
                   markers={this.props.markers} onMarkerClick={this.props.handleMarkerClick} onMarkerClose={this.props.handleMarkerClose} />
 
               </div>
