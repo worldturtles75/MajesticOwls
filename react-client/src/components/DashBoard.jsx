@@ -1,5 +1,5 @@
 import React from 'react';
-import {render} from 'react-dom';
+import ReactDOM from 'react-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
@@ -324,6 +324,7 @@ class DashBoard extends React.Component {
   handleLocationSubmit(e) {
     e.preventDefault();
     this.setState({location: this.state.newLocation.toLowerCase()}, () => {
+      ReactDOM.findDOMNode(this.refs.form).reset();
       console.log('A New Location was submitted: ' + this.state.location);    
       this.savelocation();
     })
@@ -387,9 +388,9 @@ class DashBoard extends React.Component {
       <div>
         <SignOutToolBar/>
         <div style={styles.center}>
-          <form onSubmit={this.handleLocationSubmit}>
+          <form onSubmit={this.handleLocationSubmit} ref="form">
             <MuiThemeProvider>
-              <TextField hintText="Enter Location" floatingLabelText="Change Location" onChange={this.handleLocationChange}/>
+              <TextField hintText="Enter Location" floatingLabelText="Change Location" onChange={this.handleLocationChange} floatingLabelFixed={true}/>
             </MuiThemeProvider>
             <MuiThemeProvider>
               <FlatButton label="Submit" onClick={this.handleLocationSubmit} />
