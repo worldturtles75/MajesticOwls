@@ -26,8 +26,13 @@ const place = new GooglePlaces(GOOGLE_KEY, 'json');
 
 const app = express();
 // const findOrCreate = require('mongoose-find-or-create');
+
+//FOR LOCAL DEV UNCOMMENT mongoose connect line below use mongo 
+//ds147421.mlab.com:47421/legacyworldturtles -u group -p Hackreactor1
 // mongoose.connect('mongodb://localhost/greenfield');
-mongoose.connect('mongodb://group:Hackreactor21@ds127101.mlab.com:27101/greenfield');
+
+mongoose.connect('mongodb://group:Hackreactor1@ds147421.mlab.com:47421/legacyworldturtles');
+
 // mongoose.Promise = require('bluebird');
 mongoose.connection.on('error', () => {
   console.log('mongoose connection error');

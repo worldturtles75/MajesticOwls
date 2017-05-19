@@ -65,19 +65,16 @@ import $ from 'jquery';
                
                 <ComboMap 
                   containerElement={
-                    <div style={{ height: `100%` }} />
+                    <div style={{ height: `105%` }} />
                   }
                   mapElement={
-                    <div style={{ height: `100%` }} />
+                    <div style={{ height: `110%` }} />
                   }
                   center={this.props.coordinates}
                   markers={this.props.markers} onMarkerClick={this.props.handleMarkerClick} onMarkerClose={this.props.handleMarkerClose} />
 
               </div>
-              <CardActions style={styles.actions}>
-                <FlatButton primary = {true} label="NAVIGATE" />
-                <FlatButton label="SHARE" />
-              </CardActions>
+              HELLO
         </Card>
       </div>
     )

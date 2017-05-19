@@ -3,8 +3,9 @@ import {Card, CardHeader} from 'material-ui/Card';
 import Avatar from 'material-ui/Avatar';
 import MapsLocalDining from 'material-ui/svg-icons/maps/local-dining';
 import Divider from 'material-ui/Divider';
+import LibraryBook from 'material-ui/svg-icons/av/library-books';
 import {List, ListItem} from 'material-ui/List';
-import {red500} from 'material-ui/styles/colors';
+import {red500, deepPurple500} from 'material-ui/styles/colors';
 
 
 const styles = {
@@ -13,7 +14,7 @@ const styles = {
 	  height: 400
 	},
 	avatar: {
-	  backgroundColor: red500,
+	  backgroundColor: deepPurple500,
 	},
 	list: {
       width: '100%',
@@ -35,7 +36,7 @@ class ItinList extends React.Component {
         title="Itinerary"
         subtitle="Places I plan to visit"
         avatar={<Avatar
-          icon={<MapsLocalDining />}
+          icon={<LibraryBook />}
           style={styles.avatar}
         />}
         style={styles.cardHeader}
