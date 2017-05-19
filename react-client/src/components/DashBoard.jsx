@@ -17,7 +17,7 @@ import GridList from 'material-ui/GridList';
 import GoogleButton from 'react-google-button';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
-import ItinList from './itinList.jsx';
+import ItinList from './ItinList.jsx';
 import {
   BrowserRouter as Router,
   Route,
