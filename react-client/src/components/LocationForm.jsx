@@ -56,7 +56,7 @@ class LocationForm extends React.Component {
         </form>
         {submitted ? <Redirect to={{
                             pathname: "/dashboard",
-                            state: {destination: this.state.value}
+                            state: {destination: this.state.value.toLowerCase()}
                           }} /> : null }
       </div>
     );

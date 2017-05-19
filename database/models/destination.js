@@ -1,18 +1,10 @@
 const mongoose = require('mongoose');
 
 var destinationSchema = new mongoose.Schema({
-  destination: String,
+  destination: {type: String, unique: true, dropDups: true },
   coordinates: { lat: Number, lng: Number },
-  toptenEats: {
-    name: String,
-    rating: Number, 
-    position: { lat: Number, lng: Number }
-  },
-  toptenSights: {
-    name: String,
-    rating: Number, 
-    position: { lat: Number, lng: Number }
-  }
+  toptenEats: [],
+  toptenSights: []
 })
 
 module.exports = mongoose.model('Destination', destinationSchema);

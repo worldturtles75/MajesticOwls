@@ -10,7 +10,7 @@ const GooglePlaces = require('googleplaces');
 const router = require('./api/routes.js')
 const User = require('../database/models/user');
 const Destination = require('../database/models/destination');
-
+const mongoose = require('mongoose')
 
 // Config variables
 const G_ID = process.env.G_ID || require('./config').G_ID;
