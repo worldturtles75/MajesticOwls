@@ -9,7 +9,4 @@ router.get('/savelocation', cntrl.saveLocation);
 router.get('/savelocation', cntrl.saveLocation);
 router.get('/getCityCoords', cntrl.getCityCoords);
 
-
-
-
 module.exports = router;

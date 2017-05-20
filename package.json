@@ -24,6 +24,7 @@
     "body-parser": "^1.17.2",
     "chai": "^3.5.0",
     "cookie-parser": "^1.4.3",
+    "cron": "^1.2.1",
     "express": "^4.15.2",
     "express-session": "^1.15.2",
     "google-map-react": "^0.24.0",
