@@ -1,36 +1,38 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import RaisedButton from 'material-ui/RaisedButton';
-import FlatButton from 'material-ui/FlatButton';
-import PlacesToEatCard from './PlacesToEatCard.jsx';
-import PlacesToGoCard from './PlacesToGoCard.jsx';
-
-import FlightCard from './FlightCard.jsx';
-import FoodCard from './FoodCard.jsx';
-import SightsCard from './SightsCard.jsx';
-import WeatherCard from './WeatherCard.jsx';
-import NavigationCard from './NavigationCard.jsx';
-import FlightTimeCard from './FlightTimeCard.jsx';
-import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
-import GridList from 'material-ui/GridList';
-import GoogleButton from 'react-google-button';
-import FloatingActionButton from 'material-ui/FloatingActionButton';
-import ContentAdd from 'material-ui/svg-icons/content/add';
-import ItinList from './ItinList.jsx';
 import {
   BrowserRouter as Router,
   Route,
   Link,
 } from 'react-router-dom';
+
+import PlacesToEatCard from './PlacesToEatCard.jsx';
+import PlacesToGoCard from './PlacesToGoCard.jsx';
+import NavigationCard from './NavigationCard.jsx';
+import ItinList from './ItinList.jsx';
+
+import FlightCard from './FlightCard.jsx';
+import FoodCard from './FoodCard.jsx';
+import WeatherCard from './WeatherCard.jsx';
+import FlightTimeCard from './FlightTimeCard.jsx';
+import SignOutToolBar from './SignOutToolBar.jsx';
+
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
+import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
+import GridList from 'material-ui/GridList';
+import GoogleButton from 'react-google-button';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
 import {
   amberA700,
 } from 'material-ui/styles/colors';
 import $ from 'jquery';
-import SignOutToolBar from './SignOutToolBar.jsx';
 import SelectField from 'material-ui/SelectField';
 import TextField from 'material-ui/TextField';
 import MenuItem from 'material-ui/MenuItem';
+
 var yelpSample = require ('../../../dummyData/yelpSFtop10.js');
 
 class DashBoard extends React.Component {
@@ -101,7 +103,6 @@ class DashBoard extends React.Component {
     // this.searchGoogle(location);
     this.getPlacesToGo(location);
     this.getPlacesToEat(location);
-    // this.getCityCoords(location);          
   }
 
   handleMarkerClick(targetMarker) {
@@ -423,39 +424,52 @@ class DashBoard extends React.Component {
     return(
       <div>
         <SignOutToolBar/>
-        <div style={styles.center}>
-          <form onSubmit={this.handleLocationSubmit} ref="form">
+        
+        <div style={styles.gridList}>
+          <MuiThemeProvider>
+            <GridList
+            cellHeight={80}
+            cols = {3}
+            padding = {25}>
+
             <MuiThemeProvider>
-              <TextField hintText="Enter Location" floatingLabelText="Change Location" onChange={this.handleLocationChange} floatingLabelFixed={true}/>
+              <SelectField
+                floatingLabelText='Past Cities'
+                onChange={this.savedCitiesClick}
+                value={this.state.index}
+              >
+                {this.state.savedCities.map((city, i) => {
+                  return <MenuItem key={i} value={i} label={city} primaryText={city} />
+                })}
+              </SelectField>
             </MuiThemeProvider>
+
             <MuiThemeProvider>
-              <FlatButton label="Submit" onClick={this.handleLocationSubmit} />
+              <form onSubmit={this.handleLocationSubmit} ref="form">
+                <MuiThemeProvider>
+                  <TextField hintText="Enter Location" floatingLabelText="Change Location" onChange={this.handleLocationChange} floatingLabelFixed={true}/>
+                </MuiThemeProvider>
+                <MuiThemeProvider>
+                  <FlatButton label="Submit" onClick={this.handleLocationSubmit} />
+                </MuiThemeProvider>
+              </form>
             </MuiThemeProvider>
-          </form>
+
+            </GridList>
+          </MuiThemeProvider>
         </div>
+
         <div
           style={styles.gridList}>
-          <MuiThemeProvider>
-            <SelectField
-              floatingLabelText='Past Cities'
-              onChange={this.savedCitiesClick}
-              value={this.state.index}
-            >
-              {this.state.savedCities.map((city, i) => {
-                return <MenuItem key={i} value={i} label={city} primaryText={city} />
-              })}
-            </SelectField>
-          </MuiThemeProvider>
           <MuiThemeProvider>
             <GridList
               cellHeight={400}
               cols = {3}
-              padding = {25}>
+              padding = {25}
+            >
               {/*<MuiThemeProvider><WeatherCard weather={this.state.weather} location={this.state.location}/></MuiThemeProvider>*/}
               <MuiThemeProvider><PlacesToEatCard food={this.state.placesToEat} location={this.state.location} handleFavFood={this.addToFav} addToItinerary={this.addToItinerary}/></MuiThemeProvider>
-              <MuiThemeProvider><SightsCard sights = {this.state.placesToGo} location={this.state.location} addToItinerary={this.addToItinerary} addToMaps={this.addToFav}/></MuiThemeProvider>
-              {/*<MuiThemeProvider><FlightCard flight={this.state.flight}/></MuiThemeProvider>*/}
-              {/*<MuiThemeProvider><FoodCard food={this.state.food}/></MuiThemeProvider>*/}
+              <MuiThemeProvider><PlacesToGoCard sights = {this.state.placesToGo} location={this.state.location} addToItinerary={this.addToItinerary} addToMaps={this.addToFav}/></MuiThemeProvider>
               <MuiThemeProvider><NavigationCard 
                 markers={this.state.allMarkers} 
                 handleMarkerClick = {this.handleMarkerClick}
@@ -463,9 +477,11 @@ class DashBoard extends React.Component {
                 coordinates={this.state.coordinates}
                 location={this.state.location} />
               </MuiThemeProvider>
-
-              {/*<MuiThemeProvider><FlightTimeCard duration={this.state.flightsArray}/></MuiThemeProvider>*/}
               <MuiThemeProvider><ItinList itinItems={this.state.itineraryItems}/></MuiThemeProvider>
+
+              {/*<MuiThemeProvider><FlightCard flight={this.state.flight}/></MuiThemeProvider>*/}
+              {/*<MuiThemeProvider><FoodCard food={this.state.food}/></MuiThemeProvider>*/}
+              {/*<MuiThemeProvider><FlightTimeCard duration={this.state.flightsArray}/></MuiThemeProvider>*/}
             </GridList>
           </MuiThemeProvider>
           {/*<MuiThemeProvider>
