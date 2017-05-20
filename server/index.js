@@ -34,9 +34,9 @@ const app = express();
 
 //FOR LOCAL DEV UNCOMMENT mongoose connect line below use mongo 
 //ds147421.mlab.com:47421/legacyworldturtles -u group -p Hackreactor1
-mongoose.connect('mongodb://localhost/greenfield');
+// mongoose.connect('mongodb://localhost/greenfield');
 
-// mongoose.connect('mongodb://group:Hackreactor1@ds147421.mlab.com:47421/legacyworldturtles');
+mongoose.connect('mongodb://group:Hackreactor1@ds147421.mlab.com:47421/legacyworldturtles');
 
 // mongoose.Promise = require('bluebird');
 mongoose.connection.on('error', () => {
