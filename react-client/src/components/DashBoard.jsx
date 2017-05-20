@@ -41,6 +41,7 @@ class DashBoard extends React.Component {
       sights: [],
       flight: {},
       flightsArray: [],
+      savedCities: [],
       index: 0,
       weather: [],
       location: '',
@@ -55,6 +56,8 @@ class DashBoard extends React.Component {
     this.flightSearch = this.flightSearch.bind(this);
     this.databaseFlightSearch = this.databaseFlightSearch.bind(this);
     this.historyChange = this.historyChange.bind(this);
+    this.getSavedCities = this.getSavedCities.bind(this);
+    this.savedCitiesClick = this.savedCitiesClick.bind(this);
     this.searchFood = this.searchFood.bind(this);
     this.searchWeather = this.searchWeather.bind(this);
     this.getPlacesToGo = this.getPlacesToGo.bind(this);
@@ -76,6 +79,7 @@ class DashBoard extends React.Component {
       // creates the destination into the database 
       this.savelocation();
       console.log('STATE AFTER DID MOUNT', this.state.location)
+      this.getSavedCities();
     })
 
   }
@@ -223,6 +227,30 @@ class DashBoard extends React.Component {
     });
   }
 
+  getSavedCities(){
+    $.get('/getAllSavedCities', { location: this.state.location })
+       .done((data) => {
+        var savedCities = [];
+        for(var i=0; i<data.length; i++) {
+          savedCities.push(data[i].destination);
+        }
+        this.setState({
+          savedCities: savedCities
+        })
+      }) 
+  }
+
+  savedCitiesClick(e, index) {
+    e.preventDefault();
+    var target = this.state.savedCities[index]
+    this.setState({
+      index: index,
+      location: target
+    }, function() {
+      this.savelocation();
+    });
+  }
+
   searchFood(location) {
     $.get('/food', {
       location: location
@@ -254,7 +282,7 @@ class DashBoard extends React.Component {
     $.get('/getFourSquare', {location: location})
       .then ( (data) => {
         var top10 = JSON.parse(data).response.groups[0].items
-        console.log('FourSquare API RESULT', top10);
+        // console.log('FourSquare API RESULT', top10);
         this.setState({
           placesToGo: top10
         })        
@@ -262,7 +290,7 @@ class DashBoard extends React.Component {
       .then(() => {
         $.get('/getCityCoords', {location: location})
           .done ( (data) => {
-            console.log('GET COORDS', data);
+            // console.log('GET COORDS', data);
             this.setState({
               coordinates: data
             })        
@@ -275,7 +303,7 @@ class DashBoard extends React.Component {
     console.log(location, "PLACES TO EAT LOCATION")
     $.get('/getYelp', {location: location})
       .done ( (data) => {
-        console.log('YELP API RESULT', data);
+        // console.log('YELP API RESULT', data);
         this.setState({
           placesToEat: data
         })
@@ -326,6 +354,7 @@ class DashBoard extends React.Component {
       ReactDOM.findDOMNode(this.refs.form).reset();
       console.log('A New Location was submitted: ' + this.state.location);    
       this.savelocation();
+      this.getSavedCities();      
     })
   }
 
@@ -399,11 +428,12 @@ class DashBoard extends React.Component {
           style={styles.gridList}>
           <MuiThemeProvider>
             <SelectField
-              floatingLabelText='Trips'
-              onChange={this.historyChange}
-              value={this.state.index}>
-              {this.state.flightsArray.map((index, ind) => {
-                return <MenuItem key={ind} value={ind} label={index.Airline + ' ' +index.flight} primaryText={index.Airline + ' ' +index.flight} />
+              floatingLabelText='Past Cities'
+              onChange={this.savedCitiesClick}
+              value={this.state.index}
+            >
+              {this.state.savedCities.map((city, i) => {
+                return <MenuItem key={i} value={i} label={city} primaryText={city} />
               })}
             </SelectField>
           </MuiThemeProvider>
