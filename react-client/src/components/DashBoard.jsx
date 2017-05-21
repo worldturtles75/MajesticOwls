@@ -113,7 +113,7 @@ class DashBoard extends React.Component {
   toggleWeather() {
     const cards = this.state.cardsList
     const cardsViews = this.state.cardsViews;
-    let weatherIndex = cards.indexOf('weather');
+    let weatherIndex = cards.indexOf('weather'); 
     if (weatherIndex >= 0) {
       cards.splice(weatherIndex, 1)
       cardsViews.pop()
