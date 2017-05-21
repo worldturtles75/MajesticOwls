@@ -477,11 +477,21 @@ class DashBoard extends React.Component {
                 coordinates={this.state.coordinates}
                 location={this.state.location} />
               </MuiThemeProvider>
-              <MuiThemeProvider><ItinList itinItems={this.state.itineraryItems}/></MuiThemeProvider>
 
               {/*<MuiThemeProvider><FlightCard flight={this.state.flight}/></MuiThemeProvider>*/}
               {/*<MuiThemeProvider><FoodCard food={this.state.food}/></MuiThemeProvider>*/}
               {/*<MuiThemeProvider><FlightTimeCard duration={this.state.flightsArray}/></MuiThemeProvider>*/}
+            </GridList>
+
+          </MuiThemeProvider>
+
+          <MuiThemeProvider>
+            <GridList
+              cellHeight={180}
+              cols = {1}
+              padding = {25}
+            >            
+              <MuiThemeProvider><ItinList itinItems={this.state.itineraryItems}/></MuiThemeProvider>
             </GridList>
           </MuiThemeProvider>
           {/*<MuiThemeProvider>

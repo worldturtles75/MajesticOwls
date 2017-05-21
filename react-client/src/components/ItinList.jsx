@@ -35,14 +35,13 @@ class ItinList extends React.Component {
       <Card style={styles.card}>
         <CardHeader
         title="Itinerary"
-        subtitle="Places I plan to visit"
+        subtitle="Places I Plan To Visit"
         avatar={<Avatar
           icon={<ItinIcon />}
           style={styles.avatar}
         />}
         style={styles.cardHeader}
       />
-      <Divider />
       <List
         style={styles.list}
       >
