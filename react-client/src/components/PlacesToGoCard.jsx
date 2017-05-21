@@ -49,6 +49,18 @@ class PlacesToGoCard extends React.Component {
     super(props);
     this.handleCheckedSight = this.handleCheckedSight.bind(this);
     this.handleFavoritedSight = this.handleFavoritedSight.bind(this);
+    this.handleCheckboxesItin = this.handleCheckboxesItin.bind(this);
+    this.handleCheckboxesMap = this.handleCheckboxesMap.bind(this);
+    this.state= {
+      activeCheckboxesItin: '',
+      activeCheckboxesMap: ''
+    }
+  }
+  componentDidMount() {
+    this.setState({
+      activeCheckboxesMap: this.props.activeCheckboxesMap,
+      activeCheckboxesItin: this.props.activeCheckboxesItin
+    })
   }
 
   handleCheckedSight(place, checked) {
@@ -57,6 +69,32 @@ class PlacesToGoCard extends React.Component {
 
   handleFavoritedSight(place, checked) {
     this.props.addToItinerary(place, checked);
+  }
+
+  handleCheckboxesItin(name) {
+    var found = this.state.activeCheckboxesItin.includes(name);
+    if (!found) {
+      this.setState({
+        activeCheckboxesItin: [...this.state.activeCheckboxesItin, name]
+      })
+    } else {
+      this.setState({
+        activeCheckboxesItin: this.state.activeCheckboxesItin.filter(x => x !== name)
+      })
+    }
+  }
+
+  handleCheckboxesMap(name) {
+    var found = this.state.activeCheckboxesMap.includes(name);
+    if (!found) {
+      this.setState({
+        activeCheckboxesMap: [...this.state.activeCheckboxesMap, name]
+      })
+    } else {
+      this.setState({
+        activeCheckboxesMap: this.state.activeCheckboxesMap.filter(x => x !== name)
+      })
+    }
   }
 
   render() {
@@ -101,7 +139,10 @@ class PlacesToGoCard extends React.Component {
                       checkedIcon={<ItinIcon />}
                       uncheckedIcon={<ItinIcon />}
                       onCheck={ (e,checked) => {
-                      this.handleFavoritedSight(attraction.venue, checked)} } 
+                        this.handleFavoritedSight(attraction.venue, checked);
+                        this.handleCheckboxesItin(attraction.venue.name);
+                      }}
+                      checked={this.state.activeCheckboxesItin.includes(attraction.venue.name)} 
                     />
                   </div>
                   <div style ={{width: '100%'}}>
@@ -112,7 +153,10 @@ class PlacesToGoCard extends React.Component {
                         attraction.venue.coordinates = {};
                         attraction.venue.coordinates.latitude = attraction.venue.location.lat;
                         attraction.venue.coordinates.longitude = attraction.venue.location.lng;
-                        this.handleCheckedSight(attraction.venue, checked)} } 
+                        this.handleCheckedSight(attraction.venue, checked);
+                        this.handleCheckboxesMap(attraction.venue.name);
+                      }} 
+                      checked={this.state.activeCheckboxesMap.includes(attraction.venue.name)}
                     />
                   </div>           
                 </div>           

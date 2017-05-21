@@ -52,7 +52,9 @@ class DashBoard extends React.Component {
       placesToGo: [],
       allMarkers: [],
       itineraryItems:[],
-      coordinates: { lat: 37.77493, lng: -122.41942 }
+      coordinates: { lat: 37.77493, lng: -122.41942 },
+      activeCheckboxesItin: [],
+      activeCheckboxesMap: []
     }
     this.searchGoogle = this.searchGoogle.bind(this);
     this.flightSearch = this.flightSearch.bind(this);
@@ -72,7 +74,7 @@ class DashBoard extends React.Component {
     this.fetch = this.fetch.bind(this);
     this.savelocation = this.savelocation.bind(this);
     this.addToItinerary = this.addToItinerary.bind(this);
-    this.clearItinerary = this.clearItinerary.bind(this);
+    this.clearItinAndCheckboxes = this.clearItinAndCheckboxes.bind(this);
   }
 
   componentDidMount() {
@@ -239,7 +241,9 @@ class DashBoard extends React.Component {
         var index = savedCities.indexOf(location);
         this.setState({
           savedCities: savedCities,
-          index: index
+          index: index,
+          activeCheckboxesItin: [],
+          activeCheckboxesMap: []
         })
       }) 
   }
@@ -359,14 +363,17 @@ class DashBoard extends React.Component {
       // ReactDOM.findDOMNode(this.refs.form).reset();
       console.log('A New Location was submitted: ' + this.state.location);    
       this.savelocation();
-      this.clearItinerary();      
+      this.clearItinAndCheckboxes();   
       this.getSavedCities(this.state.location);      
     })
   }
 
-  clearItinerary() {
-    this.setState({itineraryItems: []});  
-    console.log('itineray :', this.state.itineraryItems)
+  clearItinAndCheckboxes() {
+    this.setState({
+      itineraryItems: [],
+      activeCheckboxesItin: [],
+      activeCheckboxesMap: []
+    });  
   }
 
   addToItinerary(obj, checked) {
@@ -468,8 +475,8 @@ class DashBoard extends React.Component {
               padding = {25}
             >
               {/*<MuiThemeProvider><WeatherCard weather={this.state.weather} location={this.state.location}/></MuiThemeProvider>*/}
-              <MuiThemeProvider><PlacesToEatCard food={this.state.placesToEat} location={this.state.location} handleFavFood={this.addToFav} addToItinerary={this.addToItinerary}/></MuiThemeProvider>
-              <MuiThemeProvider><PlacesToGoCard sights = {this.state.placesToGo} location={this.state.location} addToItinerary={this.addToItinerary} addToMaps={this.addToFav}/></MuiThemeProvider>
+              <MuiThemeProvider><PlacesToEatCard food={this.state.placesToEat} location={this.state.location} handleFavFood={this.addToFav} addToItinerary={this.addToItinerary} activeCheckboxesItin={this.state.activeCheckboxesItin} activeCheckboxesMap={this.state.activeCheckboxesMap}/></MuiThemeProvider>
+              <MuiThemeProvider><PlacesToGoCard sights ={this.state.placesToGo} location={this.state.location} addToItinerary={this.addToItinerary} addToMaps={this.addToFav} activeCheckboxesItin={this.state.activeCheckboxesItin} activeCheckboxesMap={this.state.activeCheckboxesMap}/></MuiThemeProvider>
               <MuiThemeProvider><NavigationCard 
                 markers={this.state.allMarkers} 
                 handleMarkerClick = {this.handleMarkerClick}

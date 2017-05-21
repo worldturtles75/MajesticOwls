@@ -50,6 +50,19 @@ class PlacesToEatCard extends React.Component {
     super(props);
     this.handleCheck = this.handleCheck.bind(this);
     this.handleFavoritedSight = this.handleFavoritedSight.bind(this);
+    this.handleCheckboxesItin = this.handleCheckboxesItin.bind(this);
+    this.handleCheckboxesMap = this.handleCheckboxesMap.bind(this);
+    this.state= {
+      activeCheckboxesItin: '',
+      activeCheckboxesMap: ''
+    }
+  }
+
+  componentDidMount() {
+    this.setState({
+      activeCheckboxesItin: this.props.activeCheckboxesItin,
+      activeCheckboxesMap: this.props.activeCheckboxesMap
+    })
   }
 
   handleCheck(restaurant, checked) {
@@ -58,6 +71,32 @@ class PlacesToEatCard extends React.Component {
 
   handleFavoritedSight(place, checked) {
     this.props.addToItinerary(place, checked);
+  }
+
+  handleCheckboxesItin(name) {
+    var found = this.state.activeCheckboxesItin.includes(name);
+    if (!found) {
+      this.setState({
+        activeCheckboxesItin: [...this.state.activeCheckboxesItin, name]
+      })
+    } else {
+      this.setState({
+        activeCheckboxesItin: this.state.activeCheckboxesItin.filter(x => x !== name)
+      })
+    }
+  }
+
+  handleCheckboxesMap(name) {
+    var found = this.state.activeCheckboxesMap.includes(name);
+    if (!found) {
+      this.setState({
+        activeCheckboxesMap: [...this.state.activeCheckboxesMap, name]
+      })
+    } else {
+      this.setState({
+        activeCheckboxesMap: this.state.activeCheckboxesMap.filter(x => x !== name)
+      })
+    }
   }
 
   render() {
@@ -104,7 +143,10 @@ class PlacesToEatCard extends React.Component {
                       checkedIcon={<ItinIcon />}
                       uncheckedIcon={<ItinIcon />}
                       onCheck={ (e,checked) => {
-                      this.handleFavoritedSight(restaurant, checked)} } 
+                        this.handleFavoritedSight(restaurant, checked)
+                        this.handleCheckboxesItin(restaurant.name)
+                      }}
+                      checked={this.state.activeCheckboxesItin.includes(restaurant.name)} 
                     />
                   </div>
                   <div style ={{width: '100%'}}>
@@ -112,7 +154,11 @@ class PlacesToEatCard extends React.Component {
                       checkedIcon={<MapIcon />}
                       uncheckedIcon={<MapIcon />}
                       onCheck={ (e,checked) => {
-                        this.handleCheck(restaurant, checked)} } 
+                        this.handleCheck(restaurant, checked);
+                        this.handleCheckboxesMap(restaurant.name);
+                      }}
+                      checked={this.state.activeCheckboxesMap.includes(restaurant.name)}
+
                     />
                   </div>           
                 </div>           
