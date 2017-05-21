@@ -70,6 +70,7 @@ class DashBoard extends React.Component {
     this.fetch = this.fetch.bind(this);
     this.savelocation = this.savelocation.bind(this);
     this.addToItinerary = this.addToItinerary.bind(this);
+    this.clearItinerary = this.clearItinerary.bind(this);
   }
 
   componentDidMount() {
@@ -350,14 +351,20 @@ class DashBoard extends React.Component {
 
   handleLocationSubmit(e) {
     e.preventDefault();
+    location.reload();
     this.setState({location: this.state.newLocation.toLowerCase()}, () => {
       ReactDOM.findDOMNode(this.refs.form).reset();
       console.log('A New Location was submitted: ' + this.state.location);    
       this.savelocation();
-      this.getSavedCities();      
+      this.getSavedCities();
+      this.clearItinerary();      
     })
   }
 
+  clearItinerary() {
+    this.setState({itineraryItems: []});  
+    console.log('itineray :', this.state.itineraryItems)
+  }
 
   addToItinerary(obj, checked) {
     console.log('object!!!', obj)
