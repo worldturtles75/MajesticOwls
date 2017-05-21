@@ -80,7 +80,7 @@ class DashBoard extends React.Component {
       // creates the destination into the database 
       this.savelocation();
       console.log('STATE AFTER DID MOUNT', this.state.location)
-      this.getSavedCities();
+      this.getSavedCities(this.state.location);
     })
 
   }
@@ -228,15 +228,17 @@ class DashBoard extends React.Component {
     });
   }
 
-  getSavedCities(){
-    $.get('/getAllSavedCities', { location: this.state.location })
+  getSavedCities(location){
+    $.get('/getAllSavedCities', { location: location })
        .done((data) => {
         var savedCities = [];
         for(var i=0; i<data.length; i++) {
           savedCities.push(data[i].destination);
         }
+        var index = savedCities.indexOf(location);
         this.setState({
-          savedCities: savedCities
+          savedCities: savedCities,
+          index: index
         })
       }) 
   }
@@ -356,8 +358,8 @@ class DashBoard extends React.Component {
       ReactDOM.findDOMNode(this.refs.form).reset();
       console.log('A New Location was submitted: ' + this.state.location);    
       this.savelocation();
-      this.getSavedCities();
       this.clearItinerary();      
+      this.getSavedCities(this.state.location);      
     })
   }
 

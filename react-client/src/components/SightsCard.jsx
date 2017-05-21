@@ -52,7 +52,7 @@ class SightsCard extends React.Component {
   }
 
   render () {
-    // console.log('list :', this.props.sights)
+    console.log('list :', this.props.sights)
     return (
       <div>
         <Card style={styles.card}>
@@ -64,35 +64,49 @@ class SightsCard extends React.Component {
             style={styles.avatar}
           />}
             style={styles.cardHeader}
-          />  
+          />
           <Divider/>
           <List
             style={styles.list}
           >
             {this.props.sights.map((attraction, i) => (
               <ListItem
-                key={i}
-                rightAvatar={<Avatar src= {attraction.venue.photos.groups[0].items[0].prefix + 'width960' + attraction.venue.photos.groups[0].items[0].suffix} />}
-                leftCheckbox={<Checkbox 
-                  checkedIcon={<ActionFavorite />}
-                  uncheckedIcon={<ActionFavoriteBorder />}
-                  iconStyle={{left: '4'}, {bottom: '3.77'}}
-                  onCheck={ (e,checked) => {
-                    this.handleFavoritedSight(attraction.venue, checked)} }
-                />}
-                leftAvatar={<Checkbox 
-                  iconStyle={{left: "13"}}
-                  onCheck={ (e,checked) => {
-                    attraction.venue.coordinates = {};
-                    attraction.venue.coordinates.latitude = attraction.venue.location.lat;
-                    attraction.venue.coordinates.longitude = attraction.venue.location.lng;
-                    this.handleCheckedSight(attraction.venue, checked)} }
-                />}
-                primaryText={i+1 + '. ' + attraction.venue.name}
-                secondaryText={'# Reviews: ' + attraction.venue.ratingSignals + ' | Rating: ' + attraction.venue.rating + ' | ' + attraction.venue.categories[0].pluralName}
                 target="_blank"
                 href={attraction.venue.url}
-              />
+              >
+              <div style={{display: 'flex', flexDirection: 'row', fontSize: 18}}>
+              <div style={{display: 'flex', flexDirection: 'row', fontSize: 18}}>
+                <div style ={{width: '10%'}}>
+                  <Checkbox 
+                    checkedIcon={<ActionFavorite />}
+                    uncheckedIcon={<ActionFavoriteBorder />}
+                    onCheck={ (e,checked) => {
+                    this.handleFavoritedSight(attraction.venue, checked)} } 
+                  />
+                </div>
+                <div style ={{width: '10%'}}>
+                  <Checkbox 
+                    onCheck={ (e,checked) => {
+                      attraction.venue.coordinates = {};
+                      attraction.venue.coordinates.latitude = attraction.venue.location.lat;
+                      attraction.venue.coordinates.longitude = attraction.venue.location.lng;
+                      this.handleCheckedSight(attraction.venue, checked)} } 
+                  />
+                </div>
+                <div> {i+1 + '. ' + attraction.venue.name}
+                  <div style={{display: 'block', fontWeight: 200, fontSize: 14}}> {'# Reviews: ' + attraction.venue.ratingSignals + ' | Rating: ' + attraction.venue.rating + ' | ' + attraction.venue.categories[0].pluralName} 
+                  </div>
+                </div>
+              </div>
+              <div> 
+                <img 
+                  src={attraction.venue.photos.groups[0].items[0].prefix + 'width960' + attraction.venue.photos.groups[0].items[0].suffix}
+                  style={{height: "100", width: "100"}}
+                /> 
+              </div>
+            </div>
+
+            </ListItem>
             ))}
           </List>
         </Card>
