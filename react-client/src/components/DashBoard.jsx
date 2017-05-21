@@ -354,9 +354,9 @@ class DashBoard extends React.Component {
 
   handleLocationSubmit(e) {
     e.preventDefault();
-    location.reload();
+    // location.reload();
     this.setState({location: this.state.newLocation.toLowerCase()}, () => {
-      ReactDOM.findDOMNode(this.refs.form).reset();
+      // ReactDOM.findDOMNode(this.refs.form).reset();
       console.log('A New Location was submitted: ' + this.state.location);    
       this.savelocation();
       this.clearItinerary();      
