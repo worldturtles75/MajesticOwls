@@ -2,87 +2,128 @@ import React from 'react';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import {List, ListItem} from 'material-ui/List';
 import Avatar from 'material-ui/Avatar';
-import MapsLocalDining from 'material-ui/svg-icons/maps/local-dining';
+import CardIcon from 'material-ui/svg-icons/social/location-city';
 import {red500} from 'material-ui/styles/colors';
 import Divider from 'material-ui/Divider';
 import Checkbox from 'material-ui/Checkbox';
-import ActionFavorite from 'material-ui/svg-icons/action/favorite';
-import ActionFavoriteBorder from 'material-ui/svg-icons/action/favorite-border';
-import Visibility from 'material-ui/svg-icons/action/visibility';
-import VisibilityOff from 'material-ui/svg-icons/action/visibility-off';
+import MapIcon from 'material-ui/svg-icons/maps/place';
+import ItinIcon from 'material-ui/svg-icons/action/list';
+
+import {GridList, GridTile} from 'material-ui/GridList';
 
 const styles = {
-  cardHeader: {
-    height: '20%',
-  },
-  list: {
-    width: '100%',
-    height: '75%',
-    overflowY: 'auto',
-  },
-  card: {
-    width: '100%',
-    height: 400,
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
   },
   avatar: {
     backgroundColor: red500,
+  },  
+  gridList: {
+    width: '99%',
+    height: '80%',
+    overflowY: 'auto',
+    padding: '10 0 0 0',
+    cols:'1',
+    padding: '5 5 5 5 '    
   },
-  block: {
-    maxWidth: 250,
+  gridTile: {
+    height: '85%',
+    width: '100%',
   },
-}
+  gridListImg: {
+    position: 'relative',
+    width: '250',
+    height: '250',
+  },
+  center: {
+    margin: '0 auto',
+    width: '60px'  
+  }  
+};
+
 
 class PlacesToGoCard extends React.Component {
   constructor (props) {
     super(props);
-    this.handleCheck = this.handleCheck.bind(this);
+    this.handleCheckedSight = this.handleCheckedSight.bind(this);
+    this.handleFavoritedSight = this.handleFavoritedSight.bind(this);
   }
 
-  handleCheck(restaurant, checked) {
-    this.props.handleFavPlace(restaurant, checked);
+  handleCheckedSight(place, checked) {
+    this.props.addToMaps(place, checked);
   }
 
-  render () {
-    return (
+  handleFavoritedSight(place, checked) {
+    this.props.addToItinerary(place, checked);
+  }
+
+  render() {
+    return (      
       <div>
         <Card style={styles.card}>
           <CardHeader
             title="Places To Go"
-            subtitle={this.props.location + ': Top recommended places '}
-            avatar={<Avatar
-              icon={<MapsLocalDining />}
-              style={styles.avatar}
-            />}
+            subtitle={<span>Top 10 Suggested Places <small>(Powered by Foursquare)</small></span>}
+            avatar={<Avatar icon={<CardIcon />} style={styles.avatar} />}
             style={styles.cardHeader}
-          />
-          <Divider/>
-          <List
-            style={styles.list}
-          >
-            {this.props.places.map((place, i) => (
-              <ListItem
-                key={i}
-                rightAvatar={<Avatar src={place.image_url} />}
-                leftAvatar={<Checkbox 
-                  onCheck={ (e,checked) => {
-                    // console.log('e',e)
-                    // console.log('checked',checked)
-                    this.handleCheck(place, checked)} }
-                  />}
-                primaryText={i+1 + '. ' + place.venue.name}
-                secondaryText={'Rating: ' + place.venue.rating + ' | ' + place.venue.categories[0].name}
-                target="_blank"
-                href={place.url}
-              />
-            ))}
-          </List>
-        </Card>
-      </div>
-    )
-  }
-}
+          />      
 
-// const PlacesToEatCard = (props) => (
-// )
+        <GridList
+          cellHeight={180}
+          style={styles.gridList}
+        >
+          {this.props.sights.map((attraction, i) => (
+            <div key={i}>
+              <div>
+                <GridTile
+                  key={i}
+                  title={i+1 + '. ' + attraction.venue.name}
+                  subtitle={<span># Reviews: {attraction.venue.ratingSignals} | Rating: {attraction.venue.rating} <p>{attraction.venue.categories[0].pluralName}</p></span>}
+                  titlePosition="top"
+                  titleBackground="linear-gradient(to bottom, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)"
+                  style = {styles.gridTile}
+                > 
+                <a target="_blank" href={attraction.venue.url}>
+                  <img 
+                    style={styles.gridListImg} src={attraction.venue.photos.groups[0].items[0].prefix + 'width960' + attraction.venue.photos.groups[0].items[0].suffix} 
+                  />
+                </a>   
+
+                </GridTile>
+              </div>
+
+              <div style={styles.center}>
+                <div style={{display: 'flex', flexDirection: 'row'}}>
+                  <div style ={{width: '100%'}}>
+                    <Checkbox 
+                      checkedIcon={<ItinIcon />}
+                      uncheckedIcon={<ItinIcon />}
+                      onCheck={ (e,checked) => {
+                      this.handleFavoritedSight(attraction.venue, checked)} } 
+                    />
+                  </div>
+                  <div style ={{width: '100%'}}>
+                    <Checkbox 
+                      checkedIcon={<MapIcon />}
+                      uncheckedIcon={<MapIcon />}
+                      onCheck={ (e,checked) => {
+                        attraction.venue.coordinates = {};
+                        attraction.venue.coordinates.latitude = attraction.venue.location.lat;
+                        attraction.venue.coordinates.longitude = attraction.venue.location.lng;
+                        this.handleCheckedSight(attraction.venue, checked)} } 
+                    />
+                  </div>           
+                </div>           
+              </div>
+            </div>         
+          ))}
+        </GridList>
+        </Card>        
+      </div>
+    ) 
+  }
+};
 
 export default PlacesToGoCard;

@@ -41,7 +41,7 @@ import $ from 'jquery';
         lng: -122.42,
       },
       map: {
-        height: '65%',
+        height: '68%',
       },
       actions: {
         height: '20%',
@@ -53,8 +53,8 @@ import $ from 'jquery';
         <Card
           style={styles.card}>
           <CardHeader
-              title={this.props.location}
-              subtitle='Your Sights + Restaurants'
+              title='Map'
+              subtitle='Your Restaurants + Places'
               avatar={<Avatar icon={<MapNavigation />}
                 style={styles.avatar}
                 color={white}/>}
@@ -74,7 +74,6 @@ import $ from 'jquery';
                   markers={this.props.markers} onMarkerClick={this.props.handleMarkerClick} onMarkerClose={this.props.handleMarkerClose} />
 
               </div>
-              HELLO
         </Card>
       </div>
     )

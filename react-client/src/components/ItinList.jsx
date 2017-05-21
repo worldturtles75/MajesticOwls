@@ -6,6 +6,7 @@ import Divider from 'material-ui/Divider';
 import LibraryBook from 'material-ui/svg-icons/av/library-books';
 import {List, ListItem} from 'material-ui/List';
 import {red500, deepPurple500} from 'material-ui/styles/colors';
+import ItinIcon from 'material-ui/svg-icons/action/list';
 
 
 const styles = {
@@ -34,21 +35,21 @@ class ItinList extends React.Component {
       <Card style={styles.card}>
         <CardHeader
         title="Itinerary"
-        subtitle="Places I plan to visit"
+        subtitle="Places I Plan To Visit"
         avatar={<Avatar
-          icon={<LibraryBook />}
+          icon={<ItinIcon />}
           style={styles.avatar}
         />}
         style={styles.cardHeader}
       />
-      <Divider />
       <List
         style={styles.list}
       >
       {this.props.itinItems.length ? this.props.itinItems.map((item,i) => {
       	return (
         <ListItem
-          primaryText={i + ': ' + item.name}
+          primaryText={i+1 + ': ' + item.name}
+          key={i}
         >
         </ListItem>
       )}) : null }
