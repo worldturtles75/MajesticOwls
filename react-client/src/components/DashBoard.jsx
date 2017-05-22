@@ -218,7 +218,7 @@ class DashBoard extends React.Component {
   }
 
   fetch(location) {
-    // this.searchWeather(location);    
+    this.searchWeather(location);    
     // this.searchFood(location);
     // this.searchGoogle(location);
     this.getPlacesToGo(location);
