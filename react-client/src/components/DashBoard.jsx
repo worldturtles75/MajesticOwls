@@ -21,7 +21,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
-import GridList from 'material-ui/GridList';
+import {GridList, GridTile} from 'material-ui/GridList';
 import GoogleButton from 'react-google-button';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
@@ -52,7 +52,9 @@ class DashBoard extends React.Component {
       placesToGo: [],
       allMarkers: [],
       itineraryItems:[],
-      coordinates: { lat: 37.77493, lng: -122.41942 }
+      coordinates: { lat: 37.77493, lng: -122.41942 },
+      cardsList: [],
+      cardsViews: []
     }
     this.searchGoogle = this.searchGoogle.bind(this);
     this.flightSearch = this.flightSearch.bind(this);
@@ -73,6 +75,17 @@ class DashBoard extends React.Component {
     this.savelocation = this.savelocation.bind(this);
     this.addToItinerary = this.addToItinerary.bind(this);
     this.clearItinerary = this.clearItinerary.bind(this);
+    this.renderWeather = this.renderWeather.bind(this);
+    this.renderFood = this.renderFood.bind(this);
+    this.renderItin = this.renderItin.bind(this);
+    this.renderPlaces = this.renderPlaces.bind(this);
+    this.renderMap = this.renderMap.bind(this);
+    this.toggleWeather = this.toggleWeather.bind(this);
+    this.toggleFood = this.toggleFood.bind(this);
+    this.togglePlaces = this.togglePlaces.bind(this);
+    this.toggleItin = this.toggleItin.bind(this);
+    this.toggleMap = this.toggleMap.bind(this);
+
   }
 
   componentDidMount() {
@@ -95,6 +108,111 @@ class DashBoard extends React.Component {
        .catch((err) => {
           console.log(err)
        })
+  }
+
+  toggleWeather() {
+    const cards = this.state.cardsList
+    const cardsViews = this.state.cardsViews;
+    let weatherIndex = cards.indexOf('weather'); 
+    if (weatherIndex >= 0) {
+      cards.splice(weatherIndex, 1)
+      cardsViews.pop()
+      this.setState(prevState => ({
+        cardsList: cards
+      }))
+
+    } else {
+      cards.push('weather');
+      cardsViews.push(this.renderWeather);
+      this.setState(prevState => ({
+        cardsList: cards
+      }))
+    }
+    
+  }
+
+  toggleFood() {
+    const cards = this.state.cardsList
+    const cardsViews = this.state.cardsViews;    
+    let foodIndex = cards.indexOf('food');
+    if (foodIndex >= 0) {
+      cards.splice(foodIndex, 1)
+      cardsViews.pop()
+      this.setState(prevState => ({
+        cardsList: cards
+      }))
+
+    } else {
+      cards.push('food');
+      cardsViews.push(this.renderFood);
+      this.setState(prevState => ({
+        cardsList: cards
+      }))
+    }
+    
+  }
+
+  togglePlaces() {
+    const cards = this.state.cardsList
+    const cardsViews = this.state.cardsViews;    
+    let placesIndex = cards.indexOf('places');
+    if (placesIndex >= 0) {
+      cards.splice(placesIndex, 1)
+      cardsViews.pop()
+      this.setState(prevState => ({
+        cardsList: cards
+      }))
+
+    } else {
+      cards.push('places');
+      cardsViews.push(this.renderPlaces);
+      this.setState(prevState => ({
+        cardsList: cards
+      }))
+    }
+    
+  }
+
+  toggleItin() {
+    const cards = this.state.cardsList
+    const cardsViews = this.state.cardsViews;    
+    let itinIndex = cards.indexOf('itin');
+    if (itinIndex >= 0) {
+      cards.splice(itinIndex, 1)
+      cardsViews.pop()
+      this.setState(prevState => ({
+        cardsList: cards
+      }))
+
+    } else {
+      cards.push('itin');
+      cardsViews.push(this.renderItin);
+      this.setState(prevState => ({
+        cardsList: cards
+      }))
+    }
+    
+  }
+
+  toggleMap() {
+    const cards = this.state.cardsList
+    const cardsViews = this.state.cardsViews;    
+    let mapIndex = cards.indexOf('map');
+    if (mapIndex >= 0) {
+      cards.splice(mapIndex, 1)
+      cardsViews.pop()
+      this.setState(prevState => ({
+        cardsList: cards
+      }))
+
+    } else {
+      cards.push('map');
+      cardsViews.push(this.renderMap);
+      this.setState(prevState => ({
+        cardsList: cards
+      }))
+    }
+    
   }
 
   fetch(location) {
@@ -389,6 +507,32 @@ class DashBoard extends React.Component {
     } 
   }
 
+  renderWeather() {
+    return <MuiThemeProvider><WeatherCard weather={this.state.weather} location={this.state.location}/></MuiThemeProvider>   
+  }
+
+  renderFood() {
+    return <MuiThemeProvider><PlacesToEatCard food={this.state.placesToEat} location={this.state.location} handleFavFood={this.addToFav} addToItinerary={this.addToItinerary}/></MuiThemeProvider>      
+  }
+
+  renderPlaces() {
+    return <MuiThemeProvider><PlacesToGoCard sights = {this.state.placesToGo} location={this.state.location} addToItinerary={this.addToItinerary} addToMaps={this.addToFav}/></MuiThemeProvider>
+  }
+
+  renderItin() {
+    return <MuiThemeProvider><ItinList itinItems={this.state.itineraryItems}/></MuiThemeProvider>
+  }
+
+  renderMap() {
+    return (<MuiThemeProvider><NavigationCard 
+                markers={this.state.allMarkers} 
+                handleMarkerClick = {this.handleMarkerClick}
+                handleMarkerClose = {this.handleMarkerClose}
+                coordinates={this.state.coordinates}
+                location={this.state.location} />
+              </MuiThemeProvider>)
+  }
+
   render() {
     const styles = {
       gridList: {
@@ -423,7 +567,7 @@ class DashBoard extends React.Component {
 
     return(
       <div>
-        <SignOutToolBar/>
+        <SignOutToolBar weather={this.toggleWeather} food={this.toggleFood} places={this.togglePlaces} itin={this.toggleItin} map={this.toggleMap} />
         
         <div style={styles.gridList}>
           <MuiThemeProvider>
@@ -504,6 +648,29 @@ class DashBoard extends React.Component {
             </Link>
           </MuiThemeProvider>*/}
         </div>
+        <br/>
+            <div 
+              style={styles.gridList}>
+              <MuiThemeProvider>
+              <GridList
+                cellHeight={400}
+                col={1}
+                padding={25}
+                
+              >
+                {this.state.cardsViews.length ? this.state.cardsViews.map(card => (
+                  <MuiThemeProvider>
+             
+                  <GridTile> 
+                    <div>
+                      {card()}
+                    </div>
+                  </GridTile>
+                  </MuiThemeProvider>
+                )) : <MuiThemeProvider>{null}</MuiThemeProvider>}
+              </GridList>
+              </MuiThemeProvider>
+            </div>
       </div>
     )
   }
