@@ -170,7 +170,7 @@ export default PlacesToEatCard;
 
 
 //*********V2 UI below***************
-
+//
 
 // import React from 'react';
 // import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
